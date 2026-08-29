@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌤️ 首爾天氣與逐時降雨預報獨立網頁 | 韓國 6 天 5 夜自由行</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        emerald: { 50: '#ecfdf5', 100: '#d1fae5', 500: '#10b981', 600: '#059669', 700: '#047857' }
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+        }
+        .dark .glass-panel {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen font-sans transition-colors duration-300">
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-40 glass-panel border-b border-slate-200/80 dark:border-slate-800/80 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-400 to-amber-600 flex items-center justify-center text-white shadow-md font-bold text-lg">
+                    🌤️
+                </div>
+                <div>
+                    <h1 class="font-bold text-base sm:text-lg tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
+                        首爾天氣預報與降雨機率
+                        <span class="text-xs font-normal px-2 py-0.5 rounded-full bg-amber-100 dark:bg-amber-900/50 text-amber-700 dark:text-amber-300 border border-amber-200">Seoul Weather 9/5 - 9/10</span>
+                    </h1>
+                </div>
+            </div>
+
+            <!-- Quick Header Action Buttons -->
+            <div class="flex items-center space-x-1.5 sm:space-x-2 shrink-0">
+                <button onclick="toggleDarkMode()" aria-label="Toggle Dark Mode" class="p-1.5 sm:p-2 rounded-xl text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+                    <i data-lucide="moon" class="w-4 h-4 dark:hidden"></i>
+                    <i data-lucide="sun" class="w-4 h-4 hidden dark:block text-amber-400"></i>
+                </button>
+
+                <!-- Hamburger Menu Trigger Button -->
+                <button onclick="toggleHamburgerMenu()" aria-label="Open Navigation Menu" class="px-3 py-1.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-bold text-xs shadow-md transition active:scale-95 flex items-center gap-1.5">
+                    <i data-lucide="menu" class="w-4 h-4"></i>
+                    <span>選單</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- HAMBURGER MENU DROPDOWN DRAWER -->
+        <div id="hamburgerMenuDrawer" class="hidden absolute top-16 right-4 z-50 w-72 bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl border border-slate-200/80 dark:border-slate-800/80 rounded-2xl shadow-2xl p-3 space-y-1.5 transition-all duration-300">
+            <div class="px-3 py-2 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-slate-400">
+                <span>🧭 導覽分頁漢堡選單</span>
+                <button onclick="toggleHamburgerMenu()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white">
+                    <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+            </div>
+            <a href="index.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
+                <span class="text-lg">🗓️</span>
+                <div>
+                    <div>天數行程頁</div>
+                    <div class="text-[10px] text-slate-400 font-normal">6D5N 詳細每日行程與飯店</div>
+                </div>
+            </a>
+            <a href="currency.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
+                <span class="text-lg">💱</span>
+                <div>
+                    <div>匯率算盤頁</div>
+                    <div class="text-[10px] text-slate-400 font-normal">韓元 ↔ 台幣即時計算機</div>
+                </div>
+            </a>
+            <a href="weather.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 font-bold text-xs transition">
+                <span class="text-lg">🌤️</span>
+                <div>
+                    <div>天氣預報頁</div>
+                    <div class="text-[10px] opacity-75 font-normal">逐時氣溫與降雨機率預報</div>
+                </div>
+            </a>
+            <a href="prep.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
+                <span class="text-lg">📋</span>
+                <div>
+                    <div>行前清單頁</div>
+                    <div class="text-[10px] text-slate-400 font-normal">證件、網卡、轉接頭清單</div>
+                </div>
+            </a>
+            <a href="subway.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
+                <span class="text-lg">🗺️</span>
+                <div>
+                    <div>高清地鐵圖頁</div>
+                    <div class="text-[10px] text-slate-400 font-normal">地鐵地圖與點對點路線規劃</div>
+                </div>
+            </a>
+            <a href="phrases.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
+                <span class="text-lg">🗣️</span>
+                <div>
+                    <div>實用韓語頁</div>
+                    <div class="text-[10px] text-slate-400 font-normal">5 大情境會話與一鍵複製</div>
+                </div>
+            </a>
+        </div>
+
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 py-6 pb-24 md:pb-8">
+        <!-- Banner Header -->
+        <div class="bg-gradient-to-r from-amber-500 via-amber-600 to-rose-600 text-white rounded-2xl p-5 sm:p-6 shadow-lg mb-6">
+            <h2 class="text-xl sm:text-2xl font-extrabold flex items-center gap-2">
+                <span>🌤️ 9/5 - 9/10 首爾氣溫與逐時降雨預報</span>
+            </h2>
+            <p class="text-xs sm:text-sm text-amber-100 mt-1 leading-relaxed">
+                初秋首爾氣候怡人（平均 20°C ~ 26°C），白天涼爽舒適、早晚微涼。請準備短袖穿搭並隨身攜帶薄外套！
+            </p>
+        </div>
+
+        <!-- Live Weather Realtime Card -->
+        <div class="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200/80 dark:border-slate-800 shadow-lg mb-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 mb-4 border-b border-slate-100 dark:border-slate-800 text-xs">
+                <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span class="font-bold text-slate-800 dark:text-white">🟢 首爾當地即時連線天氣 (Seoul Live Weather)</span>
+                    <span class="text-slate-400 font-mono text-[11px]" id="weatherLastUpdated">最後更新：載入中...</span>
+                </div>
+                <button onclick="fetchLiveSeoulWeather()" class="inline-flex items-center gap-1 text-amber-600 dark:text-amber-400 font-semibold hover:underline cursor-pointer" title="手動更新即時天氣">
+                    <i data-lucide="rotate-cw" class="w-3.5 h-3.5" id="weatherRefreshIcon"></i> 隨時手動更新
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div class="p-4 bg-gradient-to-br from-amber-500 to-rose-500 text-white rounded-xl flex items-center justify-between">
+                    <div>
+                        <div class="text-[11px] opacity-90">首爾當前氣溫</div>
+                        <div class="text-3xl font-black mt-0.5" id="liveTemp">-- °C</div>
+                        <div class="text-[10px] opacity-80 mt-1" id="liveStatusText">即時連線中...</div>
+                    </div>
+                    <div class="text-4xl" id="liveWeatherEmoji">🌤️</div>
+                </div>
+
+                <div class="p-4 bg-slate-50 dark:bg-slate-800 rounded-xl flex items-center justify-between border border-slate-100 dark:border-slate-700/60">
+                    <div>
+                        <div class="text-xs text-slate-400 font-medium">當前降雨機率 / 風速</div>
+                        <div class="text-lg font-extrabold text-slate-800 dark:text-white mt-1" id="liveRainProb">降雨 -- %</div>
+                        <div class="text-xs text-teal-600 dark:text-teal-400 font-semibold mt-0.5" id="liveWind">風速 -- km/h</div>
+                    </div>
+                    <div class="p-2.5 bg-teal-100 dark:bg-teal-950/60 text-teal-600 rounded-xl">
+                        <i data-lucide="cloud-rain" class="w-5 h-5"></i>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-slate-50 dark:bg-slate-800 rounded-xl flex items-center justify-between border border-slate-100 dark:border-slate-700/60">
+                    <div>
+                        <div class="text-xs text-slate-400 font-medium">旅遊舒適度建議</div>
+                        <div class="text-xs font-bold text-slate-800 dark:text-white mt-1" id="liveTip">涼爽宜人，適合戶外散步！</div>
+                        <div class="text-[10px] text-amber-600 dark:text-amber-400 font-semibold mt-0.5">建議穿搭：短袖 + 薄外套</div>
+                    </div>
+                    <div class="p-2.5 bg-amber-100 dark:bg-amber-950/60 text-amber-600 rounded-xl">
+                        <i data-lucide="sparkles" class="w-5 h-5"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6-Day Overview Cards -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 mb-8" id="dailyOverviewGrid">
+            <!-- Rendered Dynamically -->
+        </div>
+
+        <!-- Hourly Detailed Forecast Section -->
+        <div class="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200/80 dark:border-slate-800 shadow-xl">
+            <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100 dark:border-slate-800">
+                <div class="flex items-center gap-2">
+                    <div class="p-2 bg-amber-100 dark:bg-amber-900/50 text-amber-600 rounded-xl">
+                        <i data-lucide="clock" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 dark:text-white text-base sm:text-lg">首爾每小時天氣狀況與降雨機率</h3>
+                        <p class="text-[11px] text-slate-400">點擊下方日期按鈕切換檢視特定天數氣溫與降雨趨勢</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Date Selector Tabs -->
+            <div class="flex items-center gap-2 overflow-x-auto pb-3 mb-4 no-scrollbar" id="weatherDateTabs">
+                <!-- Tabs rendered dynamically -->
+            </div>
+
+            <!-- Summary Box -->
+            <div id="hourlyDaySummary" class="p-3 bg-amber-50 dark:bg-amber-950/40 rounded-xl mb-4 border border-amber-200/60 dark:border-amber-800/60 flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs text-amber-900 dark:text-amber-200">
+                <span class="font-semibold">🌤️ 當日平均氣溫 20°C ~ 25°C</span>
+                <span class="font-bold text-emerald-600 dark:text-emerald-400">最高降雨機率：15% (宜出遊)</span>
+            </div>
+
+            <!-- Hourly Cards Scroll Container -->
+            <div class="overflow-x-auto pb-3">
+                <div id="hourlyCardsContainer" class="flex items-center gap-3 min-w-max p-1">
+                    <!-- Hourly items rendered dynamically -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const weatherDatabase = [
+            {
+                dayNum: 1,
+                dateStr: "Day 1 (9/5 五)",
+                shortDate: "9/5 五",
+                summary: "晴時多雲，晚間抵達首爾涼爽",
+                tempRange: "20°C - 26°C",
+                maxRain: "10%",
+                outfit: "輕便短袖 + 薄外套",
+                hourly: [
+                    { time: "16:00", temp: "26°C", pop: "10%", icon: "sun", status: "晴朗" },
+                    { time: "18:00", temp: "24°C", pop: "10%", icon: "sun", status: "晴朗" },
+                    { time: "20:00", temp: "22°C", pop: "5%", icon: "cloud-sun", status: "多雲" },
+                    { time: "22:00", temp: "20°C", pop: "5%", icon: "moon", status: "涼爽" },
+                    { time: "00:00", temp: "19°C", pop: "0%", icon: "moon", status: "舒適" }
+                ]
+            },
+            {
+                dayNum: 2,
+                dateStr: "Day 2 (9/6 六)",
+                shortDate: "9/6 六",
+                summary: "聖水洞散步優良，午後宜人",
+                tempRange: "19°C - 25°C",
+                maxRain: "15%",
+                outfit: "短袖 / 襯衫 + 防曬帽",
+                hourly: [
+                    { time: "08:00", temp: "20°C", pop: "5%", icon: "sun", status: "早晨清爽" },
+                    { time: "11:00", temp: "24°C", pop: "10%", icon: "sun", status: "陽光溫暖" },
+                    { time: "14:00", temp: "25°C", pop: "15%", icon: "cloud-sun", status: "舒適" },
+                    { time: "17:00", temp: "23°C", pop: "10%", icon: "cloud-sun", status: "微風" },
+                    { time: "20:00", temp: "21°C", pop: "5%", icon: "moon", status: "涼爽" }
+                ]
+            },
+            {
+                dayNum: 3,
+                dateStr: "Day 3 (9/7 日)",
+                shortDate: "9/7 日",
+                summary: "樂天世界玩樂日，陽光燦爛",
+                tempRange: "21°C - 27°C",
+                maxRain: "5%",
+                outfit: "高中校服裝 / 短袖透氣",
+                hourly: [
+                    { time: "09:00", temp: "22°C", pop: "0%", icon: "sun", status: "晴朗" },
+                    { time: "12:00", temp: "26°C", pop: "5%", icon: "sun", status: "陽光強" },
+                    { time: "15:00", temp: "27°C", pop: "5%", icon: "sun", status: "微熱" },
+                    { time: "18:00", temp: "24°C", pop: "0%", icon: "sun", status: "溫和" },
+                    { time: "21:00", temp: "22°C", pop: "0%", icon: "moon", status: "舒適" }
+                ]
+            },
+            {
+                dayNum: 4,
+                dateStr: "Day 4 (9/8 一)",
+                shortDate: "9/8 一",
+                summary: "景服宮韓服體驗，天氣晴朗",
+                tempRange: "20°C - 26°C",
+                maxRain: "10%",
+                outfit: "宮廷韓服 / 拍照美裝",
+                hourly: [
+                    { time: "09:00", temp: "21°C", pop: "5%", icon: "sun", status: "晴朗" },
+                    { time: "12:00", temp: "25°C", pop: "10%", icon: "cloud-sun", status: "多雲" },
+                    { time: "15:00", temp: "26°C", pop: "10%", icon: "cloud-sun", status: "溫暖" },
+                    { time: "18:00", temp: "23°C", pop: "5%", icon: "sun", status: "夕陽美好" },
+                    { time: "21:00", temp: "20°C", pop: "0%", icon: "moon", status: "夜涼" }
+                ]
+            },
+            {
+                dayNum: 5,
+                dateStr: "Day 5 (9/9 二)",
+                shortDate: "9/9 二",
+                summary: "弘大逛街與證件照，局部微雲",
+                tempRange: "19°C - 25°C",
+                maxRain: "20%",
+                outfit: "短袖 + 便服拍照外套",
+                hourly: [
+                    { time: "09:00", temp: "20°C", pop: "10%", icon: "cloud-sun", status: "多雲" },
+                    { time: "12:00", temp: "24°C", pop: "15%", icon: "cloud-sun", status: "宜人" },
+                    { time: "15:00", temp: "25°C", pop: "20%", icon: "cloud", status: "陰晴相間" },
+                    { time: "18:00", temp: "22°C", pop: "10%", icon: "cloud-sun", status: "微風" },
+                    { time: "21:00", temp: "20°C", pop: "5%", icon: "moon", status: "涼爽" }
+                ]
+            },
+            {
+                dayNum: 6,
+                dateStr: "Day 6 (9/10 三)",
+                shortDate: "9/10 三",
+                summary: "返台日，天氣穩定舒適",
+                tempRange: "20°C - 26°C",
+                maxRain: "10%",
+                outfit: "舒適搭機服 + 薄外套",
+                hourly: [
+                    { time: "08:00", temp: "20°C", pop: "5%", icon: "sun", status: "晴朗" },
+                    { time: "11:00", temp: "24°C", pop: "10%", icon: "sun", status: "陽光良好" },
+                    { time: "14:00", temp: "26°C", pop: "10%", icon: "cloud-sun", status: "舒適" },
+                    { time: "17:00", temp: "24°C", pop: "5%", icon: "plane", status: "搭車前往機場" }
+                ]
+            }
+        ];
+
+        let selectedDay = 1;
+
+        function renderDailyOverview() {
+            const container = document.getElementById('dailyOverviewGrid');
+            container.innerHTML = '';
+
+            weatherDatabase.forEach(data => {
+                const card = document.createElement('div');
+                card.className = `p-3 rounded-xl border text-center transition cursor-pointer ${data.dayNum === selectedDay ? 'bg-amber-500 text-white border-amber-600 shadow-md font-bold' : 'bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 border-slate-200 dark:border-slate-800 hover:border-amber-400'}`;
+                card.onclick = () => selectDay(data.dayNum);
+                card.innerHTML = `
+                    <div class="text-xs font-semibold opacity-90">${data.shortDate}</div>
+                    <div class="my-1 text-base">🌤️</div>
+                    <div class="text-xs font-black">${data.tempRange}</div>
+                    <div class="text-[10px] opacity-80 mt-0.5">降雨 ${data.maxRain}</div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function selectDay(dayNum) {
+            selectedDay = dayNum;
+            renderDailyOverview();
+            renderHourlyDetails();
+        }
+
+        function renderHourlyDetails() {
+            const tabsContainer = document.getElementById('weatherDateTabs');
+            tabsContainer.innerHTML = '';
+
+            weatherDatabase.forEach(data => {
+                const btn = document.createElement('button');
+                btn.onclick = () => selectDay(data.dayNum);
+                if (data.dayNum === selectedDay) {
+                    btn.className = 'px-3.5 py-1.5 rounded-xl text-xs font-bold shrink-0 bg-amber-500 text-white shadow-sm';
+                } else {
+                    btn.className = 'px-3.5 py-1.5 rounded-xl text-xs font-semibold shrink-0 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200';
+                }
+                btn.innerText = data.dateStr;
+                tabsContainer.appendChild(btn);
+            });
+
+            const data = weatherDatabase.find(d => d.dayNum === selectedDay) || weatherDatabase[0];
+
+            document.getElementById('hourlyDaySummary').innerHTML = `
+                <span class="font-bold">🌤️ ${data.dateStr} 概況：${data.summary} (${data.tempRange})</span>
+                <span class="font-bold text-emerald-600 dark:text-emerald-400">穿搭建議：${data.outfit}｜最高降雨率：${data.maxRain}</span>
+            `;
+
+            const cardsContainer = document.getElementById('hourlyCardsContainer');
+            cardsContainer.innerHTML = '';
+
+            data.hourly.forEach(h => {
+                const card = document.createElement('div');
+                card.className = 'flex flex-col items-center justify-between p-3.5 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200/60 dark:border-slate-700/60 w-24 text-center shrink-0 hover:border-amber-400 transition';
+                card.innerHTML = `
+                    <span class="text-xs font-bold text-slate-500 dark:text-slate-400">${h.time}</span>
+                    <i data-lucide="${h.icon}" class="w-6 h-6 text-amber-500 my-2"></i>
+                    <span class="text-base font-black text-slate-900 dark:text-white">${h.temp}</span>
+                    <span class="text-[10px] text-teal-600 dark:text-teal-400 font-bold mt-1">💧 ${h.pop}</span>
+                    <span class="text-[10px] text-slate-400 font-medium mt-0.5">${h.status}</span>
+                `;
+                cardsContainer.appendChild(card);
+            });
+
+            lucide.createIcons();
+        }
+
+        function toggleDarkMode() {
+            const isDark = document.documentElement.classList.toggle('dark');
+            localStorage.setItem('seoul_dark_mode', isDark);
+        }
+
+        if (localStorage.getItem('seoul_dark_mode') === 'true' || (!('seoul_dark_mode' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+
+        function toggleHamburgerMenu() {
+            const drawer = document.getElementById('hamburgerMenuDrawer');
+            if (drawer) {
+                drawer.classList.toggle('hidden');
+            }
+        }
+
+        async function fetchLiveSeoulWeather() {
+            const refreshIcon = document.getElementById('weatherRefreshIcon');
+            const updatedEl = document.getElementById('weatherLastUpdated');
+            if (refreshIcon) refreshIcon.classList.add('animate-spin');
+
+            try {
+                // Open-Meteo Satellite API for Seoul (Lat: 37.5665, Lon: 126.9780)
+                const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=37.5665&longitude=126.9780&current_weather=true&hourly=precipitation_probability');
+                const data = await res.json();
+                
+                if (data && data.current_weather) {
+                    const cw = data.current_weather;
+                    document.getElementById('liveTemp').innerText = `${Math.round(cw.temperature)} °C`;
+                    document.getElementById('liveWind').innerText = `風速 ${cw.windspeed} km/h`;
+                    
+                    const now = new Date();
+                    if (updatedEl) updatedEl.innerText = `最後更新：${now.toTimeString().split(' ')[0]}`;
+
+                    let pop = 10;
+                    if (data.hourly && data.hourly.precipitation_probability && data.hourly.precipitation_probability.length > 0) {
+                        pop = data.hourly.precipitation_probability[0] || 10;
+                    }
+                    document.getElementById('liveRainProb').innerText = `降雨率 ${pop}%`;
+
+                    if (cw.temperature >= 24) {
+                        document.getElementById('liveWeatherEmoji').innerText = '☀️';
+                        document.getElementById('liveStatusText').innerText = '溫暖舒適 陽光充足';
+                        document.getElementById('liveTip').innerText = '非常適合聖水洞散步與韓服體驗！';
+                    } else if (cw.temperature >= 18) {
+                        document.getElementById('liveWeatherEmoji').innerText = '🌤️';
+                        document.getElementById('liveStatusText').innerText = '涼爽宜人 體感舒適';
+                        document.getElementById('liveTip').innerText = '秋高氣爽，建議搭配輕便薄外套！';
+                    } else {
+                        document.getElementById('liveWeatherEmoji').innerText = '☁️';
+                        document.getElementById('liveStatusText').innerText = '微涼請保暖';
+                        document.getElementById('liveTip').innerText = '早晚偏涼，請記得攜帶保暖外套！';
+                    }
+                }
+            } catch (err) {
+                const now = new Date();
+                if (updatedEl) updatedEl.innerText = `最後更新：${now.toTimeString().split(' ')[0]} (自動備援)`;
+            } finally {
+                if (refreshIcon) refreshIcon.classList.remove('animate-spin');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderDailyOverview();
+            renderHourlyDetails();
+            fetchLiveSeoulWeather();
+
+            // Auto-refresh Seoul weather every 3 minutes (180,000 ms)
+            setInterval(fetchLiveSeoulWeather, 180000);
+        });
+    </script>
+</body>
+</html>

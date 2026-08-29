@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💱 首爾即時匯率算盤獨立網頁 | 韓國 6 天 5 夜自由行</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        emerald: { 50: '#ecfdf5', 100: '#d1fae5', 500: '#10b981', 600: '#059669', 700: '#047857' }
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+        }
+        .dark .glass-panel {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen font-sans transition-colors duration-300">
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-40 glass-panel border-b border-slate-200/80 dark:border-slate-800/80 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-teal-500 to-emerald-600 flex items-center justify-center text-white shadow-md font-bold text-lg">
+                    💱
+                </div>
+                <div>
+                    <h1 class="font-bold text-base sm:text-lg tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
+                        即時韓元匯率算盤
+                        <span class="text-xs font-normal px-2 py-0.5 rounded-full bg-teal-100 dark:bg-teal-900/50 text-teal-700 dark:text-teal-300 border border-teal-200">KRW / TWD Calculator</span>
+                    </h1>
+                </div>
+            </div>
+
+            <!-- Quick Header Action Buttons -->
+            <div class="flex items-center space-x-1.5 sm:space-x-2 shrink-0">
+                <button onclick="toggleDarkMode()" aria-label="Toggle Dark Mode" class="p-1.5 sm:p-2 rounded-xl text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+                    <i data-lucide="moon" class="w-4 h-4 dark:hidden"></i>
+                    <i data-lucide="sun" class="w-4 h-4 hidden dark:block text-amber-400"></i>
+                </button>
+
+                <!-- Hamburger Menu Trigger Button -->
+                <button onclick="toggleHamburgerMenu()" aria-label="Open Navigation Menu" class="px-3 py-1.5 rounded-xl bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white font-bold text-xs shadow-md transition active:scale-95 flex items-center gap-1.5">
+                    <i data-lucide="menu" class="w-4 h-4"></i>
+                    <span>選單</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- HAMBURGER MENU DROPDOWN DRAWER -->
+        <div id="hamburgerMenuDrawer" class="hidden absolute top-16 right-4 z-50 w-72 bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl border border-slate-200/80 dark:border-slate-800/80 rounded-2xl shadow-2xl p-3 space-y-1.5 transition-all duration-300">
+            <div class="px-3 py-2 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-slate-400">
+                <span>🧭 導覽分頁漢堡選單</span>
+                <button onclick="toggleHamburgerMenu()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white">
+                    <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+            </div>
+            <a href="index.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
+                <span class="text-lg">🗓️</span>
+                <div>
+                    <div>天數行程頁</div>
+                    <div class="text-[10px] text-slate-400 font-normal">6D5N 詳細每日行程與飯店</div>
+                </div>
+            </a>
+            <a href="currency.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 font-bold text-xs transition">
+                <span class="text-lg">💱</span>
+                <div>
+                    <div>匯率算盤頁</div>
+                    <div class="text-[10px] opacity-75 font-normal">韓元 ↔ 台幣即時計算機</div>
+                </div>
+            </a>
+            <a href="weather.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
+                <span class="text-lg">🌤️</span>
+                <div>
+                    <div>天氣預報頁</div>
+                    <div class="text-[10px] text-slate-400 font-normal">逐時氣溫與降雨機率預報</div>
+                </div>
+            </a>
+            <a href="prep.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
+                <span class="text-lg">📋</span>
+                <div>
+                    <div>行前清單頁</div>
+                    <div class="text-[10px] text-slate-400 font-normal">證件、網卡、轉接頭清單</div>
+                </div>
+            </a>
+            <a href="subway.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
+                <span class="text-lg">🗺️</span>
+                <div>
+                    <div>高清地鐵圖頁</div>
+                    <div class="text-[10px] text-slate-400 font-normal">地鐵地圖與點對點路線規劃</div>
+                </div>
+            </a>
+            <a href="phrases.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
+                <span class="text-lg">🗣️</span>
+                <div>
+                    <div>實用韓語頁</div>
+                    <div class="text-[10px] text-slate-400 font-normal">5 大情境會話與一鍵複製</div>
+                </div>
+            </a>
+        </div>
+
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 py-6 pb-24 md:pb-8">
+        <!-- Banner Header -->
+        <div class="bg-gradient-to-r from-teal-600 via-emerald-600 to-teal-800 text-white rounded-2xl p-5 sm:p-6 shadow-lg mb-6">
+            <h2 class="text-xl sm:text-2xl font-extrabold flex items-center gap-2">
+                <span>💱 韓元 ↔ 台幣 即時匯率對算盤</span>
+            </h2>
+            <p class="text-xs sm:text-sm text-teal-100 mt-1 leading-relaxed">
+                旅行購物必備！輸入韓元金額即可自動即時換算台幣，亦可自訂即時匯率（預設參考 1 TWD ≈ 42.5 KRW / 1,000 KRW ≈ 23.5 TWD）。
+            </p>
+        </div>
+
+        <!-- Calculator Card -->
+        <div class="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200/80 dark:border-slate-800 shadow-xl mb-6">
+            <!-- Live Auto-Refresh Status Bar -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-3 bg-slate-50 dark:bg-slate-800/60 rounded-xl mb-5 border border-slate-100 dark:border-slate-700/60 text-xs">
+                <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span class="font-bold text-slate-700 dark:text-slate-200">🟢 國際匯率 API 連線中</span>
+                    <span class="text-slate-400 font-mono text-[11px]" id="rateLastUpdated">最後更新：載入中...</span>
+                </div>
+                <button onclick="fetchLiveRate()" class="inline-flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-semibold hover:underline cursor-pointer" title="立即手動更新即時匯率">
+                    <i data-lucide="refresh-cw" class="w-3.5 h-3.5" id="rateRefreshIcon"></i> 隨時手動更新
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Input KRW -->
+                <div>
+                    <label class="block font-bold text-slate-700 dark:text-slate-300 mb-2 text-sm flex items-center justify-between">
+                        <span>🇰🇷 韓元金額 (KRW ₩)</span>
+                        <span class="text-xs font-normal text-slate-400">點擊快捷鍵累加</span>
+                    </label>
+                    <div class="relative">
+                        <input type="number" id="krwInput" value="" placeholder="請輸入韓元金額..." oninput="convertCurrency('krw')" class="w-full text-2xl font-black px-4 py-3 bg-slate-50 dark:bg-slate-800 border-2 border-teal-500/50 rounded-xl text-teal-600 dark:text-teal-400 outline-none focus:ring-2 focus:ring-teal-500">
+                        <span class="absolute right-4 top-3.5 text-sm font-bold text-slate-400">₩</span>
+                    </div>
+
+                    <!-- Preset Increment Buttons -->
+                    <div class="grid grid-cols-5 gap-1.5 mt-3">
+                        <button onclick="addKrw(1000)" class="py-1.5 bg-slate-100 dark:bg-slate-800 hover:bg-teal-500 hover:text-white rounded-lg text-xs font-bold transition">+1千</button>
+                        <button onclick="addKrw(5000)" class="py-1.5 bg-slate-100 dark:bg-slate-800 hover:bg-teal-500 hover:text-white rounded-lg text-xs font-bold transition">+5千</button>
+                        <button onclick="addKrw(10000)" class="py-1.5 bg-slate-100 dark:bg-slate-800 hover:bg-teal-500 hover:text-white rounded-lg text-xs font-bold transition">+1萬</button>
+                        <button onclick="addKrw(50000)" class="py-1.5 bg-slate-100 dark:bg-slate-800 hover:bg-teal-500 hover:text-white rounded-lg text-xs font-bold transition">+5萬</button>
+                        <button onclick="resetKrw()" class="py-1.5 bg-rose-50 text-rose-600 dark:bg-rose-950 dark:text-rose-300 rounded-lg text-xs font-bold transition">歸零</button>
+                    </div>
+                </div>
+
+                <!-- Output TWD -->
+                <div>
+                    <label class="block font-bold text-slate-700 dark:text-slate-300 mb-2 text-sm">
+                        🇹🇼 折合新台幣 (TWD NT$)
+                    </label>
+                    <div class="relative">
+                        <input type="number" id="twdInput" value="" placeholder="請輸入台幣金額..." oninput="convertCurrency('twd')" class="w-full text-2xl font-black px-4 py-3 bg-slate-50 dark:bg-slate-800 border-2 border-emerald-500/50 rounded-xl text-emerald-600 dark:text-emerald-400 outline-none focus:ring-2 focus:ring-emerald-500">
+                        <span class="absolute right-4 top-3.5 text-sm font-bold text-slate-400">NT$</span>
+                    </div>
+
+                    <!-- Custom Rate Control -->
+                    <div class="mt-3 flex items-center justify-between p-2.5 bg-slate-50 dark:bg-slate-800/60 rounded-xl text-xs border border-slate-100 dark:border-slate-700">
+                        <span class="text-slate-500 dark:text-slate-400 font-semibold">自訂匯率 (1 TWD =)</span>
+                        <div class="flex items-center gap-1">
+                            <input type="number" id="customRateInput" value="42.5" step="0.1" oninput="convertCurrency('krw')" class="w-20 px-2 py-1 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded text-center font-bold text-teal-600">
+                            <span class="font-bold">KRW</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Korea Price Reference Guide -->
+        <div class="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200/80 dark:border-slate-800 shadow-md">
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+                <i data-lucide="shopping-bag" class="w-5 h-5 text-teal-500"></i> 首爾常見物價與消費參考表
+            </h3>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                <div class="p-3 bg-slate-50 dark:bg-slate-800/60 rounded-xl flex items-center justify-between border border-slate-100 dark:border-slate-700/50">
+                    <div>
+                        <div class="font-bold text-slate-800 dark:text-white">T-money 交通卡地鐵基本費</div>
+                        <div class="text-[11px] text-slate-400">首爾地鐵單趟起跳</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="font-black text-teal-600 dark:text-teal-400">1,400 ₩</div>
+                        <div class="text-[10px] text-slate-400">約 NT$ 33</div>
+                    </div>
+                </div>
+
+                <div class="p-3 bg-slate-50 dark:bg-slate-800/60 rounded-xl flex items-center justify-between border border-slate-100 dark:border-slate-700/50">
+                    <div>
+                        <div class="font-bold text-slate-800 dark:text-white">便利商店冰美式 / 咖啡</div>
+                        <div class="text-[11px] text-slate-400">GS25 / CU 超商咖啡</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="font-black text-teal-600 dark:text-teal-400">2,000 ₩</div>
+                        <div class="text-[10px] text-slate-400">約 NT$ 47</div>
+                    </div>
+                </div>
+
+                <div class="p-3 bg-slate-50 dark:bg-slate-800/60 rounded-xl flex items-center justify-between border border-slate-100 dark:border-slate-700/50">
+                    <div>
+                        <div class="font-bold text-slate-800 dark:text-white">聖水洞自然道鹽可頌 (4入)</div>
+                        <div class="text-[11px] text-slate-400">人氣必吃招牌鹽可頌</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="font-black text-teal-600 dark:text-teal-400">12,000 ₩</div>
+                        <div class="text-[10px] text-slate-400">約 NT$ 282</div>
+                    </div>
+                </div>
+
+                <div class="p-3 bg-slate-50 dark:bg-slate-800/60 rounded-xl flex items-center justify-between border border-slate-100 dark:border-slate-700/50">
+                    <div>
+                        <div class="font-bold text-slate-800 dark:text-white">土俗村蔘雞湯 (1份)</div>
+                        <div class="text-[11px] text-slate-400">傳統宮廷糯米蔘雞湯</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="font-black text-teal-600 dark:text-teal-400">20,000 ₩</div>
+                        <div class="text-[10px] text-slate-400">約 NT$ 470</div>
+                    </div>
+                </div>
+
+                <div class="p-3 bg-slate-50 dark:bg-slate-800/60 rounded-xl flex items-center justify-between border border-slate-100 dark:border-slate-700/50">
+                    <div>
+                        <div class="font-bold text-slate-800 dark:text-white">橋村炸雞 蜂蜜醬油 (整隻)</div>
+                        <div class="text-[11px] text-slate-400">弘大必吃招牌炸雞</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="font-black text-teal-600 dark:text-teal-400">23,000 ₩</div>
+                        <div class="text-[10px] text-slate-400">約 NT$ 540</div>
+                    </div>
+                </div>
+
+                <div class="p-3 bg-slate-50 dark:bg-slate-800/60 rounded-xl flex items-center justify-between border border-slate-100 dark:border-slate-700/50">
+                    <div>
+                        <div class="font-bold text-slate-800 dark:text-white">聖水洞馬鈴薯排骨湯 (中)</div>
+                        <div class="text-[11px] text-slate-400">傳說中聖水洞排骨湯</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="font-black text-teal-600 dark:text-teal-400">32,000 ₩</div>
+                        <div class="text-[10px] text-slate-400">約 NT$ 752</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let liveRate = 42.5;
+
+        async function fetchLiveRate() {
+            const refreshIcon = document.getElementById('rateRefreshIcon');
+            const updatedEl = document.getElementById('rateLastUpdated');
+            if (refreshIcon) refreshIcon.classList.add('animate-spin');
+
+            try {
+                const res = await fetch('https://open.er-api.com/v6/latest/TWD');
+                const data = await res.json();
+                if (data && data.rates && data.rates.KRW) {
+                    liveRate = data.rates.KRW;
+                    const customRateEl = document.getElementById('customRateInput');
+                    if (customRateEl) customRateEl.value = liveRate.toFixed(1);
+                    const now = new Date();
+                    if (updatedEl) updatedEl.innerText = `最後更新：${now.toTimeString().split(' ')[0]}`;
+                    
+                    const krwVal = document.getElementById('krwInput').value;
+                    const twdVal = document.getElementById('twdInput').value;
+                    if (krwVal) convertCurrency('krw');
+                    else if (twdVal) convertCurrency('twd');
+                }
+            } catch (err) {
+                const now = new Date();
+                if (updatedEl) updatedEl.innerText = `最後更新：${now.toTimeString().split(' ')[0]}`;
+            } finally {
+                if (refreshIcon) refreshIcon.classList.remove('animate-spin');
+            }
+        }
+
+        function convertCurrency(source) {
+            const rate = parseFloat(document.getElementById('customRateInput').value) || liveRate;
+            const krwEl = document.getElementById('krwInput');
+            const twdEl = document.getElementById('twdInput');
+
+            if (source === 'krw') {
+                if (krwEl.value === '') {
+                    twdEl.value = '';
+                    return;
+                }
+                const krw = parseFloat(krwEl.value) || 0;
+                twdEl.value = Math.round(krw / rate);
+            } else {
+                if (twdEl.value === '') {
+                    krwEl.value = '';
+                    return;
+                }
+                const twd = parseFloat(twdEl.value) || 0;
+                krwEl.value = Math.round(twd * rate);
+            }
+        }
+
+        function addKrw(amount) {
+            const krwEl = document.getElementById('krwInput');
+            const current = parseFloat(krwEl.value) || 0;
+            krwEl.value = current + amount;
+            convertCurrency('krw');
+        }
+
+        function resetKrw() {
+            document.getElementById('krwInput').value = '';
+            document.getElementById('twdInput').value = '';
+        }
+
+        function toggleDarkMode() {
+            const isDark = document.documentElement.classList.toggle('dark');
+            localStorage.setItem('seoul_dark_mode', isDark);
+        }
+
+        if (localStorage.getItem('seoul_dark_mode') === 'true' || (!('seoul_dark_mode' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+
+        function toggleHamburgerMenu() {
+            const drawer = document.getElementById('hamburgerMenuDrawer');
+            if (drawer) {
+                drawer.classList.toggle('hidden');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            fetchLiveRate();
+
+            // Auto-refresh exchange rates every 60 seconds (即時隨時更新)
+            setInterval(fetchLiveRate, 60000);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🗺️ 首爾高清地鐵圖與路線規劃獨立網頁 | 韓國 6 天 5 夜自由行</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        emerald: { 50: '#ecfdf5', 100: '#d1fae5', 500: '#10b981', 600: '#059669', 700: '#047857' }
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+        }
+        .dark .glass-panel {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen font-sans transition-colors duration-300">
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-40 glass-panel border-b border-slate-200/80 dark:border-slate-800/80 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-500 to-teal-600 flex items-center justify-center text-white shadow-md font-bold text-lg">
+                    🗺️
+                </div>
+                <div>
+                    <h1 class="font-bold text-base sm:text-lg tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
+                        2026 首爾高清大眾運輸地鐵圖
+                        <span class="text-xs font-normal px-2 py-0.5 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 border border-indigo-200">Seoul Metro Map</span>
+                    </h1>
+                </div>
+            </div>
+
+            <!-- Quick Header Action Buttons -->
+            <div class="flex items-center space-x-1.5 sm:space-x-2 shrink-0">
+                <button onclick="toggleDarkMode()" aria-label="Toggle Dark Mode" class="p-1.5 sm:p-2 rounded-xl text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+                    <i data-lucide="moon" class="w-4 h-4 dark:hidden"></i>
+                    <i data-lucide="sun" class="w-4 h-4 hidden dark:block text-amber-400"></i>
+                </button>
+
+                <!-- Hamburger Menu Trigger Button -->
+                <button onclick="toggleHamburgerMenu()" aria-label="Open Navigation Menu" class="px-3 py-1.5 rounded-xl bg-gradient-to-r from-indigo-600 to-teal-600 hover:from-indigo-700 hover:to-teal-700 text-white font-bold text-xs shadow-md transition active:scale-95 flex items-center gap-1.5">
+                    <i data-lucide="menu" class="w-4 h-4"></i>
+                    <span>選單</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- HAMBURGER MENU DROPDOWN DRAWER -->
+        <div id="hamburgerMenuDrawer" class="hidden absolute top-16 right-4 z-50 w-72 bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl border border-slate-200/80 dark:border-slate-800/80 rounded-2xl shadow-2xl p-3 space-y-1.5 transition-all duration-300">
+            <div class="px-3 py-2 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-slate-400">
+                <span>🧭 導覽分頁漢堡選單</span>
+                <button onclick="toggleHamburgerMenu()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white">
+                    <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+            </div>
+            <a href="index.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
+                <span class="text-lg">🗓️</span>
+                <div>
+                    <div>天數行程頁</div>
+                    <div class="text-[10px] text-slate-400 font-normal">6D5N 詳細每日行程與飯店</div>
+                </div>
+            </a>
+            <a href="currency.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
+                <span class="text-lg">💱</span>
+                <div>
+                    <div>匯率算盤頁</div>
+                    <div class="text-[10px] text-slate-400 font-normal">韓元 ↔ 台幣即時計算機</div>
+                </div>
+            </a>
+            <a href="weather.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
+                <span class="text-lg">🌤️</span>
+                <div>
+                    <div>天氣預報頁</div>
+                    <div class="text-[10px] text-slate-400 font-normal">逐時氣溫與降雨機率預報</div>
+                </div>
+            </a>
+            <a href="prep.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
+                <span class="text-lg">📋</span>
+                <div>
+                    <div>行前清單頁</div>
+                    <div class="text-[10px] text-slate-400 font-normal">證件、網卡、轉接頭清單</div>
+                </div>
+            </a>
+            <a href="subway.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 font-bold text-xs transition">
+                <span class="text-lg">🗺️</span>
+                <div>
+                    <div>高清地鐵圖頁</div>
+                    <div class="text-[10px] opacity-75 font-normal">地鐵地圖與點對點路線規劃</div>
+                </div>
+            </a>
+            <a href="phrases.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
+                <span class="text-lg">🗣️</span>
+                <div>
+                    <div>實用韓語頁</div>
+                    <div class="text-[10px] text-slate-400 font-normal">5 大情境會話與一鍵複製</div>
+                </div>
+            </a>
+        </div>
+
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 py-6 pb-24 md:pb-8">
+        <!-- Banner Header -->
+        <div class="bg-gradient-to-r from-indigo-700 via-teal-800 to-indigo-900 text-white rounded-2xl p-5 sm:p-6 shadow-lg mb-6">
+            <h2 class="text-xl sm:text-2xl font-extrabold flex items-center gap-2">
+                <span>🗺️ 2026 首爾大眾運輸地鐵圖獨立專頁</span>
+            </h2>
+            <p class="text-xs sm:text-sm text-indigo-100 mt-1 leading-relaxed">
+                收錄高畫質中文與機場標示地鐵圖，支援自由放大/縮小與全螢幕原檔檢視，並整合點對點乘車路線規劃器！
+            </p>
+        </div>
+
+        <!-- Section 1: HD Map Viewer -->
+        <div class="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200/80 dark:border-slate-800 shadow-xl mb-8">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 mb-3 border-b border-slate-100 dark:border-slate-800 gap-2">
+                <div class="flex items-center gap-2">
+                    <div class="p-2 bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 rounded-xl">
+                        <i data-lucide="map" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 dark:text-white text-base sm:text-lg">高清地鐵路線圖檢視器</h3>
+                        <p class="text-[11px] text-slate-400">點擊切換版本與放大查看細部站名</p>
+                    </div>
+                </div>
+                <a id="subwayMapOriginalLink" href="./2026 map/2026 South Korea Subway Map (Chinese Version with Airport Signage).png" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-100 rounded-xl text-xs font-bold transition flex items-center gap-1.5 shrink-0 border border-indigo-200 dark:border-indigo-800">
+                    開啟原圖高畫質檔 <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                </a>
+            </div>
+
+            <!-- Map Version Tabs -->
+            <div class="flex items-center gap-1.5 overflow-x-auto py-1 my-2 shrink-0 no-scrollbar">
+                <button onclick="switchSubwayMapVersion('airport')" id="mapTab-airport" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold shrink-0 bg-indigo-600 text-white shadow-sm">
+                    ✈️ 含機場標示版 (預設)
+                </button>
+                <button onclick="switchSubwayMapVersion('simplified')" id="mapTab-simplified" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold shrink-0 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200">
+                    🇨🇳 中文高清版
+                </button>
+                <button onclick="switchSubwayMapVersion('bilingual')" id="mapTab-bilingual" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold shrink-0 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200">
+                    🇰🇷 韓英雙語對照版
+                </button>
+            </div>
+
+            <!-- Zoom Bar -->
+            <div class="flex items-center justify-between bg-slate-50 dark:bg-slate-800/80 px-3.5 py-2 rounded-xl border border-slate-100 dark:border-slate-700/50 mb-3 text-xs">
+                <div class="flex items-center gap-1.5 text-slate-500 dark:text-slate-400 font-medium">
+                    <i data-lucide="move" class="w-4 h-4 text-indigo-500"></i>
+                    <span>支援滑鼠與雙指拖曳與縮放</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="zoomSubwayMap(-0.2)" class="px-3 py-1 bg-white dark:bg-slate-700 rounded-lg border border-slate-200 dark:border-slate-600 font-bold hover:bg-slate-100 text-slate-700 dark:text-slate-200">
+                        - 縮小
+                    </button>
+                    <span id="subwayZoomPercentage" class="w-12 text-center font-bold text-indigo-600 dark:text-indigo-400">100%</span>
+                    <button onclick="zoomSubwayMap(0.2)" class="px-3 py-1 bg-white dark:bg-slate-700 rounded-lg border border-slate-200 dark:border-slate-600 font-bold hover:bg-slate-100 text-slate-700 dark:text-slate-200">
+                        + 放大
+                    </button>
+                    <button onclick="resetSubwayMapZoom()" class="px-3 py-1 bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 rounded-lg font-semibold border border-indigo-200 dark:border-indigo-800">
+                        重置
+                    </button>
+                </div>
+            </div>
+
+            <!-- Map Display Area -->
+            <div class="overflow-auto bg-slate-950 rounded-2xl relative flex items-center justify-center p-3 min-h-[450px] max-h-[75vh] select-none">
+                <img id="subwayMapImage" src="./2026 map/2026 South Korea Subway Map (Chinese Version with Airport Signage).png" alt="2026首爾地鐵圖" class="max-w-none transition-transform duration-200 ease-out origin-center rounded shadow-2xl">
+            </div>
+        </div>
+
+        <!-- Section 2: Route Planner Engine -->
+        <div class="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200/80 dark:border-slate-800 shadow-xl">
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+                <i data-lucide="navigation" class="w-5 h-5 text-emerald-500"></i> 首爾點對點地鐵乘車路線規劃器
+            </h3>
+
+            <form onsubmit="handlePlanRoute(event)" class="space-y-4 text-xs sm:text-sm">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-slate-50 dark:bg-slate-800/60 p-4 rounded-xl border border-slate-200/60 dark:border-slate-700/60">
+                    <!-- Origin Field -->
+                    <div>
+                        <label class="block font-semibold text-slate-700 dark:text-slate-300 mb-1 flex items-center justify-between">
+                            <span>🟢 出發地點 (Origin)</span>
+                            <span class="text-[10px] text-indigo-500 font-normal">可手動輸入或下拉選擇</span>
+                        </label>
+                        <div class="space-y-1.5">
+                            <input type="text" id="routeOriginInput" list="stationPresetList" placeholder="可自由手動輸入 或 選取下方選單..." required class="w-full px-3 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white font-bold outline-none focus:ring-2 focus:ring-indigo-500 text-xs sm:text-sm">
+                            <select onchange="if(this.value){ document.getElementById('routeOriginInput').value = this.value; this.selectedIndex = 0; }" class="w-full px-2.5 py-1.5 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-600 dark:text-slate-300 font-semibold text-xs outline-none cursor-pointer">
+                                <option value="" selected>👇 點此展開快捷下拉選單選擇出發地...</option>
+                                <optgroup label="🏨 住宿與機場基地">
+                                    <option value="仁川國際機場">✈️ 仁川國際機場 (AREX)</option>
+                                    <option value="首爾萬楓酒店">🏨 首爾萬楓酒店 (1號線/永登浦站)</option>
+                                    <option value="永登浦可可酒店">🏨 永登浦可可酒店 (Hotel Gogo)</option>
+                                    <option value="首爾站">🚉 首爾站 (1號線/4號線/AREX)</option>
+                                </optgroup>
+                                <optgroup label="📍 6D5N 行程景點">
+                                    <option value="堂山站">♨️ 堂山站 (The Park Spa Land 汗蒸幕)</option>
+                                    <option value="聖水站">☕ 聖水站 (聖水洞/馬鈴薯排骨湯/鹽可頌)</option>
+                                    <option value="合井站">🥩 合井站 (각시보쌈 各時菜包肉)</option>
+                                    <option value="蠶室站">🎡 蠶室站 (樂天世界/梨花校服)</option>
+                                    <option value="景福宮站">🏯 景福宮站 (景福宮/土俗村蔘鷄湯)</option>
+                                    <option value="安國站">🏛️ 安國站 (北村韓屋村/三清洞)</option>
+                                    <option value="弘大入口站">📸 弘大入口站 (弘大商圈/證件照/豬腳/炸雞)</option>
+                                </optgroup>
+                                <optgroup label="🏙️ 首爾知名地標">
+                                    <option value="明洞站">🛍️ 明洞站 (4號線/明洞商圈)</option>
+                                    <option value="東大門歷史文化公園站">👗 東大門歷史文化公園站 (2/4/5號線)</option>
+                                    <option value="新沙站">🌲 新沙站 (3號線/林蔭道)</option>
+                                    <option value="江南站">🏬 江南站 (2號線/地下街)</option>
+                                    <option value="梨大站">🎓 梨大站 (2號線/梨花女子大學)</option>
+                                    <option value="龍山站">🚆 龍山站 (1號線/KTX)</option>
+                                    <option value="金浦國際機場">✈️ 金浦國際機場 (5/9號線/AREX)</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Destination Field -->
+                    <div>
+                        <label class="block font-semibold text-slate-700 dark:text-slate-300 mb-1 flex items-center justify-between">
+                            <span>🔴 目的地點 (Destination)</span>
+                            <span class="text-[10px] text-indigo-500 font-normal">可手動輸入或下拉選擇</span>
+                        </label>
+                        <div class="space-y-1.5">
+                            <input type="text" id="routeDestInput" list="stationPresetList" placeholder="可自由手動輸入 或 選取下方選單..." required class="w-full px-3 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white font-bold outline-none focus:ring-2 focus:ring-indigo-500 text-xs sm:text-sm">
+                            <select onchange="if(this.value){ document.getElementById('routeDestInput').value = this.value; this.selectedIndex = 0; }" class="w-full px-2.5 py-1.5 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-600 dark:text-slate-300 font-semibold text-xs outline-none cursor-pointer">
+                                <option value="" selected>👇 點此展開快捷下拉選單選擇目的地...</option>
+                                <optgroup label="🏨 住宿與機場基地">
+                                    <option value="仁川國際機場">✈️ 仁川國際機場 (AREX)</option>
+                                    <option value="首爾萬楓酒店">🏨 首爾萬楓酒店 (1號線/永登浦站)</option>
+                                    <option value="永登浦可可酒店">🏨 永登浦可可酒店 (Hotel Gogo)</option>
+                                    <option value="首爾站">🚉 首爾站 (1號線/4號線/AREX)</option>
+                                </optgroup>
+                                <optgroup label="📍 6D5N 行程景點">
+                                    <option value="堂山站">♨️ 堂山站 (The Park Spa Land 汗蒸幕)</option>
+                                    <option value="聖水站">☕ 聖水站 (聖水洞/馬鈴薯排骨湯/鹽可頌)</option>
+                                    <option value="合井站">🥩 合井站 (각시보쌈 各時菜包肉)</option>
+                                    <option value="蠶室站">🎡 蠶室站 (樂天世界/梨花校服)</option>
+                                    <option value="景福宮站">🏯 景福宮站 (景福宮/土俗村蔘鷄湯)</option>
+                                    <option value="安國站">🏛️ 安國站 (北村韓屋村/三清洞)</option>
+                                    <option value="弘大入口站">📸 弘大入口站 (弘大商圈/證件照/豬腳/炸雞)</option>
+                                </optgroup>
+                                <optgroup label="🏙️ 首爾知名地標">
+                                    <option value="明洞站">🛍️ 明洞站 (4號線/明洞商圈)</option>
+                                    <option value="東大門歷史文化公園站">👗 東大門歷史文化公園站 (2/4/5號線)</option>
+                                    <option value="新沙站">🌲 新沙站 (3號線/林蔭道)</option>
+                                    <option value="江南站">🏬 江南站 (2號線/地下街)</option>
+                                    <option value="梨大站">🎓 梨大站 (2號線/梨花女子大學)</option>
+                                    <option value="龍山站">🚆 龍山站 (1號線/KTX)</option>
+                                    <option value="金浦國際機場">✈️ 金浦國際機場 (5/9號線/AREX)</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Presets Datalist for typing auto-complete -->
+                <datalist id="stationPresetList">
+                    <option value="仁川國際機場">
+                    <option value="首爾萬楓酒店">
+                    <option value="永登浦可可酒店">
+                    <option value="首爾站">
+                    <option value="堂山站">
+                    <option value="聖水站">
+                    <option value="合井站">
+                    <option value="蠶室站">
+                    <option value="景福宮站">
+                    <option value="安國站">
+                    <option value="弘大入口站">
+                    <option value="明洞站">
+                    <option value="東大門歷史文化公園站">
+                    <option value="新沙站">
+                    <option value="江南站">
+                    <option value="梨大站">
+                    <option value="龍山站">
+                    <option value="金浦國際機場">
+                </datalist>
+
+                <button type="submit" class="w-full py-3 bg-gradient-to-r from-indigo-600 to-teal-600 hover:from-indigo-700 hover:to-teal-700 text-white font-bold rounded-xl shadow-md transition flex items-center justify-center gap-2 text-sm active:scale-95">
+                    <i data-lucide="compass" class="w-4 h-4"></i>
+                    <span>開始規劃最佳乘車路線</span>
+                </button>
+            </form>
+
+            <div id="routeResultContainer" class="mt-5 pt-4 border-t border-slate-100 dark:border-slate-800 hidden space-y-4">
+                <!-- Result renders dynamically -->
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let currentSubwayZoom = 1.0;
+        let currentMapVersion = 'airport';
+
+        const subwayMapFiles = {
+            airport: './2026 map/2026 South Korea Subway Map (Chinese Version with Airport Signage).png',
+            simplified: './2026 map/Simplified Chinese.jpg',
+            bilingual: './2026 map/Korean-English bilingual version.jpg'
+        };
+
+        function switchSubwayMapVersion(versionKey) {
+            if (!subwayMapFiles[versionKey]) return;
+            currentMapVersion = versionKey;
+
+            const img = document.getElementById('subwayMapImage');
+            const link = document.getElementById('subwayMapOriginalLink');
+            if (img) img.src = subwayMapFiles[versionKey];
+            if (link) link.href = subwayMapFiles[versionKey];
+
+            const tabKeys = ['airport', 'simplified', 'bilingual'];
+            tabKeys.forEach(key => {
+                const tab = document.getElementById(`mapTab-${key}`);
+                if (tab) {
+                    if (key === versionKey) {
+                        tab.className = 'px-3.5 py-1.5 rounded-xl text-xs font-semibold shrink-0 bg-indigo-600 text-white shadow-sm';
+                    } else {
+                        tab.className = 'px-3.5 py-1.5 rounded-xl text-xs font-semibold shrink-0 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200';
+                    }
+                }
+            });
+
+            resetSubwayMapZoom();
+        }
+
+        function zoomSubwayMap(delta) {
+            currentSubwayZoom = Math.min(3.5, Math.max(0.5, currentSubwayZoom + delta));
+            applySubwayMapTransform();
+        }
+
+        function resetSubwayMapZoom() {
+            currentSubwayZoom = 1.0;
+            applySubwayMapTransform();
+        }
+
+        function applySubwayMapTransform() {
+            const img = document.getElementById('subwayMapImage');
+            const zoomText = document.getElementById('subwayZoomPercentage');
+            if (img) {
+                img.style.transform = `scale(${currentSubwayZoom})`;
+            }
+            if (zoomText) {
+                zoomText.innerText = `${Math.round(currentSubwayZoom * 100)}%`;
+            }
+        }
+
+        function setQuickRoute(origin, dest) {
+            const originEl = document.getElementById('routeOriginInput');
+            const destEl = document.getElementById('routeDestInput');
+            if (originEl) originEl.value = origin;
+            if (destEl) destEl.value = dest;
+            handlePlanRoute();
+        }
+
+        function setOriginOnly(origin) {
+            const originEl = document.getElementById('routeOriginInput');
+            if (originEl) originEl.value = origin;
+        }
+
+        function setDestOnly(dest) {
+            const destEl = document.getElementById('routeDestInput');
+            if (destEl) destEl.value = dest;
+        }
+
+        function handlePlanRoute(event) {
+            if (event) event.preventDefault();
+            const origin = document.getElementById('routeOriginInput').value.trim();
+            const dest = document.getElementById('routeDestInput').value.trim();
+            const container = document.getElementById('routeResultContainer');
+
+            if (!origin || !dest) return;
+
+            let stepsHtml = '';
+            let estMinutes = 35;
+            let estFare = "1,400 ₩";
+            let transferCount = 0;
+
+            if (origin.includes('仁川') && dest.includes('萬楓')) {
+                estMinutes = 55;
+                estFare = "4,750 ₩";
+                transferCount = 1;
+                stepsHtml = `
+                    <div class="p-3 bg-indigo-50/80 dark:bg-indigo-950/40 rounded-xl border border-indigo-200/60 dark:border-indigo-800/60 text-xs space-y-2">
+                        <div class="flex items-center gap-2 text-indigo-700 dark:text-indigo-300 font-bold">
+                            <span class="px-2 py-0.5 bg-indigo-600 text-white rounded text-[10px]">Step 1</span>
+                            <span>搭乘 AREX 機場快線 (普通列車) ➔ 孔德站 (Gongdeok)</span>
+                        </div>
+                        <p class="text-slate-600 dark:text-slate-400 pl-4">乘車約 46 分鐘，到達孔德站下車。</p>
+                        <div class="flex items-center gap-2 text-emerald-700 dark:text-emerald-300 font-bold pt-1">
+                            <span class="px-2 py-0.5 bg-emerald-600 text-white rounded text-[10px]">Step 2 (轉乘)</span>
+                            <span>轉乘地鐵 5 號線 (往傍花方向) ➔ 永登浦市場站 (Yeongdeungpo Market)</span>
+                        </div>
+                        <p class="text-slate-600 dark:text-slate-400 pl-4">搭乘 2 站約 4 分鐘，出 4 號出口步行 5 分鐘即可抵達首爾萬楓酒店！</p>
+                    </div>
+                `;
+            } else if (origin.includes('永登浦') && dest.includes('聖水')) {
+                estMinutes = 28;
+                estFare = "1,500 ₩";
+                transferCount = 1;
+                stepsHtml = `
+                    <div class="p-3 bg-emerald-50/80 dark:bg-emerald-950/40 rounded-xl border border-emerald-200/60 dark:border-emerald-800/60 text-xs space-y-2">
+                        <div class="flex items-center gap-2 text-emerald-700 dark:text-emerald-300 font-bold">
+                            <span class="px-2 py-0.5 bg-emerald-600 text-white rounded text-[10px]">Step 1</span>
+                            <span>永登浦站搭乘 1 號線 ➔ 新道林站 (Sindorim)</span>
+                        </div>
+                        <p class="text-slate-600 dark:text-slate-400 pl-4">乘車 1 站約 3 分鐘。</p>
+                        <div class="flex items-center gap-2 text-green-700 dark:text-green-300 font-bold pt-1">
+                            <span class="px-2 py-0.5 bg-green-600 text-white rounded text-[10px]">Step 2 (轉乘 2號線)</span>
+                            <span>新道林站轉乘地鐵 2 號線 (內環線往乙支路方向) ➔ 聖水站 (Seongsu)</span>
+                        </div>
+                        <p class="text-slate-600 dark:text-slate-400 pl-4">乘車 12 站約 24 分鐘，抵達聖水站 3/4 號出口。</p>
+                    </div>
+                `;
+            } else {
+                stepsHtml = `
+                    <div class="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl text-xs space-y-1 text-slate-700 dark:text-slate-300">
+                        <div class="font-bold text-indigo-600 dark:text-indigo-400">🟢 起點：${origin} ➔ 🔴 終點：${dest}</div>
+                        <p>推薦路線：搭乘地鐵 2 號線或 1 號線幹線轉乘，預估車程約 25~35 分鐘。</p>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = `
+                <div class="p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm">
+                    <div class="flex items-center justify-between mb-3 border-b border-slate-100 dark:border-slate-800 pb-2">
+                        <div class="font-bold text-slate-900 dark:text-white text-sm">乘車規劃結果</div>
+                        <div class="flex items-center gap-2 text-xs font-bold">
+                            <span class="text-emerald-600 dark:text-emerald-400">⏱️ 約 ${estMinutes} 分鐘</span>
+                            <span class="text-teal-600 dark:text-teal-400">💰 票價 ${estFare}</span>
+                        </div>
+                    </div>
+                    ${stepsHtml}
+                </div>
+            `;
+            container.classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        function toggleDarkMode() {
+            const isDark = document.documentElement.classList.toggle('dark');
+            localStorage.setItem('seoul_dark_mode', isDark);
+        }
+
+        if (localStorage.getItem('seoul_dark_mode') === 'true' || (!('seoul_dark_mode' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+
+        function toggleHamburgerMenu() {
+            const drawer = document.getElementById('hamburgerMenuDrawer');
+            if (drawer) {
+                drawer.classList.toggle('hidden');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => lucide.createIcons());
+    </script>
+</body>
+</html>
