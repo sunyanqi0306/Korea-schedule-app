@@ -156,75 +156,71 @@
         </div>
 
         <!-- Section 1: HD Map Viewer -->
-        <div
-            class="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200/80 dark:border-slate-800 shadow-xl mb-8">
-            <div
-                class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 mb-3 border-b border-slate-100 dark:border-slate-800 gap-2">
+        <div class="bg-white dark:bg-slate-900 rounded-2xl p-4 sm:p-6 border border-slate-200/80 dark:border-slate-800 shadow-xl mb-8">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 mb-3 border-b border-slate-100 dark:border-slate-800 gap-3">
                 <div class="flex items-center gap-2">
                     <div class="p-2 bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 rounded-xl">
                         <i data-lucide="map" class="w-5 h-5"></i>
                     </div>
                     <div>
                         <h3 class="font-bold text-slate-900 dark:text-white text-base sm:text-lg">高清地鐵路線圖檢視器</h3>
-                        <p class="text-[11px] text-slate-400">點擊切換版本與放大查看細部站名</p>
+                        <p class="text-[11px] text-slate-400">點擊切換版本、放大或點擊原圖檔瀏覽</p>
                     </div>
                 </div>
                 <a id="subwayMapOriginalLink"
-                    href="./2026 map/2026 South Korea Subway Map (Chinese Version with Airport Signage).png"
+                    href="./2026%20map/2026%20South%20Korea%20Subway%20Map%20(Chinese%20Version%20with%20Airport%20Signage).png"
                     target="_blank" rel="noopener noreferrer"
-                    class="px-3.5 py-1.5 bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-100 rounded-xl text-xs font-bold transition flex items-center gap-1.5 shrink-0 border border-indigo-200 dark:border-indigo-800">
-                    開啟原圖高畫質檔 <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                    class="w-full sm:w-auto px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 shadow-md shrink-0">
+                    📱 手機全螢幕開啟高畫質原圖 <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
                 </a>
             </div>
 
             <!-- Map Version Tabs -->
             <div class="flex items-center gap-1.5 overflow-x-auto py-1 my-2 shrink-0 no-scrollbar">
                 <button onclick="switchSubwayMapVersion('airport')" id="mapTab-airport"
-                    class="px-3.5 py-1.5 rounded-xl text-xs font-semibold shrink-0 bg-indigo-600 text-white shadow-sm">
-                    含機場標示版
+                    class="px-3.5 py-2 rounded-xl text-xs font-bold shrink-0 bg-indigo-600 text-white shadow-sm">
+                    ✈️ 含機場標示版 (預設)
                 </button>
                 <button onclick="switchSubwayMapVersion('simplified')" id="mapTab-simplified"
-                    class="px-3.5 py-1.5 rounded-xl text-xs font-semibold shrink-0 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200">
-                    中文高清版
+                    class="px-3.5 py-2 rounded-xl text-xs font-bold shrink-0 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200">
+                    🇨🇳 中文高清版
                 </button>
                 <button onclick="switchSubwayMapVersion('bilingual')" id="mapTab-bilingual"
-                    class="px-3.5 py-1.5 rounded-xl text-xs font-semibold shrink-0 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200">
-                    韓英雙語對照版
+                    class="px-3.5 py-2 rounded-xl text-xs font-bold shrink-0 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200">
+                    🇰🇷 韓英雙語對照版
                 </button>
             </div>
 
-            <!-- Zoom Bar -->
-            <div
-                class="flex items-center justify-between bg-slate-50 dark:bg-slate-800/80 px-3.5 py-2 rounded-xl border border-slate-100 dark:border-slate-700/50 mb-3 text-xs">
+            <!-- Zoom Control Bar (Responsive on Mobile) -->
+            <div class="flex flex-col sm:flex-row items-center justify-between bg-slate-50 dark:bg-slate-800/80 px-3.5 py-2.5 rounded-xl border border-slate-100 dark:border-slate-700/50 mb-3 text-xs gap-2">
                 <div class="flex items-center gap-1.5 text-slate-500 dark:text-slate-400 font-medium">
                     <i data-lucide="move" class="w-4 h-4 text-indigo-500"></i>
-                    <span>支援滑鼠與雙指拖曳與縮放</span>
+                    <span>支援點擊 +/- 按鈕自由縮放與拖曳</span>
                 </div>
-                <div class="flex items-center gap-2">
-                    <button onclick="zoomSubwayMap(-0.2)"
-                        class="px-3 py-1 bg-white dark:bg-slate-700 rounded-lg border border-slate-200 dark:border-slate-600 font-bold hover:bg-slate-100 text-slate-700 dark:text-slate-200">
+                <div class="flex items-center gap-1.5 w-full sm:w-auto justify-center">
+                    <button onclick="zoomSubwayMap(-0.25)"
+                        class="px-3 py-1.5 bg-white dark:bg-slate-700 rounded-lg border border-slate-200 dark:border-slate-600 font-bold hover:bg-slate-100 text-slate-700 dark:text-slate-200 active:scale-95">
                         - 縮小
                     </button>
                     <span id="subwayZoomPercentage"
-                        class="w-12 text-center font-bold text-indigo-600 dark:text-indigo-400">100%</span>
-                    <button onclick="zoomSubwayMap(0.2)"
-                        class="px-3 py-1 bg-white dark:bg-slate-700 rounded-lg border border-slate-200 dark:border-slate-600 font-bold hover:bg-slate-100 text-slate-700 dark:text-slate-200">
+                        class="w-12 text-center font-black text-indigo-600 dark:text-indigo-400">100%</span>
+                    <button onclick="zoomSubwayMap(0.25)"
+                        class="px-3 py-1.5 bg-indigo-600 text-white rounded-lg font-bold hover:bg-indigo-700 shadow-sm active:scale-95">
                         + 放大
                     </button>
                     <button onclick="resetSubwayMapZoom()"
-                        class="px-3 py-1 bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 rounded-lg font-semibold border border-indigo-200 dark:border-indigo-800">
-                        重置
+                        class="px-3 py-1.5 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-lg font-semibold border border-slate-300 dark:border-slate-600">
+                        重置適合螢幕
                     </button>
                 </div>
             </div>
 
             <!-- Map Display Area -->
-            <div
-                class="overflow-auto bg-slate-950 rounded-2xl relative flex items-center justify-center p-3 min-h-[450px] max-h-[75vh] select-none">
+            <div class="overflow-auto bg-slate-950 rounded-2xl relative flex items-center justify-center p-2 sm:p-4 min-h-[320px] max-h-[70vh] select-none border border-slate-800">
                 <img id="subwayMapImage"
-                    src="./2026 map/2026 South Korea Subway Map (Chinese Version with Airport Signage).png"
+                    src="./2026%20map/2026%20South%20Korea%20Subway%20Map%20(Chinese%20Version%20with%20Airport%20Signage).png"
                     alt="2026首爾地鐵圖"
-                    class="max-w-none transition-transform duration-200 ease-out origin-center rounded shadow-2xl">
+                    class="max-w-full h-auto transition-transform duration-200 ease-out origin-center rounded shadow-2xl">
             </div>
         </div>
 
@@ -366,9 +362,9 @@
         let currentMapVersion = 'airport';
 
         const subwayMapFiles = {
-            airport: './2026 map/2026 South Korea Subway Map (Chinese Version with Airport Signage).png',
-            simplified: './2026 map/Simplified Chinese.jpg',
-            bilingual: './2026 map/Korean-English bilingual version.jpg'
+            airport: './2026%20map/2026%20South%20Korea%20Subway%20Map%20(Chinese%20Version%20with%20Airport%20Signage).png',
+            simplified: './2026%20map/Simplified%20Chinese.jpg',
+            bilingual: './2026%20map/Korean-English%20bilingual%20version.jpg'
         };
 
         function switchSubwayMapVersion(versionKey) {
@@ -385,9 +381,9 @@
                 const tab = document.getElementById(`mapTab-${key}`);
                 if (tab) {
                     if (key === versionKey) {
-                        tab.className = 'px-3.5 py-1.5 rounded-xl text-xs font-semibold shrink-0 bg-indigo-600 text-white shadow-sm';
+                        tab.className = 'px-3.5 py-2 rounded-xl text-xs font-bold shrink-0 bg-indigo-600 text-white shadow-sm';
                     } else {
-                        tab.className = 'px-3.5 py-1.5 rounded-xl text-xs font-semibold shrink-0 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200';
+                        tab.className = 'px-3.5 py-2 rounded-xl text-xs font-bold shrink-0 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200';
                     }
                 }
             });
@@ -396,7 +392,7 @@
         }
 
         function zoomSubwayMap(delta) {
-            currentSubwayZoom = Math.min(3.5, Math.max(0.5, currentSubwayZoom + delta));
+            currentSubwayZoom = Math.min(3.5, Math.max(0.6, currentSubwayZoom + delta));
             applySubwayMapTransform();
         }
 
@@ -409,6 +405,13 @@
             const img = document.getElementById('subwayMapImage');
             const zoomText = document.getElementById('subwayZoomPercentage');
             if (img) {
+                if (currentSubwayZoom <= 1.0) {
+                    img.classList.remove('max-w-none');
+                    img.classList.add('max-w-full');
+                } else {
+                    img.classList.remove('max-w-full');
+                    img.classList.add('max-w-none');
+                }
                 img.style.transform = `scale(${currentSubwayZoom})`;
             }
             if (zoomText) {
