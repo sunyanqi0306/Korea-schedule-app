@@ -219,7 +219,7 @@
                             <span class="text-[10px] text-indigo-500 font-normal">可手動輸入或下拉選擇</span>
                         </label>
                         <div class="space-y-1.5">
-                            <input type="text" id="routeOriginInput" list="stationPresetList"
+                            <input type="text" id="routeOriginInput"
                                 placeholder="可自由手動輸入 或 選取下方選單..." required
                                 class="w-full px-3 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white font-bold outline-none focus:ring-2 focus:ring-indigo-500 text-xs sm:text-sm">
                             <select
@@ -254,6 +254,16 @@
                         </div>
                     </div>
 
+                    <!-- Swap Button -->
+                    <div class="flex justify-center items-center sm:col-span-2 -my-1">
+                        <button type="button" onclick="swapRouteOriginDest()"
+                            class="px-4 py-1.5 rounded-full bg-indigo-50 dark:bg-indigo-950/80 text-indigo-600 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 hover:bg-indigo-100 dark:hover:bg-indigo-900 transition shadow-sm font-bold text-xs flex items-center gap-1.5 active:scale-95"
+                            title="互相調換出發地與目的地">
+                            <i data-lucide="arrow-left-right" class="w-3.5 h-3.5"></i>
+                            <span>對調起終點</span>
+                        </button>
+                    </div>
+
                     <!-- Destination Field -->
                     <div>
                         <label
@@ -262,7 +272,7 @@
                             <span class="text-[10px] text-indigo-500 font-normal">可手動輸入或下拉選擇</span>
                         </label>
                         <div class="space-y-1.5">
-                            <input type="text" id="routeDestInput" list="stationPresetList"
+                            <input type="text" id="routeDestInput"
                                 placeholder="可自由手動輸入 或 選取下方選單..." required
                                 class="w-full px-3 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white font-bold outline-none focus:ring-2 focus:ring-indigo-500 text-xs sm:text-sm">
                             <select
@@ -297,28 +307,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Presets Datalist for typing auto-complete -->
-                <datalist id="stationPresetList">
-                    <option value="仁川國際機場">
-                    <option value="首爾萬楓酒店">
-                    <option value="永登浦可可酒店">
-                    <option value="首爾站">
-                    <option value="堂山站">
-                    <option value="聖水站">
-                    <option value="合井站">
-                    <option value="蠶室站">
-                    <option value="景福宮站">
-                    <option value="安國站">
-                    <option value="弘大入口站">
-                    <option value="明洞站">
-                    <option value="東大門歷史文化公園站">
-                    <option value="新沙站">
-                    <option value="江南站">
-                    <option value="梨大站">
-                    <option value="龍山站">
-                    <option value="金浦國際機場">
-                </datalist>
 
                 <button type="submit"
                     class="w-full py-3 bg-gradient-to-r from-indigo-600 to-teal-600 hover:from-indigo-700 hover:to-teal-700 text-white font-bold rounded-xl shadow-md transition flex items-center justify-center gap-2 text-sm active:scale-95">
@@ -404,88 +392,371 @@
             handlePlanRoute();
         }
 
+        function showToast(message) {
+            const container = document.getElementById('toastContainer');
+            if (!container) return;
+            const toast = document.createElement('div');
+            toast.className = 'px-4 py-2.5 bg-slate-900/90 text-white rounded-xl text-xs font-bold shadow-2xl border border-slate-700/50 backdrop-blur-md transition-all duration-300 pointer-events-auto flex items-center gap-2';
+            toast.innerHTML = `<span class="text-emerald-400">✓</span> <span>${message}</span>`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 2500);
+        }
+
+        function copyToClipboard(text, message) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast(message || '已複製至剪貼簿！');
+            }).catch(err => {
+                console.error('Copy failed: ', err);
+            });
+        }
+
         function setOriginOnly(origin) {
             const originEl = document.getElementById('routeOriginInput');
             if (originEl) originEl.value = origin;
+            showToast(`已設定出發地：${origin}`);
         }
 
         function setDestOnly(dest) {
             const destEl = document.getElementById('routeDestInput');
             if (destEl) destEl.value = dest;
+            showToast(`已設定目的地：${dest}`);
+        }
+
+        function swapRouteOriginDest() {
+            const originEl = document.getElementById('routeOriginInput');
+            const destEl = document.getElementById('routeDestInput');
+            if (!originEl || !destEl) return;
+            const temp = originEl.value;
+            originEl.value = destEl.value;
+            destEl.value = temp;
+            if (originEl.value && destEl.value) {
+                handlePlanRoute();
+            }
+        }
+
+        const landmarkMap = [
+            { keys: ['新沙', 'sinsa', '林蔭道'], station: '新沙站', krStation: '신사역', line: '3號線 (橘色)', exit: '8號出口' },
+            { keys: ['景福宮', 'gyeongbokgung', '土俗村', '蔘雞湯'], station: '景福宮站', krStation: '경복궁역', line: '3號線 (橘色)', exit: '2號出口' },
+            { keys: ['廣藏市場', 'kwangjang', '鐘路5街'], station: '鐘路5街站', krStation: '종로5가역', line: '1號線 (深藍)', exit: '8號出口' },
+            { keys: ['聖水', 'seongsu', '馬鈴薯排骨湯', '鹽可頌', '生吐司', 'pizzeria'], station: '聖水站', krStation: '성수역', line: '2號線 (綠色)', exit: '3/4號出口' },
+            { keys: ['弘大', 'hongdae', 'modelro', '證件照', '豬腳'], station: '弘大入口站', krStation: '홍대입구역', line: '2號線 / AREX', exit: '8/9號出口' },
+            { keys: ['明洞', 'myeongdong', '南山塔', '首爾塔'], station: '明洞站', krStation: '명동역', line: '4號線 (天藍)', exit: '6號出口' },
+            { keys: ['東大門', 'dongdaemun', 'ddp'], station: '東大門歷史文化公園站', krStation: '동대문역사문화공원역', line: '2/4/5號線', exit: '14號出口' },
+            { keys: ['蠶室', 'jamsil', '樂天世界', '梨花校服'], station: '蠶室站', krStation: '잠실역', line: '2號線 (綠色)', exit: '4號出口' },
+            { keys: ['萬楓', 'fairfield', '永登浦'], station: '首爾萬楓酒店 / 永登浦站', krStation: '영등포역', line: '1號線 (深藍)', exit: '5號出口' },
+            { keys: ['可可', 'coco', 'gogo', '永登浦市場'], station: '永登浦市場站', krStation: '영등포시장역', line: '5號線 (紫色)', exit: '4號出口' },
+            { keys: ['安國', 'anguk', '北村', '三清洞'], station: '安國站', krStation: '안국역', line: '3號線 (橘色)', exit: '2/3號出口' },
+            { keys: ['堂山', 'dangsan', 'spa', '汗蒸幕'], station: '堂山站', krStation: '당산역', line: '2號線 (綠色)', exit: '10號出口' },
+            { keys: ['首爾站', 'seoul station', 'ktx'], station: '首爾站', krStation: '서울역', line: '1/4號線/AREX', exit: '1/15號出口' },
+            { keys: ['仁川', 'icn', 'incheon', '機場'], station: '仁川國際機場 T1/T2', krStation: '인천국제공항', line: 'AREX 機場快線', exit: '航廈大廳' },
+            { keys: ['汝矣島', 'yeouido', '現代百貨', 'hyundai'], station: '汝矣島站', krStation: '여의도역', line: '5/9號線', exit: '3號出口連通道' },
+            { keys: ['江南', 'gangnam'], station: '江南站', krStation: '강남역', line: '2號線 (綠色)', exit: '10/11號出口' },
+            { keys: ['coex', '三成', 'samseong'], station: '三成站 (COEX)', krStation: '삼성역', line: '2號線 (綠色)', exit: '5/6號出口' },
+            { keys: ['梨大', 'ewha'], station: '梨大站', krStation: '이대역', line: '2號線 (綠色)', exit: '2/3號出口' },
+            { keys: ['龍山', 'yongsan'], station: '龍山站', krStation: '용산역', line: '1號線 / KTX', exit: '1號出口' }
+        ];
+
+        function getLandmarkInfo(inputStr) {
+            if (!inputStr) return null;
+            const str = inputStr.toLowerCase();
+            return landmarkMap.find(item => item.keys.some(k => str.includes(k)));
         }
 
         function handlePlanRoute(event) {
             if (event) event.preventDefault();
+
             const origin = document.getElementById('routeOriginInput').value.trim();
             const dest = document.getElementById('routeDestInput').value.trim();
             const container = document.getElementById('routeResultContainer');
 
             if (!origin || !dest) return;
 
-            let stepsHtml = '';
-            let estMinutes = 35;
-            let estFare = "1,400 ₩";
-            let transferCount = 0;
+            container.classList.remove('hidden');
+            container.innerHTML = `
+                <div class="text-center py-4 text-xs text-slate-400">
+                    <i data-lucide="loader-2" class="w-5 h-5 animate-spin mx-auto mb-2 text-indigo-500"></i>
+                    計算最佳地鐵點對點路線中...
+                </div>
+            `;
+            lucide.createIcons();
 
-            if (origin.includes('仁川') && dest.includes('萬楓')) {
-                estMinutes = 55;
-                estFare = "4,750 ₩";
-                transferCount = 1;
-                stepsHtml = `
-                    <div class="p-3 bg-indigo-50/80 dark:bg-indigo-950/40 rounded-xl border border-indigo-200/60 dark:border-indigo-800/60 text-xs space-y-2">
-                        <div class="flex items-center gap-2 text-indigo-700 dark:text-indigo-300 font-bold">
-                            <span class="px-2 py-0.5 bg-indigo-600 text-white rounded text-[10px]">Step 1</span>
-                            <span>搭乘 AREX 機場快線 (普通列車) ➔ 孔德站 (Gongdeok)</span>
-                        </div>
-                        <p class="text-slate-600 dark:text-slate-400 pl-4">乘車約 46 分鐘，到達孔德站下車。</p>
-                        <div class="flex items-center gap-2 text-emerald-700 dark:text-emerald-300 font-bold pt-1">
-                            <span class="px-2 py-0.5 bg-emerald-600 text-white rounded text-[10px]">Step 2 (轉乘)</span>
-                            <span>轉乘地鐵 5 號線 (往傍花方向) ➔ 永登浦市場站 (Yeongdeungpo Market)</span>
-                        </div>
-                        <p class="text-slate-600 dark:text-slate-400 pl-4">搭乘 2 站約 4 分鐘，出 4 號出口步行 5 分鐘即可抵達首爾萬楓酒店！</p>
+            setTimeout(() => {
+                const originInfo = getLandmarkInfo(origin);
+                const destInfo = getLandmarkInfo(dest);
+
+                const originTermKr = originInfo ? originInfo.krStation : origin;
+                const destTermKr = destInfo ? destInfo.krStation : dest;
+
+                const naverDirectionsUrl = `https://map.naver.com/p/search/${encodeURIComponent(originTermKr + '에서 ' + destTermKr + ' 대중교통 길찾기')}`;
+                const googleDirectionsUrl = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(originTermKr)}&destination=${encodeURIComponent(destTermKr)}&travelmode=transit`;
+                const kakaoDirectionsUrl = `https://map.kakao.com/?sName=${encodeURIComponent(originTermKr)}&eName=${encodeURIComponent(destTermKr)}`;
+
+                const match = findPredefinedRoute(origin, dest);
+
+                if (match) {
+                    renderMatchedRoute(container, match, origin, dest, naverDirectionsUrl, googleDirectionsUrl, kakaoDirectionsUrl);
+                } else {
+                    renderDynamicRoute(container, origin, dest, naverDirectionsUrl, googleDirectionsUrl, kakaoDirectionsUrl);
+                }
+                lucide.createIcons();
+            }, 300);
+        }
+
+        function findPredefinedRoute(origin, dest) {
+            const oStr = origin.toLowerCase();
+            const dStr = dest.toLowerCase();
+
+            const routeDatabase = [
+                {
+                    origins: ['新沙', 'sinsa', '林蔭道'],
+                    dests: ['景福宮', 'gyeongbokgung', '土俗村'],
+                    title: "新沙站 (林蔭道商圈) ➔ 景福宮站 (景福宮 / 土俗村)",
+                    time: "約 12 分鐘 (5 站)",
+                    fare: "₩1,400",
+                    transfers: "直達 (免轉乘)",
+                    steps: [
+                        { line: "3號線 (橘色線)", from: "新沙站 (Sinsa Exit 8)", to: "景福宮站 (Gyeongbokgung Exit 2)", note: "從新沙站搭乘地鐵 3 號線（往大化/景福宮方向），途經 5 站直達「景福宮站」" },
+                        { line: "到站步行 3 分鐘", from: "景福宮站 2號出口", to: "土俗村蔘雞湯 / 景福宮正門", note: "出 2 號出口直行 120 公尺即可抵達土俗村蔘雞湯與景福宮" }
+                    ]
+                },
+                {
+                    origins: ['景福宮', 'gyeongbokgung', '土俗村'],
+                    dests: ['新沙', 'sinsa', '林蔭道'],
+                    title: "景福宮站 ➔ 新沙站 (林蔭道商圈)",
+                    time: "約 12 分鐘 (5 站)",
+                    fare: "₩1,400",
+                    transfers: "直達 (免轉乘)",
+                    steps: [
+                        { line: "3號線 (橘色線)", from: "景福宮站 (Exit 2)", to: "新沙站 (Sinsa Exit 8)", note: "從景福宮站搭乘地鐵 3 號線（往水西/梧琴方向），途經 5 站直達「新沙站」" },
+                        { line: "出站即達商圈", from: "新沙站 8號出口", to: "新沙洞林蔭大道 (Garosu-gil)", note: "出 8 號出口即抵達林蔭大道咖啡館街與潮流品牌專賣店" }
+                    ]
+                },
+                {
+                    origins: ['仁川', 'icn', 'incheon'],
+                    dests: ['永登浦', '可可', 'gogo', 'koko'],
+                    title: "仁川國際機場 ➔ 永登浦可可酒店",
+                    time: "約 55 分鐘",
+                    fare: "₩4,500",
+                    transfers: "1 次轉乘",
+                    steps: [
+                        { line: "AREX 機場快線", from: "仁川國際機場 T1/T2", to: "孔德站 (Gongdeok)", note: "搭乘 AREX 普通列車至「孔德站」" },
+                        { line: "5號線 (紫色)", from: "孔德站", to: "永登浦市場站 (Exit 4)", note: "轉乘 5 號線往傍花方向，至「永登浦市場站」4 號出口" },
+                        { line: "步行 7 分鐘", from: "永登浦市場站 4號出口", to: "永登浦可可酒店", note: "出站後沿永新路 38 巷步行 7 分鐘抵達" }
+                    ]
+                },
+                {
+                    origins: ['仁川', 'icn', 'incheon'],
+                    dests: ['萬楓', 'fairfield'],
+                    title: "仁川國際機場 ➔ 首爾萬楓酒店",
+                    time: "約 55 分鐘",
+                    fare: "₩4,750",
+                    transfers: "1 次轉乘",
+                    steps: [
+                        { line: "AREX 機場快線", from: "仁川國際機場 T1/T2", to: "孔德站 (Gongdeok)", note: "搭乘 AREX 普通列車至「孔德站」" },
+                        { line: "5號線 (紫色)", from: "孔德站", to: "永登浦市場站 (Exit 4)", note: "轉乘 5 號線往傍花方向，至「永登浦市場站」4 號出口步行 5 分鐘抵達" }
+                    ]
+                },
+                {
+                    origins: ['廣藏', 'kwangjang', '鐘路5街'],
+                    dests: ['聖水', 'seongsu', '馬鈴薯排骨湯', '鹽可頌'],
+                    title: "廣藏市場 (鐘路5街站) ➔ 聖水洞",
+                    time: "約 18 分鐘 (6 站)",
+                    fare: "₩1,400",
+                    transfers: "1 次轉乘",
+                    steps: [
+                        { line: "1號線 (深藍)", from: "鐘路5街站 (Exit 8)", to: "東大門站 (Dongdaemun)", note: "搭乘 1 號線 1 站至「東大門站」" },
+                        { line: "2號線 (綠色)", from: "東大門歷史文化公園站 / 新堂站", to: "聖水站 (Seongsu Exit 3/4)", note: "轉乘 2 號線往聖水方向，直達「聖水站」" }
+                    ]
+                },
+                {
+                    origins: ['永登浦', '萬楓', 'fairfield'],
+                    dests: ['聖水', 'seongsu', '馬鈴薯排骨湯', '鹽可頌', '生吐司', 'pizzeria'],
+                    title: "首爾萬楓酒店 / 永登浦站 ➔ 聖水洞",
+                    time: "約 28 分鐘 (9 站)",
+                    fare: "₩1,400",
+                    transfers: "1 次轉乘",
+                    steps: [
+                        { line: "1號線 (深藍)", from: "永登浦站 (Yeongdeungpo)", to: "新道林站 (Sindorim)", note: "搭乘 1 號線 1 站至「新道林站」" },
+                        { line: "2號線 (綠色環狀線)", from: "新道林站", to: "聖水站 (Seongsu Exit 3/4)", note: "轉乘 2 號線往聖水方向，直達「聖水站」4 號出口" }
+                    ]
+                },
+                {
+                    origins: ['永登浦', '萬楓', 'fairfield'],
+                    dests: ['堂山', 'dangsan', 'spa', '汗蒸幕'],
+                    title: "首爾萬楓酒店 / 永登浦站 ➔ The Park Spa Land 汗蒸幕",
+                    time: "約 12 分鐘",
+                    fare: "₩1,400",
+                    transfers: "1 次轉乘",
+                    steps: [
+                        { line: "1號線 (深藍)", from: "永登浦站", to: "新道林站", note: "搭乘 1 號線 1 站至「新道林站」" },
+                        { line: "2號線 (綠色)", from: "新道林站", to: "堂山站 (Dangsan Exit 10)", note: "轉乘 2 號線至「堂山站」10 號出口，步行 8 分鐘抵達" }
+                    ]
+                },
+                {
+                    origins: ['永登浦', '萬楓', 'fairfield'],
+                    dests: ['蠶室', '樂天世界', '梨花校服', 'jamsil', 'lotte'],
+                    title: "首爾萬楓酒店 / 永登浦站 ➔ 樂天世界 / 梨花校服",
+                    time: "約 35 分鐘 (15 站)",
+                    fare: "₩1,500",
+                    transfers: "1 次轉乘",
+                    steps: [
+                        { line: "1號線 (深藍)", from: "永登浦站", to: "新道林站", note: "搭乘 1 號線 1 站至「新道林站」" },
+                        { line: "2號線 (綠色內環)", from: "新道林站", to: "蠶室站 (Jamsil Exit 4)", note: "轉乘 2 號線直達「蠶室站」4 號出口，走地下連通道直達樂天世界" }
+                    ]
+                },
+                {
+                    origins: ['永登浦', '萬楓', 'fairfield'],
+                    dests: ['景福宮', '土俗村', 'gyeongbokgung'],
+                    title: "首爾萬楓酒店 / 永登浦站 ➔ 景福宮 / 土俗村蔘雞湯",
+                    time: "約 25 分鐘 (8 站)",
+                    fare: "₩1,400",
+                    transfers: "1 次轉乘",
+                    steps: [
+                        { line: "1號線 (深藍)", from: "永登浦站", to: "鐘路3街站 (Jongno 3-ga)", note: "搭乘 1 號線 6 站至「鐘路3街站」" },
+                        { line: "3號線 (橘色)", from: "鐘路3街站", to: "景福宮站 (Gyeongbokgung Exit 2)", note: "轉乘 3 號線 2 站至「景福宮站」2 號出口，步行 3 分鐘即達土俗村" }
+                    ]
+                },
+                {
+                    origins: ['景福宮', '土俗村', 'gyeongbokgung'],
+                    dests: ['北村', '三清洞', '安國', 'anguk', 'bukchon'],
+                    title: "景福宮 ➔ 北村韓屋村 / 三清洞散策街",
+                    time: "約 8 分鐘 (1 站)",
+                    fare: "₩1,400",
+                    transfers: "直達 (無須轉乘)",
+                    steps: [
+                        { line: "3號線 (橘色)", from: "景福宮站 (Exit 2)", to: "安國站 (Anguk Exit 1/2/3)", note: "搭乘 3 號線 1 站至「安國站」，2/3 號出口即為北村入口" }
+                    ]
+                },
+                {
+                    origins: ['永登浦', '萬楓', 'fairfield'],
+                    dests: ['弘大', 'hongdae', 'myth', '橋村', 'modelro', '證件照'],
+                    title: "首爾萬楓酒店 / 永登浦站 ➔ 弘大商圈 / Modelro Studio",
+                    time: "約 15 分鐘 (5 站)",
+                    fare: "₩1,400",
+                    transfers: "1 次轉乘",
+                    steps: [
+                        { line: "1號線 (深藍)", from: "永登浦站", to: "新道林站", note: "搭乘 1 號線 1 站至「新道林站」" },
+                        { line: "2號線 (綠色)", from: "新道林站", to: "弘大入口站 (Hongik Univ. Exit 8/9)", note: "轉乘 2 號線 4 站至「弘大入口站」8 號/9 號出口" }
+                    ]
+                },
+                {
+                    origins: ['弘大', 'hongdae'],
+                    dests: ['仁川', 'icn', 'incheon', '機場'],
+                    title: "弘大入口站 ➔ 仁川國際機場 (返程)",
+                    time: "約 54 分鐘 (直達)",
+                    fare: "₩4,150",
+                    transfers: "免轉乘 (AREX 直達列車)",
+                    steps: [
+                        { line: "AREX 機場快線 (普通車)", from: "弘大入口站", to: "仁川國際機場 T1/T2", note: "從弘大入口站直接搭乘 AREX 普通列車直達仁川機場" }
+                    ]
+                }
+            ];
+
+            return routeDatabase.find(r => 
+                r.origins.some(o => oStr.includes(o)) && r.dests.some(d => dStr.includes(d))
+            );
+        }
+
+        function renderMatchedRoute(container, route, origin, dest, naverUrl, googleUrl, kakaoUrl) {
+            const stepsHTML = route.steps.map((s, idx) => `
+                <div class="flex items-start gap-3 relative pb-4 last:pb-0">
+                    ${idx < route.steps.length - 1 ? '<div class="absolute left-3.5 top-6 bottom-0 w-0.5 bg-indigo-200 dark:bg-indigo-800"></div>' : ''}
+                    <div class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold text-xs flex items-center justify-center shrink-0 shadow-sm z-10">
+                        ${idx + 1}
                     </div>
-                `;
-            } else if (origin.includes('永登浦') && dest.includes('聖水')) {
-                estMinutes = 28;
-                estFare = "1,500 ₩";
-                transferCount = 1;
-                stepsHtml = `
-                    <div class="p-3 bg-emerald-50/80 dark:bg-emerald-950/40 rounded-xl border border-emerald-200/60 dark:border-emerald-800/60 text-xs space-y-2">
-                        <div class="flex items-center gap-2 text-emerald-700 dark:text-emerald-300 font-bold">
-                            <span class="px-2 py-0.5 bg-emerald-600 text-white rounded text-[10px]">Step 1</span>
-                            <span>永登浦站搭乘 1 號線 ➔ 新道林站 (Sindorim)</span>
+                    <div class="flex-1 bg-slate-50 dark:bg-slate-800/70 p-3 rounded-xl border border-slate-200/60 dark:border-slate-700/60">
+                        <div class="flex items-center justify-between gap-2 mb-1">
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">
+                                ${s.line}
+                            </span>
+                            <span class="text-[11px] font-semibold text-slate-500 dark:text-slate-400">${s.from} ➔ ${s.to}</span>
                         </div>
-                        <p class="text-slate-600 dark:text-slate-400 pl-4">乘車 1 站約 3 分鐘。</p>
-                        <div class="flex items-center gap-2 text-green-700 dark:text-green-300 font-bold pt-1">
-                            <span class="px-2 py-0.5 bg-green-600 text-white rounded text-[10px]">Step 2 (轉乘 2號線)</span>
-                            <span>新道林站轉乘地鐵 2 號線 (內環線往乙支路方向) ➔ 聖水站 (Seongsu)</span>
-                        </div>
-                        <p class="text-slate-600 dark:text-slate-400 pl-4">乘車 12 站約 24 分鐘，抵達聖水站 3/4 號出口。</p>
+                        <div class="text-xs text-slate-700 dark:text-slate-200 leading-relaxed font-medium">${s.note}</div>
                     </div>
-                `;
-            } else {
-                stepsHtml = `
-                    <div class="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl text-xs space-y-1 text-slate-700 dark:text-slate-300">
-                        <div class="font-bold text-indigo-600 dark:text-indigo-400">🟢 起點：${origin} ➔ 🔴 終點：${dest}</div>
-                        <p>推薦路線：搭乘地鐵 2 號線或 1 號線幹線轉乘，預估車程約 25~35 分鐘。</p>
+                </div>
+            `).join('');
+
+            container.innerHTML = `
+                <div class="bg-gradient-to-r from-indigo-900 via-slate-900 to-indigo-950 text-white p-4 rounded-xl shadow-md">
+                    <div class="text-xs text-indigo-300 font-semibold mb-1">✨ 推薦最佳地鐵路線</div>
+                    <h4 class="text-base font-extrabold mb-2">${route.title}</h4>
+                    <div class="flex flex-wrap items-center gap-3 text-xs opacity-90">
+                        <span>⏱️ 預估時間：<strong>${route.time}</strong></span>
+                        <span>💳 車資：<strong>${route.fare}</strong></span>
+                        <span>🔄 轉乘：<strong>${route.transfers}</strong></span>
+                    </div>
+                </div>
+
+                <div class="space-y-2 mt-3">
+                    ${stepsHTML}
+                </div>
+
+                <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2">
+                    <button onclick="copyToClipboard('${origin} ➔ ${dest} 地鐵路線：${route.title} (${route.time})', '已複製路線筆記至剪貼簿！')" class="px-3 py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-semibold rounded-xl hover:bg-slate-200 transition">
+                        <i data-lucide="copy" class="w-3.5 h-3.5 inline"></i> 複製路線
+                    </button>
+                    <div class="grid grid-cols-3 sm:flex items-center gap-1.5 w-full sm:w-auto">
+                        <a href="${googleUrl}" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-initial px-2 py-2 bg-blue-50 dark:bg-blue-950/60 hover:bg-blue-100 text-blue-700 dark:text-blue-300 text-[11px] sm:text-xs font-semibold rounded-xl border border-blue-200/80 transition flex items-center justify-center gap-1">
+                            <i data-lucide="map-pin" class="w-3.5 h-3.5 text-blue-500 shrink-0"></i> Google
+                        </a>
+                        <a href="${naverUrl}" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-initial px-2 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] sm:text-xs font-semibold rounded-xl shadow-md transition flex items-center justify-center gap-1">
+                            <i data-lucide="map" class="w-3.5 h-3.5 shrink-0"></i> Naver
+                        </a>
+                        <a href="${kakaoUrl}" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-initial px-2 py-2 bg-amber-400 hover:bg-amber-500 text-slate-900 text-[11px] sm:text-xs font-bold rounded-xl transition flex items-center justify-center gap-1">
+                            <i data-lucide="navigation" class="w-3.5 h-3.5 text-amber-950 shrink-0"></i> Kakao
+                        </a>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderDynamicRoute(container, origin, dest, naverUrl, googleUrl, kakaoUrl) {
+            const originLandmark = getLandmarkInfo(origin);
+            const destLandmark = getLandmarkInfo(dest);
+
+            const originStationText = originLandmark ? `${origin} (近 ${originLandmark.station} ${originLandmark.exit})` : `${origin} 站`;
+            const destStationText = destLandmark ? `${dest} (近 ${destLandmark.station} ${destLandmark.exit})` : `${dest} 站`;
+
+            let landmarkNoticeHtml = '';
+            if (originLandmark || destLandmark) {
+                landmarkNoticeHtml = `
+                    <div class="p-3 bg-amber-50 dark:bg-amber-950/40 rounded-xl border border-amber-200/60 dark:border-amber-800/60 text-xs text-amber-900 dark:text-amber-200 mb-3 space-y-1">
+                        <div class="font-bold flex items-center gap-1.5">
+                            <i data-lucide="map-pin" class="w-4 h-4 text-amber-600"></i> 地點最近地鐵站識別結果：
+                        </div>
+                        ${originLandmark ? `<div>🟢 出發點「${origin}」➔ 最近車站：<strong>${originLandmark.station}</strong> (${originLandmark.line} ${originLandmark.exit})</div>` : ''}
+                        ${destLandmark ? `<div>🔴 目的地「${dest}」➔ 最近車站：<strong>${destLandmark.station}</strong> (${destLandmark.line} ${destLandmark.exit})</div>` : ''}
                     </div>
                 `;
             }
 
             container.innerHTML = `
-                <div class="p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm">
-                    <div class="flex items-center justify-between mb-3 border-b border-slate-100 dark:border-slate-800 pb-2">
-                        <div class="font-bold text-slate-900 dark:text-white text-sm">乘車規劃結果</div>
-                        <div class="flex items-center gap-2 text-xs font-bold">
-                            <span class="text-emerald-600 dark:text-emerald-400">⏱️ 約 ${estMinutes} 分鐘</span>
-                            <span class="text-teal-600 dark:text-teal-400">💰 票價 ${estFare}</span>
-                        </div>
+                ${landmarkNoticeHtml}
+                <div class="bg-gradient-to-r from-indigo-900 via-slate-900 to-indigo-950 text-white p-4 rounded-xl shadow-md space-y-2">
+                    <div class="text-xs text-indigo-300 font-semibold mb-1 flex items-center gap-1.5">
+                        <i data-lucide="compass" class="w-4 h-4 text-emerald-400"></i> 自訂地點路線規劃與路網算路
                     </div>
-                    ${stepsHtml}
+                    <h4 class="text-base font-extrabold">${originStationText} ➔ ${destStationText}</h4>
+                    <p class="text-xs text-slate-300 leading-relaxed pt-1">
+                        系統已為您調用首爾地鐵與大眾運輸實時路網 API！點擊下方按鈕可直接帶入「起點 ➔ 終點」，開啟三大地圖實時點對點導航與最佳候車月台指引。
+                    </p>
+                </div>
+
+                <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-end gap-1.5 mt-3">
+                    <a href="${googleUrl}" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-initial px-3 py-2.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-200 text-xs font-bold rounded-xl transition flex items-center justify-center gap-1">
+                        <i data-lucide="map-pin" class="w-3.5 h-3.5 text-blue-500 shrink-0"></i> Google 導航
+                    </a>
+                    <a href="${naverUrl}" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-initial px-3 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-xl shadow-md transition flex items-center justify-center gap-1">
+                        <i data-lucide="map" class="w-3.5 h-3.5 shrink-0"></i> Naver 導航
+                    </a>
+                    <a href="${kakaoUrl}" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-initial px-3 py-2.5 bg-amber-400 hover:bg-amber-500 text-slate-900 text-xs font-bold rounded-xl transition flex items-center justify-center gap-1">
+                        <i data-lucide="navigation" class="w-3.5 h-3.5 text-amber-950 shrink-0"></i> Kakao 導航
+                    </a>
                 </div>
             `;
-            container.classList.remove('hidden');
-            lucide.createIcons();
         }
 
         function toggleDarkMode() {
@@ -506,6 +777,7 @@
 
         document.addEventListener('DOMContentLoaded', () => lucide.createIcons());
     </script>
+    <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
 </body>
 
 </html>
