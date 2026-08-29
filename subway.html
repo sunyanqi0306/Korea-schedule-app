@@ -168,7 +168,7 @@
                     </div>
                 </div>
                 <a id="subwayMapOriginalLink"
-                    href="./2026%20map/2026%20South%20Korea%20Subway%20Map%20(Chinese%20Version%20with%20Airport%20Signage).png"
+                    href="./2026%20South%20Korea%20Subway%20Map%20(Chinese%20Version%20with%20Airport%20Signage).png"
                     target="_blank" rel="noopener noreferrer"
                     class="w-full sm:w-auto px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 shadow-md shrink-0">
                     📱 手機全螢幕開啟高畫質原圖 <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
@@ -176,7 +176,7 @@
             </div>
 
             <!-- Map Version Tabs -->
-            <div class="flex items-center gap-1.5 overflow-x-auto py-1 mb-4 shrink-0 no-scrollbar">
+            <div class="flex items-center gap-1.5 overflow-x-auto py-1 mb-3 shrink-0 no-scrollbar">
                 <button onclick="switchSubwayMapVersion('airport')" id="mapTab-airport"
                     class="px-3.5 py-2 rounded-xl text-xs font-bold shrink-0 bg-indigo-600 text-white shadow-sm">
                     ✈️ 含機場標示版 (預設)
@@ -191,12 +191,36 @@
                 </button>
             </div>
 
+            <!-- Zoom Control Bar (Responsive Zoom & Pan) -->
+            <div class="flex flex-col sm:flex-row items-center justify-between bg-slate-50 dark:bg-slate-800/80 px-3.5 py-2.5 rounded-xl border border-slate-100 dark:border-slate-700/50 mb-3 text-xs gap-2">
+                <div class="flex items-center gap-1.5 text-slate-500 dark:text-slate-400 font-medium">
+                    <i data-lucide="move" class="w-4 h-4 text-indigo-500"></i>
+                    <span>支援 +/- 按鈕自由縮放與拖曳</span>
+                </div>
+                <div class="flex items-center gap-1.5 w-full sm:w-auto justify-center">
+                    <button onclick="zoomSubwayMap(-0.25)"
+                        class="px-3 py-1.5 bg-white dark:bg-slate-700 rounded-lg border border-slate-200 dark:border-slate-600 font-bold hover:bg-slate-100 text-slate-700 dark:text-slate-200 active:scale-95">
+                        - 縮小
+                    </button>
+                    <span id="subwayZoomPercentage"
+                        class="w-12 text-center font-black text-indigo-600 dark:text-indigo-400">100%</span>
+                    <button onclick="zoomSubwayMap(0.25)"
+                        class="px-3 py-1.5 bg-indigo-600 text-white rounded-lg font-bold hover:bg-indigo-700 shadow-sm active:scale-95">
+                        + 放大
+                    </button>
+                    <button onclick="resetSubwayMapZoom()"
+                        class="px-3 py-1.5 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-lg font-semibold border border-slate-300 dark:border-slate-600">
+                        重置適合螢幕
+                    </button>
+                </div>
+            </div>
+
             <!-- Map Display Area -->
-            <div class="bg-slate-950 rounded-2xl relative flex items-center justify-center p-2 sm:p-4 border border-slate-800 overflow-hidden">
+            <div class="overflow-auto bg-slate-950 rounded-2xl relative flex items-center justify-center p-2 sm:p-4 min-h-[320px] max-h-[75vh] select-none border border-slate-800">
                 <img id="subwayMapImage"
-                    src="./2026%20map/2026%20South%20Korea%20Subway%20Map%20(Chinese%20Version%20with%20Airport%20Signage).png"
+                    src="./2026%20South%20Korea%20Subway%20Map%20(Chinese%20Version%20with%20Airport%20Signage).png"
                     alt="2026首爾地鐵圖"
-                    class="w-full h-auto rounded shadow-2xl">
+                    class="max-w-full h-auto transition-transform duration-200 ease-out origin-center rounded shadow-2xl">
             </div>
         </div>
 
@@ -338,9 +362,9 @@
         let currentMapVersion = 'airport';
 
         const subwayMapFiles = {
-            airport: './2026%20map/2026%20South%20Korea%20Subway%20Map%20(Chinese%20Version%20with%20Airport%20Signage).png',
-            simplified: './2026%20map/Simplified%20Chinese.jpg',
-            bilingual: './2026%20map/Korean-English%20bilingual%20version.jpg'
+            airport: './2026%20South%20Korea%20Subway%20Map%20(Chinese%20Version%20with%20Airport%20Signage).png',
+            simplified: './Simplified%20Chinese.jpg',
+            bilingual: './Korean-English%20bilingual%20version.jpg'
         };
 
         function switchSubwayMapVersion(versionKey) {
@@ -363,6 +387,36 @@
                     }
                 }
             });
+
+            resetSubwayMapZoom();
+        }
+
+        function zoomSubwayMap(delta) {
+            currentSubwayZoom = Math.min(3.5, Math.max(0.6, currentSubwayZoom + delta));
+            applySubwayMapTransform();
+        }
+
+        function resetSubwayMapZoom() {
+            currentSubwayZoom = 1.0;
+            applySubwayMapTransform();
+        }
+
+        function applySubwayMapTransform() {
+            const img = document.getElementById('subwayMapImage');
+            const zoomText = document.getElementById('subwayZoomPercentage');
+            if (img) {
+                if (currentSubwayZoom <= 1.0) {
+                    img.classList.remove('max-w-none');
+                    img.classList.add('max-w-full');
+                } else {
+                    img.classList.remove('max-w-full');
+                    img.classList.add('max-w-none');
+                }
+                img.style.transform = `scale(${currentSubwayZoom})`;
+            }
+            if (zoomText) {
+                zoomText.innerText = `${Math.round(currentSubwayZoom * 100)}%`;
+            }
         }
 
         function setQuickRoute(origin, dest) {
