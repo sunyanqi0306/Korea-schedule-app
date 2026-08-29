@@ -119,6 +119,10 @@
 
             <!-- Quick Action Buttons -->
             <div class="flex items-center space-x-2">
+                <button onclick="openRoutePlannerModal()" class="flex items-center space-x-1 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold bg-indigo-50 text-indigo-700 hover:bg-indigo-100 dark:bg-indigo-950/60 dark:text-indigo-300 dark:hover:bg-indigo-900/60 border border-indigo-200 dark:border-indigo-800 transition">
+                    <i data-lucide="navigation" class="w-4 h-4 text-indigo-600 dark:text-indigo-400"></i>
+                    <span>路線規劃</span>
+                </button>
                 <button onclick="toggleModal('prepModal')" class="flex items-center space-x-1 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium bg-emerald-50 text-emerald-700 hover:bg-emerald-100 dark:bg-emerald-950/60 dark:text-emerald-300 dark:hover:bg-emerald-900/60 border border-emerald-200 dark:border-emerald-800 transition">
                     <i data-lucide="check-square" class="w-4 h-4"></i>
                     <span class="hidden md:inline">行前清單</span>
@@ -381,45 +385,104 @@
                     </div>
                 </div>
 
-                <!-- WIDGET 3: Useful Phrases Quick Card -->
-                <div class="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-800 shadow-md">
-                    <div class="flex items-center space-x-2 mb-3">
-                        <div class="p-2 bg-amber-100 dark:bg-amber-900/50 text-amber-600 dark:text-amber-400 rounded-xl">
-                            <i data-lucide="message-square" class="w-5 h-5"></i>
+                <!-- WIDGET 3: 2026 Seoul Subway Map Preview Card -->
+                <div id="subwayMapWidget" class="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-800 shadow-md scroll-mt-20">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center space-x-2">
+                            <div class="p-2 bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 rounded-xl">
+                                <i data-lucide="map" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h2 class="font-bold text-slate-900 dark:text-white text-base">2026 首爾高清地鐵全圖</h2>
+                                <p class="text-[11px] text-slate-400">中文完整版 / 機場標示 / 韓英對照</p>
+                            </div>
                         </div>
-                        <h2 class="font-bold text-slate-900 dark:text-white text-base">實用旅遊韓語小卡</h2>
+                        <button onclick="openSubwayMapModal()" class="text-indigo-600 dark:text-indigo-400 hover:underline text-xs font-semibold flex items-center gap-1">
+                            全螢幕 <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+                        </button>
                     </div>
+
+                    <!-- Interactive Image Preview -->
+                    <div onclick="openSubwayMapModal()" class="group relative bg-slate-900 rounded-xl overflow-hidden cursor-pointer border border-slate-200/60 dark:border-slate-700/60 transition hover:shadow-lg">
+                        <img src="./2026 map/2026 South Korea Subway Map (Chinese Version with Airport Signage).png" alt="2026 首爾地鐵圖" class="w-full h-40 object-cover object-center group-hover:scale-105 transition duration-500 opacity-90 group-hover:opacity-100">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-900/30 to-transparent flex items-end p-3">
+                            <div class="text-white">
+                                <div class="text-xs font-bold flex items-center gap-1.5 text-indigo-300">
+                                    <i data-lucide="zoom-in" class="w-4 h-4"></i> 點擊開啟高清路線圖與縮放
+                                </div>
+                                <div class="text-[10px] opacity-80 mt-0.5">點擊即刻檢視中/韓/英高畫質大眾運輸路線圖</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="openSubwayMapModal()" class="w-full mt-3 py-2 bg-indigo-50 hover:bg-indigo-100 dark:bg-indigo-950/60 dark:hover:bg-indigo-900/60 text-indigo-700 dark:text-indigo-300 rounded-xl text-xs font-semibold border border-indigo-200/80 dark:border-indigo-800/80 transition flex items-center justify-center gap-1.5 active:scale-95 shadow-sm">
+                        <i data-lucide="map-pin" class="w-4 h-4 text-indigo-600"></i>
+                        <span>檢視高清地鐵圖 (含放大與多版本)</span>
+                        <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+                    </button>
+                </div>
+
+                <!-- WIDGET 4: Useful Phrases Quick Card -->
+                <div id="phrasesWidget" class="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-800 shadow-md scroll-mt-20">
+                    <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center space-x-2">
+                            <div class="p-2 bg-amber-100 dark:bg-amber-900/50 text-amber-600 dark:text-amber-400 rounded-xl">
+                                <i data-lucide="message-square" class="w-5 h-5"></i>
+                            </div>
+                            <h2 class="font-bold text-slate-900 dark:text-white text-base">實用旅遊韓語對照</h2>
+                        </div>
+                        <button onclick="openPhrasesModal()" class="text-amber-600 dark:text-amber-400 hover:underline text-xs font-semibold flex items-center gap-1">
+                            全部 25+ <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+                        </button>
+                    </div>
+
                     <div class="space-y-2 text-xs">
-                        <div class="p-2.5 bg-slate-50 dark:bg-slate-800/80 rounded-xl flex items-center justify-between hover:border-emerald-300 border border-transparent transition">
+                        <div class="p-2.5 bg-slate-50 dark:bg-slate-800/80 rounded-xl flex items-center justify-between hover:border-amber-300 border border-transparent transition">
+                            <div>
+                                <div class="font-bold text-slate-800 dark:text-slate-200">謝謝 (Gam-sa-ham-ni-da)</div>
+                                <div class="text-slate-500 dark:text-slate-400 text-[11px]">감사합니다 (康撒哈米達)</div>
+                            </div>
+                            <button onclick="copyToClipboard('감사합니다', '已複製韓文：謝謝')" class="p-1.5 bg-white dark:bg-slate-700 rounded-lg text-slate-600 dark:text-slate-300 hover:text-amber-600 shadow-sm" title="複製韓文">
+                                <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                            </button>
+                        </div>
+
+                        <div class="p-2.5 bg-slate-50 dark:bg-slate-800/80 rounded-xl flex items-center justify-between hover:border-amber-300 border border-transparent transition">
                             <div>
                                 <div class="font-bold text-slate-800 dark:text-slate-200">請問這個多少錢？</div>
                                 <div class="text-slate-500 dark:text-slate-400 text-[11px]">이거 얼마예요? (I-geo eol-ma-ye-yo?)</div>
                             </div>
-                            <button onclick="copyToClipboard('이거 얼마예요?', '已複製韓文：請問這個多少錢？')" class="p-1.5 bg-white dark:bg-slate-700 rounded-lg text-slate-600 dark:text-slate-300 hover:text-emerald-600 shadow-sm">
+                            <button onclick="copyToClipboard('이거 얼마예요?', '已複製韓文：請問這個多少錢？')" class="p-1.5 bg-white dark:bg-slate-700 rounded-lg text-slate-600 dark:text-slate-300 hover:text-amber-600 shadow-sm" title="複製韓文">
                                 <i data-lucide="copy" class="w-3.5 h-3.5"></i>
                             </button>
                         </div>
 
-                        <div class="p-2.5 bg-slate-50 dark:bg-slate-800/80 rounded-xl flex items-center justify-between hover:border-emerald-300 border border-transparent transition">
+                        <div class="p-2.5 bg-slate-50 dark:bg-slate-800/80 rounded-xl flex items-center justify-between hover:border-amber-300 border border-transparent transition">
                             <div>
-                                <div class="font-bold text-slate-800 dark:text-slate-200">請幫我算便宜一點！</div>
-                                <div class="text-slate-500 dark:text-slate-400 text-[11px]">깎아주세요 (Kkak-a ju-se-yo)</div>
+                                <div class="font-bold text-slate-800 dark:text-slate-200">請給我～（萬用語）</div>
+                                <div class="text-slate-500 dark:text-slate-400 text-[11px]">~ 주세요 (~ Ju-se-yo / ~ 主誰優)</div>
                             </div>
-                            <button onclick="copyToClipboard('깎아주세요', '已複製韓文：請算便宜一點')" class="p-1.5 bg-white dark:bg-slate-700 rounded-lg text-slate-600 dark:text-slate-300 hover:text-emerald-600 shadow-sm">
+                            <button onclick="copyToClipboard('주세요', '已複製韓文：請給我')" class="p-1.5 bg-white dark:bg-slate-700 rounded-lg text-slate-600 dark:text-slate-300 hover:text-amber-600 shadow-sm" title="複製韓文">
                                 <i data-lucide="copy" class="w-3.5 h-3.5"></i>
                             </button>
                         </div>
 
-                        <div class="p-2.5 bg-slate-50 dark:bg-slate-800/80 rounded-xl flex items-center justify-between hover:border-emerald-300 border border-transparent transition">
+                        <div class="p-2.5 bg-slate-50 dark:bg-slate-800/80 rounded-xl flex items-center justify-between hover:border-amber-300 border border-transparent transition">
                             <div>
                                 <div class="font-bold text-slate-800 dark:text-slate-200">請問洗手間在哪裡？</div>
-                                <div class="text-slate-500 dark:text-slate-400 text-[11px]">화장실이 어디예요? (Hwa-jang-sil-i o-di-ye-yo?)</div>
+                                <div class="text-slate-500 dark:text-slate-400 text-[11px]">화장실 어디예요? (Hwa-jang-sil eo-di-ye-yo?)</div>
                             </div>
-                            <button onclick="copyToClipboard('화장실이 어디예요?', '已複製韓文：洗手間在哪裡')" class="p-1.5 bg-white dark:bg-slate-700 rounded-lg text-slate-600 dark:text-slate-300 hover:text-emerald-600 shadow-sm">
+                            <button onclick="copyToClipboard('화장실 어디예요?', '已複製韓文：洗手間在哪裡')" class="p-1.5 bg-white dark:bg-slate-700 rounded-lg text-slate-600 dark:text-slate-300 hover:text-amber-600 shadow-sm" title="複製韓文">
                                 <i data-lucide="copy" class="w-3.5 h-3.5"></i>
                             </button>
                         </div>
                     </div>
+
+                    <button onclick="openPhrasesModal()" class="w-full mt-3 py-2 bg-amber-50 hover:bg-amber-100 dark:bg-amber-950/60 dark:hover:bg-amber-900/60 text-amber-700 dark:text-amber-300 rounded-xl text-xs font-semibold border border-amber-200/80 dark:border-amber-800/80 transition flex items-center justify-center gap-1.5 active:scale-95 shadow-sm">
+                        <i data-lucide="book-open" class="w-4 h-4 text-amber-600"></i>
+                        <span>開啟 5 大情境常用韓語會話手冊</span>
+                        <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+                    </button>
                 </div>
 
             </aside>
@@ -759,6 +822,239 @@
 
             <div class="mt-5 pt-3 border-t border-slate-100 dark:border-slate-800 text-right">
                 <button onclick="toggleModal('hourlyWeatherModal')" class="px-5 py-2 bg-teal-600 text-white rounded-xl text-xs font-semibold hover:bg-teal-700 transition">關閉</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- MODAL 5: 點對點地鐵路線規劃器 (Subway Route Planner Modal) -->
+    <div id="routePlannerModal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm hidden p-4">
+        <div class="bg-white dark:bg-slate-900 rounded-2xl max-w-xl w-full p-5 sm:p-6 shadow-2xl border border-slate-200 dark:border-slate-800 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100 dark:border-slate-800">
+                <div class="flex items-center gap-2">
+                    <div class="p-2 bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 rounded-xl">
+                        <i data-lucide="navigation" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 dark:text-white text-base sm:text-lg">首爾地鐵點對點路線規劃器</h3>
+                        <p class="text-[11px] text-slate-400">輸入或點選出發地與目的地，即刻規劃最佳地鐵乘車路線</p>
+                    </div>
+                </div>
+                <button onclick="toggleModal('routePlannerModal')" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-white">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <!-- Route Inputs Form -->
+            <form onsubmit="handlePlanRoute(event)" class="space-y-4 text-xs sm:text-sm">
+                <div class="space-y-3 bg-slate-50 dark:bg-slate-800/60 p-4 rounded-xl border border-slate-200/60 dark:border-slate-700/60">
+                    <!-- Departure Origin -->
+                    <div>
+                        <label class="block font-semibold text-slate-700 dark:text-slate-300 mb-1 flex items-center justify-between">
+                            <span>🟢 出發地點 / 現在位置 (Origin)</span>
+                            <span class="text-[11px] text-indigo-600 dark:text-indigo-400 font-normal">可手動輸入或選取</span>
+                        </label>
+                        <div class="relative">
+                            <input type="text" id="routeOriginInput" list="stationPresetList" placeholder="例如：首爾萬楓酒店 或 仁川機場" required class="w-full pl-9 pr-3 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white font-bold focus:ring-2 focus:ring-indigo-500 outline-none">
+                            <i data-lucide="map-pin" class="w-4 h-4 text-emerald-500 absolute left-3 top-2.5"></i>
+                        </div>
+                    </div>
+
+                    <!-- Swap Button -->
+                    <div class="flex justify-center -my-1">
+                        <button type="button" onclick="swapRouteOriginDest()" class="p-1.5 rounded-full bg-white dark:bg-slate-700 text-indigo-600 dark:text-indigo-400 border border-slate-200 dark:border-slate-600 hover:rotate-180 transition duration-300 shadow-sm" title="互相調換出發地與目的地">
+                            <i data-lucide="arrow-up-down" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+
+                    <!-- Destination -->
+                    <div>
+                        <label class="block font-semibold text-slate-700 dark:text-slate-300 mb-1 flex items-center justify-between">
+                            <span>🔴 目的地 / 欲前往景點 (Destination)</span>
+                            <span class="text-[11px] text-indigo-600 dark:text-indigo-400 font-normal">可手動輸入或選取</span>
+                        </label>
+                        <div class="relative">
+                            <input type="text" id="routeDestInput" list="stationPresetList" placeholder="例如：聖水洞 或 樂天世界 / 景福宮" required class="w-full pl-9 pr-3 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white font-bold focus:ring-2 focus:ring-indigo-500 outline-none">
+                            <i data-lucide="flag" class="w-4 h-4 text-rose-500 absolute left-3 top-2.5"></i>
+                        </div>
+                    </div>
+
+                    <!-- Presets Datalist -->
+                    <datalist id="stationPresetList">
+                        <option value="仁川國際機場 T1/T2 (AREX)">
+                        <option value="永登浦站 (1號線)">
+                        <option value="首爾萬楓酒店 / 永登浦站">
+                        <option value="永登浦可可酒店 (Hotel Gogo)">
+                        <option value="堂山站 (5號線/9號線)">
+                        <option value="聖水站 / 聖水洞 (2號線)">
+                        <option value="뚝섬 뚝島站 (2號線)">
+                        <option value="合井站 (2號線/6號線)">
+                        <option value="蠶室站 / 樂天世界 (2號線/8號線)">
+                        <option value="景福宮站 / 土俗村 (3號線)">
+                        <option value="安國站 / 北村韓屋村 / 三清洞 (3號線)">
+                        <option value="弘大入口站 / Modelro Studio (2號線/AREX)">
+                        <option value="首爾站 (1號線/4號線/AREX)">
+                        <option value="明洞站 (4號線)">
+                        <option value="東大門歷史文化公園站">
+                    </datalist>
+                </div>
+
+                <!-- Quick Preset Tags -->
+                <div>
+                    <div class="text-[11px] text-slate-400 mb-1.5 font-medium">常用熱門路線快速選擇：</div>
+                    <div class="flex flex-wrap gap-1.5 text-xs">
+                        <button type="button" onclick="setQuickRoute('首爾萬楓酒店', '聖水站')" class="px-2.5 py-1 bg-slate-100 dark:bg-slate-800 hover:bg-indigo-50 dark:hover:bg-indigo-950 text-slate-700 dark:text-slate-300 rounded-lg transition">萬楓 ➔ 聖水洞</button>
+                        <button type="button" onclick="setQuickRoute('首爾萬楓酒店', '樂天世界')" class="px-2.5 py-1 bg-slate-100 dark:bg-slate-800 hover:bg-indigo-50 dark:hover:bg-indigo-950 text-slate-700 dark:text-slate-300 rounded-lg transition">萬楓 ➔ 樂天世界</button>
+                        <button type="button" onclick="setQuickRoute('首爾萬楓酒店', '景福宮站')" class="px-2.5 py-1 bg-slate-100 dark:bg-slate-800 hover:bg-indigo-50 dark:hover:bg-indigo-950 text-slate-700 dark:text-slate-300 rounded-lg transition">萬楓 ➔ 景福宮</button>
+                        <button type="button" onclick="setQuickRoute('首爾萬楓酒店', '弘大入口站')" class="px-2.5 py-1 bg-slate-100 dark:bg-slate-800 hover:bg-indigo-50 dark:hover:bg-indigo-950 text-slate-700 dark:text-slate-300 rounded-lg transition">萬楓 ➔ 弘大商圈</button>
+                        <button type="button" onclick="setQuickRoute('弘大入口站', '仁川國際機場')" class="px-2.5 py-1 bg-slate-100 dark:bg-slate-800 hover:bg-indigo-50 dark:hover:bg-indigo-950 text-slate-700 dark:text-slate-300 rounded-lg transition">弘大 ➔ 仁川機場</button>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full py-2.5 bg-gradient-to-r from-indigo-600 to-teal-600 hover:from-indigo-700 hover:to-teal-700 text-white font-bold rounded-xl shadow-md transition flex items-center justify-center gap-2 text-sm active:scale-95">
+                    <i data-lucide="compass" class="w-4 h-4"></i>
+                    <span>開始規劃地鐵路線</span>
+                </button>
+            </form>
+
+            <!-- Route Result Container -->
+            <div id="routeResultContainer" class="mt-5 pt-4 border-t border-slate-100 dark:border-slate-800 hidden space-y-4">
+                <!-- Result renders dynamically -->
+            </div>
+        </div>
+    </div>
+
+
+    <!-- MODAL 6: 高清地鐵圖 Modal (Subway Map Viewer Modal) -->
+    <div id="subwayMapModal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/80 backdrop-blur-md hidden p-2 sm:p-4">
+        <div class="bg-white dark:bg-slate-900 rounded-2xl max-w-5xl w-full p-4 sm:p-6 shadow-2xl border border-slate-200 dark:border-slate-800 max-h-[95vh] flex flex-col">
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800 shrink-0">
+                <div class="flex items-center gap-2">
+                    <div class="p-2 bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 rounded-xl">
+                        <i data-lucide="map" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 dark:text-white text-base sm:text-lg">2026 首爾高清大眾運輸地鐵圖</h3>
+                        <p class="text-[11px] text-slate-400">支援放大、縮小、全螢幕檢視與多版本切換</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <a id="subwayMapOriginalLink" href="./2026 map/2026 South Korea Subway Map (Chinese Version with Airport Signage).png" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-200 rounded-xl text-xs font-semibold transition hidden sm:flex items-center gap-1">
+                        開啟原圖檔 <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                    </a>
+                    <button onclick="toggleModal('subwayMapModal')" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-white">
+                        <i data-lucide="x" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Map Version Tabs Selector -->
+            <div class="flex items-center gap-1.5 overflow-x-auto py-2 my-1 shrink-0 no-scrollbar" id="mapVersionTabs">
+                <button onclick="switchSubwayMapVersion('airport')" id="mapTab-airport" class="px-3 py-1.5 rounded-xl text-xs font-semibold shrink-0 bg-indigo-600 text-white shadow-sm">
+                    ✈️ 含機場標示版
+                </button>
+                <button onclick="switchSubwayMapVersion('simplified')" id="mapTab-simplified" class="px-3 py-1.5 rounded-xl text-xs font-semibold shrink-0 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200">
+                    🇨🇳 中文高清版
+                </button>
+                <button onclick="switchSubwayMapVersion('bilingual')" id="mapTab-bilingual" class="px-3 py-1.5 rounded-xl text-xs font-semibold shrink-0 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200">
+                    🇰🇷 韓英雙語對照版
+                </button>
+            </div>
+
+            <!-- Image Zoom Controls Bar -->
+            <div class="flex items-center justify-between bg-slate-50 dark:bg-slate-800/80 px-3 py-1.5 rounded-xl border border-slate-100 dark:border-slate-700/50 mb-2 shrink-0 text-xs">
+                <div class="flex items-center gap-1 text-slate-500 dark:text-slate-400">
+                    <i data-lucide="move" class="w-3.5 h-3.5"></i>
+                    <span>可雙指或按鈕自由縮放</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                    <button onclick="zoomSubwayMap(-0.2)" class="px-2.5 py-1 bg-white dark:bg-slate-700 rounded-lg border border-slate-200 dark:border-slate-600 font-bold hover:bg-slate-100 text-slate-700 dark:text-slate-200" title="縮小">
+                        <i data-lucide="zoom-out" class="w-3.5 h-3.5 inline"></i> -
+                    </button>
+                    <span id="subwayZoomPercentage" class="w-12 text-center font-bold text-indigo-600 dark:text-indigo-400">100%</span>
+                    <button onclick="zoomSubwayMap(0.2)" class="px-2.5 py-1 bg-white dark:bg-slate-700 rounded-lg border border-slate-200 dark:border-slate-600 font-bold hover:bg-slate-100 text-slate-700 dark:text-slate-200" title="放大">
+                        <i data-lucide="zoom-in" class="w-3.5 h-3.5 inline"></i> +
+                    </button>
+                    <button onclick="resetSubwayMapZoom()" class="px-2.5 py-1 bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 rounded-lg font-semibold border border-indigo-200 dark:border-indigo-800 hover:bg-indigo-100">
+                        重置
+                    </button>
+                </div>
+            </div>
+
+            <!-- Interactive Zoomable Map Container -->
+            <div class="flex-1 overflow-auto bg-slate-950 rounded-xl relative flex items-center justify-center p-2 min-h-[350px] max-h-[65vh] select-none" id="subwayMapViewport">
+                <img id="subwayMapImage" src="./2026 map/2026 South Korea Subway Map (Chinese Version with Airport Signage).png" alt="2026首爾地鐵圖" class="max-w-none transition-transform duration-200 ease-out origin-center rounded shadow-2xl">
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="pt-3 mt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between shrink-0 text-xs">
+                <div class="text-slate-400 flex items-center gap-1 truncate">
+                    <i data-lucide="info" class="w-3.5 h-3.5 text-indigo-500 shrink-0"></i>
+                    <span class="truncate">重點路線：1號線(深藍) | 2號線(綠) | 3號線(橘) | 5號線(紫) | AREX(機場快線)</span>
+                </div>
+                <button onclick="toggleModal('subwayMapModal')" class="px-4 py-2 bg-indigo-600 text-white rounded-xl font-semibold hover:bg-indigo-700 transition shrink-0">
+                    關閉
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- MODAL 7: 實用韓語會話對照 Modal (Korean Phrases Handbook Modal) -->
+    <div id="koreanPhrasesModal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm hidden p-4">
+        <div class="bg-white dark:bg-slate-900 rounded-2xl max-w-2xl w-full p-5 sm:p-6 shadow-2xl border border-slate-200 dark:border-slate-800 max-h-[90vh] flex flex-col">
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800 shrink-0">
+                <div class="flex items-center gap-2">
+                    <div class="p-2 bg-amber-100 dark:bg-amber-900/50 text-amber-600 dark:text-amber-400 rounded-xl">
+                        <i data-lucide="book-open" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 dark:text-white text-base sm:text-lg">首爾自由行實用韓語會話手冊</h3>
+                        <p class="text-[11px] text-slate-400">收錄 5 大情境常用對照，點擊按鈕即可一鍵複製韓文</p>
+                    </div>
+                </div>
+                <button onclick="toggleModal('koreanPhrasesModal')" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-white">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <!-- Category Switcher Tabs -->
+            <div class="flex items-center gap-1.5 overflow-x-auto py-2 my-1 shrink-0 no-scrollbar" id="phraseCategoryTabs">
+                <button onclick="switchPhraseCategory('basic')" id="phraseTab-basic" class="px-3 py-1.5 rounded-xl text-xs font-semibold shrink-0 bg-amber-500 text-white shadow-sm">
+                    💡 基本問候
+                </button>
+                <button onclick="switchPhraseCategory('dining')" id="phraseTab-dining" class="px-3 py-1.5 rounded-xl text-xs font-semibold shrink-0 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200">
+                    🍽️ 餐廳點餐
+                </button>
+                <button onclick="switchPhraseCategory('shopping')" id="phraseTab-shopping" class="px-3 py-1.5 rounded-xl text-xs font-semibold shrink-0 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200">
+                    🛍️ 購物退稅
+                </button>
+                <button onclick="switchPhraseCategory('transit')" id="phraseTab-transit" class="px-3 py-1.5 rounded-xl text-xs font-semibold shrink-0 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200">
+                    🚕 交通問路
+                </button>
+                <button onclick="switchPhraseCategory('hotel')" id="phraseTab-hotel" class="px-3 py-1.5 rounded-xl text-xs font-semibold shrink-0 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200">
+                    🏨 飯店住宿
+                </button>
+            </div>
+
+            <!-- Category Description Banner -->
+            <div id="phraseCategoryBanner" class="p-3 bg-amber-50 dark:bg-amber-950/40 rounded-xl mb-3 border border-amber-200/60 dark:border-amber-800/60 text-xs text-amber-900 dark:text-amber-200 shrink-0 font-medium">
+                💡 韓國禮貌問候語與日常必備萬用語
+            </div>
+
+            <!-- Scrollable Phrases List Container -->
+            <div class="flex-1 overflow-y-auto space-y-2 pr-1" id="phraseListContainer">
+                <!-- Phrase Cards Render Dynamically -->
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="pt-3 mt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between shrink-0 text-xs">
+                <span class="text-slate-400">💡 提示：點擊右側複製鈕即可直接貼上或出示給店員查看</span>
+                <button onclick="toggleModal('koreanPhrasesModal')" class="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white rounded-xl font-semibold transition shrink-0">
+                    關閉
+                </button>
             </div>
         </div>
     </div>
@@ -1790,6 +2086,407 @@
             if (el) {
                 el.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
+        }
+
+        /* ==========================================================================
+           10. SUBWAY POINT-TO-POINT ROUTE PLANNER ENGINE
+           ========================================================================== */
+        function openRoutePlannerModal(defaultOrigin = '', defaultDest = '') {
+            if (defaultOrigin) document.getElementById('routeOriginInput').value = defaultOrigin;
+            if (defaultDest) document.getElementById('routeDestInput').value = defaultDest;
+            toggleModal('routePlannerModal');
+            if (defaultOrigin && defaultDest) {
+                handlePlanRoute();
+            }
+        }
+
+        function setQuickRoute(origin, dest) {
+            document.getElementById('routeOriginInput').value = origin;
+            document.getElementById('routeDestInput').value = dest;
+            handlePlanRoute();
+        }
+
+        function swapRouteOriginDest() {
+            const originEl = document.getElementById('routeOriginInput');
+            const destEl = document.getElementById('routeDestInput');
+            const temp = originEl.value;
+            originEl.value = destEl.value;
+            destEl.value = temp;
+            if (originEl.value && destEl.value) {
+                handlePlanRoute();
+            }
+        }
+
+        function handlePlanRoute(event) {
+            if (event) event.preventDefault();
+
+            const origin = document.getElementById('routeOriginInput').value.trim();
+            const dest = document.getElementById('routeDestInput').value.trim();
+            const container = document.getElementById('routeResultContainer');
+
+            if (!origin || !dest) return;
+
+            container.classList.remove('hidden');
+            container.innerHTML = `
+                <div class="text-center py-4 text-xs text-slate-400">
+                    <i data-lucide="loader-2" class="w-5 h-5 animate-spin mx-auto mb-2 text-indigo-500"></i>
+                    計算最佳地鐵路線中...
+                </div>
+            `;
+            lucide.createIcons();
+
+            setTimeout(() => {
+                const match = findPredefinedRoute(origin, dest);
+                const naverDirectionsUrl = `https://map.naver.com/p/directions/${encodeURIComponent(origin)}/${encodeURIComponent(dest)}/-/transit`;
+
+                if (match) {
+                    renderMatchedRoute(container, match, origin, dest, naverDirectionsUrl);
+                } else {
+                    renderDynamicRoute(container, origin, dest, naverDirectionsUrl);
+                }
+                lucide.createIcons();
+            }, 300);
+        }
+
+        function findPredefinedRoute(origin, dest) {
+            const oStr = origin.toLowerCase();
+            const dStr = dest.toLowerCase();
+
+            const routeDatabase = [
+                {
+                    origins: ['仁川', 'icn', 'incheon'],
+                    dests: ['永登浦', '可可', 'gogo', 'koko'],
+                    title: "仁川國際機場 ➔ 永登浦可可酒店",
+                    time: "約 55 分鐘",
+                    fare: "₩4,500",
+                    transfers: "1 次轉乘",
+                    steps: [
+                        { line: "AREX 機場快線", from: "仁川國際機場 T1/T2", to: "孔德站 (Gongdeok)", note: "搭乘 AREX 普通列車至「孔德站」" },
+                        { line: "5號線 (紫色)", from: "孔德站", to: "永登浦市場站 (Exit 4)", note: "轉乘 5 號線往傍花方向，至「永登浦市場站」4 號出口" },
+                        { line: "步行 7 分鐘", from: "永登浦市場站 4號出口", to: "永登浦可可酒店", note: "出站後沿永新路 38 巷步行 7 分鐘抵達" }
+                    ]
+                },
+                {
+                    origins: ['永登浦', '萬楓', 'fairfield'],
+                    dests: ['聖水', 'seongsu', '馬鈴薯排骨湯', '鹽可頌', '生吐司', 'pizzeria'],
+                    title: "首爾萬楓酒店 / 永登浦站 ➔ 聖水洞",
+                    time: "約 28 分鐘 (9 站)",
+                    fare: "₩1,400",
+                    transfers: "1 次轉乘",
+                    steps: [
+                        { line: "1號線 (深藍)", from: "永登浦站 (Yeongdeungpo)", to: "新道林站 (Sindorim)", note: "搭乘 1 號線 1 站至「新道林站」" },
+                        { line: "2號線 (綠色環狀線)", from: "新道林站", to: "聖水站 (Seongsu Exit 3/4)", note: "轉乘 2 號線往聖水方向，直達「聖水站」4 號出口" }
+                    ]
+                },
+                {
+                    origins: ['永登浦', '萬楓', 'fairfield'],
+                    dests: ['堂山', 'dangsan', 'spa', '汗蒸幕'],
+                    title: "首爾萬楓酒店 / 永登浦站 ➔ The Park Spa Land 汗蒸幕",
+                    time: "約 12 分鐘",
+                    fare: "₩1,400",
+                    transfers: "1 次轉乘",
+                    steps: [
+                        { line: "1號線 (深藍)", from: "永登浦站", to: "新道林站", note: "搭乘 1 號線 1 站至「新道林站」" },
+                        { line: "2號線 (綠色)", from: "新道林站", to: "堂山站 (Dangsan Exit 10)", note: "轉乘 2 號線至「堂山站」10 號出口，步行 8 分鐘抵達" }
+                    ]
+                },
+                {
+                    origins: ['永登浦', '萬楓', 'fairfield'],
+                    dests: ['蠶室', '樂天世界', '梨花校服', 'jamsil', 'lotte'],
+                    title: "首爾萬楓酒店 / 永登浦站 ➔ 樂天世界 / 梨花校服",
+                    time: "約 35 分鐘 (15 站)",
+                    fare: "₩1,500",
+                    transfers: "1 次轉乘",
+                    steps: [
+                        { line: "1號線 (深藍)", from: "永登浦站", to: "新道林站", note: "搭乘 1 號線 1 站至「新道林站」" },
+                        { line: "2號線 (綠色內環)", from: "新道林站", to: "蠶室站 (Jamsil Exit 4)", note: "轉乘 2 號線直達「蠶室站」4 號出口，走地下連通道直達樂天世界" }
+                    ]
+                },
+                {
+                    origins: ['永登浦', '萬楓', 'fairfield'],
+                    dests: ['景福宮', '土俗村', 'gyeongbokgung'],
+                    title: "首爾萬楓酒店 / 永登浦站 ➔ 景福宮 / 土俗村蔘雞湯",
+                    time: "約 25 分鐘 (8 站)",
+                    fare: "₩1,400",
+                    transfers: "1 次轉乘",
+                    steps: [
+                        { line: "1號線 (深藍)", from: "永登浦站", to: "鐘路3街站 (Jongno 3-ga)", note: "搭乘 1 號線 6 站至「鐘路3街站」" },
+                        { line: "3號線 (橘色)", from: "鐘路3街站", to: "景福宮站 (Gyeongbokgung Exit 2)", note: "轉乘 3 號線 2 站至「景福宮站」2 號出口，步行 3 分鐘即達土俗村" }
+                    ]
+                },
+                {
+                    origins: ['景福宮', '土俗村', 'gyeongbokgung'],
+                    dests: ['北村', '三清洞', '安國', 'anguk', 'bukchon'],
+                    title: "景福宮 ➔ 北村韓屋村 / 三清洞散策街",
+                    time: "約 8 分鐘 (1 站)",
+                    fare: "₩1,400",
+                    transfers: "直達 (無須轉乘)",
+                    steps: [
+                        { line: "3號線 (橘色)", from: "景福宮站 (Exit 2)", to: "安國站 (Anguk Exit 1/2/3)", note: "搭乘 3 號線 1 站至「安國站」，2/3 號出口即為北村入口" }
+                    ]
+                },
+                {
+                    origins: ['永登浦', '萬楓', 'fairfield'],
+                    dests: ['弘大', 'hongdae', 'myth', '橋村', 'modelro', '證件照'],
+                    title: "首爾萬楓酒店 / 永登浦站 ➔ 弘大商圈 / Modelro Studio",
+                    time: "約 15 分鐘 (5 站)",
+                    fare: "₩1,400",
+                    transfers: "1 次轉乘",
+                    steps: [
+                        { line: "1號線 (深藍)", from: "永登浦站", to: "新道林站", note: "搭乘 1 號線 1 站至「新道林站」" },
+                        { line: "2號線 (綠色)", from: "新道林站", to: "弘大入口站 (Hongik Univ. Exit 8/9)", note: "轉乘 2 號線 4 站至「弘大入口站」8 號/9 號出口" }
+                    ]
+                },
+                {
+                    origins: ['弘大', 'hongdae'],
+                    dests: ['仁川', 'icn', 'incheon', '機場'],
+                    title: "弘大入口站 ➔ 仁川國際機場 (返程)",
+                    time: "約 54 分鐘 (直達)",
+                    fare: "₩4,150",
+                    transfers: "免轉乘 (AREX 直達列車)",
+                    steps: [
+                        { line: "AREX 機場快線 (普通車)", from: "弘大入口站", to: "仁川國際機場 T1/T2", note: "從弘大入口站直接搭乘 AREX 普通列車直達仁川機場" }
+                    ]
+                }
+            ];
+
+            return routeDatabase.find(r => 
+                r.origins.some(o => oStr.includes(o)) && r.dests.some(d => dStr.includes(d))
+            );
+        }
+
+        function renderMatchedRoute(container, route, origin, dest, naverUrl) {
+            const stepsHTML = route.steps.map((s, idx) => `
+                <div class="flex items-start gap-3 relative pb-4 last:pb-0">
+                    ${idx < route.steps.length - 1 ? '<div class="absolute left-3.5 top-6 bottom-0 w-0.5 bg-indigo-200 dark:bg-indigo-800"></div>' : ''}
+                    <div class="w-7 h-7 rounded-full bg-indigo-600 text-white font-bold text-xs flex items-center justify-center shrink-0 shadow-sm z-10">
+                        ${idx + 1}
+                    </div>
+                    <div class="flex-1 bg-slate-50 dark:bg-slate-800/70 p-3 rounded-xl border border-slate-200/60 dark:border-slate-700/60">
+                        <div class="flex items-center justify-between gap-2 mb-1">
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">
+                                ${s.line}
+                            </span>
+                            <span class="text-[11px] font-semibold text-slate-500 dark:text-slate-400">${s.from} ➔ ${s.to}</span>
+                        </div>
+                        <div class="text-xs text-slate-700 dark:text-slate-200 leading-relaxed font-medium">${s.note}</div>
+                    </div>
+                </div>
+            `).join('');
+
+            container.innerHTML = `
+                <div class="bg-gradient-to-r from-indigo-900 to-slate-900 text-white p-4 rounded-xl shadow-md">
+                    <div class="text-xs text-indigo-300 font-semibold mb-1">✨ 推薦最佳地鐵路線</div>
+                    <h4 class="text-base font-extrabold mb-2">${route.title}</h4>
+                    <div class="flex items-center gap-4 text-xs opacity-90">
+                        <span>⏱️ 預估時間：<strong>${route.time}</strong></span>
+                        <span>💳 車資：<strong>${route.fare}</strong></span>
+                        <span>🔄 轉乘：<strong>${route.transfers}</strong></span>
+                    </div>
+                </div>
+
+                <div class="space-y-2 mt-3">
+                    ${stepsHTML}
+                </div>
+
+                <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-2">
+                    <button onclick="copyToClipboard('${origin} ➔ ${dest} 地鐵路線：${route.title} (${route.time})', '已複製路線筆記至剪貼簿！')" class="px-3 py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-semibold rounded-xl hover:bg-slate-200 transition">
+                        <i data-lucide="copy" class="w-3.5 h-3.5 inline"></i> 複製路線
+                    </button>
+                    <a href="${naverUrl}" target="_blank" rel="noopener noreferrer" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-xl shadow-md transition flex items-center gap-1.5">
+                        <i data-lucide="map" class="w-3.5 h-3.5"></i> 開啟 Naver Map 實時導航 <i data-lucide="external-link" class="w-3 h-3"></i>
+                    </a>
+                </div>
+            `;
+        }
+
+        function renderDynamicRoute(container, origin, dest, naverUrl) {
+            container.innerHTML = `
+                <div class="bg-indigo-50 dark:bg-indigo-950/40 p-4 rounded-xl border border-indigo-200/60 dark:border-indigo-800/60 text-xs space-y-2">
+                    <div class="font-bold text-indigo-900 dark:text-indigo-200 text-sm flex items-center gap-1.5">
+                        <i data-lucide="compass" class="w-4 h-4 text-indigo-600"></i> 自訂地點路線規劃：${origin} ➔ ${dest}
+                    </div>
+                    <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                        系統已為您準備首爾地鐵與大眾運輸實時路網算路！建議點擊下方按鈕，直接以 Naver Map 開啟「點對點導航」，自動為您計算出發地到目的地的最佳車次與轉乘月台資訊。
+                    </p>
+                </div>
+
+                <div class="pt-2 flex items-center justify-end">
+                    <a href="${naverUrl}" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-xl shadow-md transition flex items-center justify-center gap-2">
+                        <i data-lucide="navigation" class="w-4 h-4"></i> 開啟 Naver Map 點對點導航 <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                    </a>
+                </div>
+            `;
+        }
+
+        /* ==========================================================================
+           11. HIGH-DEFINITION SUBWAY MAP VIEWER LOGIC
+           ========================================================================== */
+        let currentSubwayZoom = 1.0;
+        let currentMapVersion = 'airport';
+
+        const subwayMapFiles = {
+            airport: './2026 map/2026 South Korea Subway Map (Chinese Version with Airport Signage).png',
+            simplified: './2026 map/Simplified Chinese.jpg',
+            bilingual: './2026 map/Korean-English bilingual version.jpg'
+        };
+
+        function openSubwayMapModal() {
+            toggleModal('subwayMapModal');
+            resetSubwayMapZoom();
+        }
+
+        function switchSubwayMapVersion(versionKey) {
+            if (!subwayMapFiles[versionKey]) return;
+            currentMapVersion = versionKey;
+
+            const img = document.getElementById('subwayMapImage');
+            const link = document.getElementById('subwayMapOriginalLink');
+            if (img) img.src = subwayMapFiles[versionKey];
+            if (link) link.href = subwayMapFiles[versionKey];
+
+            const tabKeys = ['airport', 'simplified', 'bilingual'];
+            tabKeys.forEach(key => {
+                const tab = document.getElementById(`mapTab-${key}`);
+                if (tab) {
+                    if (key === versionKey) {
+                        tab.className = 'px-3 py-1.5 rounded-xl text-xs font-semibold shrink-0 bg-indigo-600 text-white shadow-sm';
+                    } else {
+                        tab.className = 'px-3 py-1.5 rounded-xl text-xs font-semibold shrink-0 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200';
+                    }
+                }
+            });
+
+            resetSubwayMapZoom();
+        }
+
+        function zoomSubwayMap(delta) {
+            currentSubwayZoom = Math.min(3.5, Math.max(0.5, currentSubwayZoom + delta));
+            applySubwayMapTransform();
+        }
+
+        function resetSubwayMapZoom() {
+            currentSubwayZoom = 1.0;
+            applySubwayMapTransform();
+        }
+
+        function applySubwayMapTransform() {
+            const img = document.getElementById('subwayMapImage');
+            const zoomText = document.getElementById('subwayZoomPercentage');
+            if (img) {
+                img.style.transform = `scale(${currentSubwayZoom})`;
+            }
+            if (zoomText) {
+                zoomText.innerText = `${Math.round(currentSubwayZoom * 100)}%`;
+            }
+        }
+        /* ==========================================================================
+           12. KOREAN PHRASES HANDBOOK ENGINE
+           ========================================================================== */
+        let currentPhraseCategory = 'basic';
+
+        const phraseDatabase = {
+            basic: {
+                title: "💡 日常基本問候與禮貌萬用語",
+                items: [
+                    { zh: "您好", kr: "안녕하세요", py: "An-nyeong-ha-se-yo / 安寧哈塞優" },
+                    { zh: "謝謝", kr: "감사합니다", py: "Gam-sa-ham-ni-da / 康撒哈米達" },
+                    { zh: "不好意思 / 借過", kr: "실례합니다", py: "Sil-lye-ham-ni-da / 席咧哈米達" },
+                    { zh: "對不起", kr: "죄송합니다", py: "Joe-song-ham-ni-da / 最松哈米達" },
+                    { zh: "請給我～（萬用語）", kr: "~ 주세요", py: "~ Ju-se-yo / ~ 主誰優" }
+                ]
+            },
+            dining: {
+                title: "🍽️ 餐廳與用餐情境實用句",
+                items: [
+                    { zh: "請給我菜單", kr: "메뉴판 주세요", py: "Me-nyu-pan ju-se-yo" },
+                    { zh: "請給我水", kr: "물 주세요", py: "Mul ju-se-yo" },
+                    { zh: "這裡請點餐（叫店員）", kr: "저기요", py: "Jeo-gi-yo / 瞧gi優" },
+                    { zh: "這個請給我～份", kr: "이거 ~인분 주세요", py: "I-geo ~in-bun ju-se-yo" },
+                    { zh: "1 份", kr: "일인분", py: "Il-in-bun" },
+                    { zh: "2 份", kr: "이인분", py: "I-in-bun" },
+                    { zh: "請推薦招牌菜", kr: "추천해 주세요", py: "Chu-cheon-hae ju-se-yo" },
+                    { zh: "請不要太辣", kr: "덜 맵게 해주세요", py: "Deol maep-ge hae-ju-se-yo" },
+                    { zh: "小菜請幫我續加", kr: "반찬 리필해 주세요", py: "Ban-chan ri-pil-hae ju-se-yo" },
+                    { zh: "結帳", kr: "계산해 주세요", py: "Gye-san-hae ju-se-yo" },
+                    { zh: "請幫我打包", kr: "포장해 주세요", py: "Po-jang-hae ju-se-yo" }
+                ]
+            },
+            shopping: {
+                title: "🛍️ 逛街購物與免稅退稅情境",
+                items: [
+                    { zh: "請問這個多少錢？", kr: "이거 얼마예요?", py: "I-geo eol-ma-ye-yo?" },
+                    { zh: "可以試穿嗎？", kr: "입어봐도 돼요?", py: "Ib-eo-bwa-do dwae-yo?" },
+                    { zh: "有新的（現貨）嗎？", kr: "새 상품 있어요?", py: "Sae sang-pum iss-eo-yo?" },
+                    { zh: "可以退稅嗎？", kr: "택스 리펀 돼요?", py: "Taek-seu ri-peon dwae-yo?" },
+                    { zh: "請給我收據", kr: "영수증 주세요", py: "Yeong-su-jeung ju-se-yo" },
+                    { zh: "請給我購物袋", kr: "봉투 주세요", py: "Bong-tu ju-se-yo" }
+                ]
+            },
+            transit: {
+                title: "🚕 交通搭車與問路情境",
+                items: [
+                    { zh: "請問洗手間在哪裡？", kr: "화장실 어디예요?", py: "Hwa-jang-sil eo-di-ye-yo?" },
+                    { zh: "請帶我到這裡（搭計程車出示地址）", kr: "여기로 가주세요", py: "Yeo-gi-ro ga-ju-se-yo" },
+                    { zh: "請在這邊停（下車）", kr: "여기서 내려주세요", py: "Yeo-gi-seo nae-ryeo-ju-se-yo" },
+                    { zh: "請幫我加值 T-money", kr: "티머니 충전해 주세요", py: "T-money chung-jeon-hae ju-se-yo" }
+                ]
+            },
+            hotel: {
+                title: "🏨 飯店住宿與行李寄存情境",
+                items: [
+                    { zh: "我要辦理入住", kr: "체크인할게요", py: "Che-keu-in-hal-ge-yo" },
+                    { zh: "我要辦理退房", kr: "체크아웃할게요", py: "Che-keu-out-hal-ge-yo" },
+                    { zh: "可以幫忙寄放行李嗎？", kr: "짐 보관해 주실 수 있나요?", py: "Jim bo-gwan-hae ju-sil su it-na-yo?" }
+                ]
+            }
+        };
+
+        function openPhrasesModal(catKey = 'basic') {
+            toggleModal('koreanPhrasesModal');
+            switchPhraseCategory(catKey);
+        }
+
+        function switchPhraseCategory(catKey) {
+            if (!phraseDatabase[catKey]) return;
+            currentPhraseCategory = catKey;
+
+            const categoryData = phraseDatabase[catKey];
+            document.getElementById('phraseCategoryBanner').innerText = categoryData.title;
+
+            const keys = ['basic', 'dining', 'shopping', 'transit', 'hotel'];
+            keys.forEach(k => {
+                const tab = document.getElementById(`phraseTab-${k}`);
+                if (tab) {
+                    if (k === catKey) {
+                        tab.className = 'px-3 py-1.5 rounded-xl text-xs font-semibold shrink-0 bg-amber-500 text-white shadow-sm';
+                    } else {
+                        tab.className = 'px-3 py-1.5 rounded-xl text-xs font-semibold shrink-0 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200';
+                    }
+                }
+            });
+
+            const container = document.getElementById('phraseListContainer');
+            container.innerHTML = '';
+
+            categoryData.items.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'p-3 bg-slate-50 dark:bg-slate-800/80 rounded-xl border border-slate-200/60 dark:border-slate-700/60 flex items-center justify-between gap-3 hover:border-amber-300 transition group';
+                card.innerHTML = `
+                    <div class="space-y-0.5">
+                        <div class="font-bold text-slate-900 dark:text-white text-xs sm:text-sm">${item.zh}</div>
+                        <div class="text-amber-600 dark:text-amber-400 font-extrabold text-sm sm:text-base">${item.kr}</div>
+                        <div class="text-[11px] text-slate-400 font-medium">${item.py}</div>
+                    </div>
+                    <button onclick="copyToClipboard('${item.kr}', '已複製韓文：${item.zh}')" class="px-3 py-2 bg-white dark:bg-slate-700 hover:bg-amber-500 hover:text-white text-slate-700 dark:text-slate-200 rounded-xl font-bold text-xs shadow-sm border border-slate-200 dark:border-slate-600 transition flex items-center gap-1 shrink-0 active:scale-95">
+                        <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                        <span>複製韓文</span>
+                    </button>
+                `;
+                container.appendChild(card);
+            });
+
+            lucide.createIcons();
         }
     </script>
 
