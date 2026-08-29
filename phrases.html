@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-TW" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🗣️ 首爾自由行實用韓語會話對照獨立網頁 | 韓國 6 天 5 夜自由行</title>
+    <title>🗣️ 首爾自由行實用韓語會話對照 | 韓國 6 天 5 夜自由行</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -23,40 +24,56 @@
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(12px);
         }
+
         .dark .glass-panel {
             background: rgba(15, 23, 42, 0.85);
             backdrop-filter: blur(12px);
         }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen font-sans transition-colors duration-300">
+
+<body
+    class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen font-sans transition-colors duration-300">
 
     <!-- Header Navigation -->
     <header class="sticky top-0 z-40 glass-panel border-b border-slate-200/80 dark:border-slate-800/80 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-400 to-amber-600 flex items-center justify-center text-white shadow-md font-bold text-lg">
+                <div
+                    class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-400 to-amber-600 flex items-center justify-center text-white shadow-md font-bold text-lg">
                     🗣️
                 </div>
                 <div>
-                    <h1 class="font-bold text-base sm:text-lg tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
+                    <h1
+                        class="font-bold text-base sm:text-lg tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
                         首爾自由行實用韓語會話
-                        <span class="text-xs font-normal px-2 py-0.5 rounded-full bg-amber-100 dark:bg-amber-900/50 text-amber-700 dark:text-amber-300 border border-amber-200">Korean Handbook</span>
+                        <span
+                            class="text-xs font-normal px-2 py-0.5 rounded-full bg-amber-100 dark:bg-amber-900/50 text-amber-700 dark:text-amber-300 border border-amber-200">Korean
+                            Handbook</span>
                     </h1>
                 </div>
             </div>
 
             <!-- Quick Header Action Buttons -->
             <div class="flex items-center space-x-1.5 sm:space-x-2 shrink-0">
-                <button onclick="toggleDarkMode()" aria-label="Toggle Dark Mode" class="p-1.5 sm:p-2 rounded-xl text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+                <button onclick="toggleDarkMode()" aria-label="Toggle Dark Mode"
+                    class="p-1.5 sm:p-2 rounded-xl text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition">
                     <i data-lucide="moon" class="w-4 h-4 dark:hidden"></i>
                     <i data-lucide="sun" class="w-4 h-4 hidden dark:block text-amber-400"></i>
                 </button>
 
                 <!-- Hamburger Menu Trigger Button -->
-                <button onclick="toggleHamburgerMenu()" aria-label="Open Navigation Menu" class="px-3 py-1.5 rounded-xl bg-gradient-to-r from-rose-500 to-amber-600 hover:from-rose-600 hover:to-amber-700 text-white font-bold text-xs shadow-md transition active:scale-95 flex items-center gap-1.5">
+                <button onclick="toggleHamburgerMenu()" aria-label="Open Navigation Menu"
+                    class="px-3 py-1.5 rounded-xl bg-gradient-to-r from-rose-500 to-amber-600 hover:from-rose-600 hover:to-amber-700 text-white font-bold text-xs shadow-md transition active:scale-95 flex items-center gap-1.5">
                     <i data-lucide="menu" class="w-4 h-4"></i>
                     <span>選單</span>
                 </button>
@@ -64,53 +81,62 @@
         </div>
 
         <!-- HAMBURGER MENU DROPDOWN DRAWER -->
-        <div id="hamburgerMenuDrawer" class="hidden absolute top-16 right-4 z-50 w-72 bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl border border-slate-200/80 dark:border-slate-800/80 rounded-2xl shadow-2xl p-3 space-y-1.5 transition-all duration-300">
-            <div class="px-3 py-2 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-slate-400">
-                <span>🧭 導覽分頁漢堡選單</span>
-                <button onclick="toggleHamburgerMenu()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white">
+        <div id="hamburgerMenuDrawer"
+            class="hidden absolute top-16 right-4 z-50 w-72 bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl border border-slate-200/80 dark:border-slate-800/80 rounded-2xl shadow-2xl p-3 space-y-1.5 transition-all duration-300">
+            <div
+                class="px-3 py-2 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-slate-400">
+                <span>🧭 導覽漢堡選單</span>
+                <button onclick="toggleHamburgerMenu()"
+                    class="text-slate-400 hover:text-slate-600 dark:hover:text-white">
                     <i data-lucide="x" class="w-4 h-4"></i>
                 </button>
             </div>
-            <a href="index.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
+            <a href="index.html"
+                class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
                 <span class="text-lg">🗓️</span>
                 <div>
-                    <div>天數行程頁</div>
+                    <div>天數行程</div>
                     <div class="text-[10px] text-slate-400 font-normal">6D5N 詳細每日行程與飯店</div>
                 </div>
             </a>
-            <a href="currency.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
-                <span class="text-lg">💱</span>
-                <div>
-                    <div>匯率算盤頁</div>
-                    <div class="text-[10px] text-slate-400 font-normal">韓元 ↔ 台幣即時計算機</div>
-                </div>
-            </a>
-            <a href="weather.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
-                <span class="text-lg">🌤️</span>
-                <div>
-                    <div>天氣預報頁</div>
-                    <div class="text-[10px] text-slate-400 font-normal">逐時氣溫與降雨機率預報</div>
-                </div>
-            </a>
-            <a href="prep.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
-                <span class="text-lg">📋</span>
-                <div>
-                    <div>行前清單頁</div>
-                    <div class="text-[10px] text-slate-400 font-normal">證件、網卡、轉接頭清單</div>
-                </div>
-            </a>
-            <a href="subway.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
+            <a href="subway.html"
+                class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
                 <span class="text-lg">🗺️</span>
                 <div>
-                    <div>高清地鐵圖頁</div>
+                    <div>高清地鐵圖</div>
                     <div class="text-[10px] text-slate-400 font-normal">地鐵地圖與點對點路線規劃</div>
                 </div>
             </a>
-            <a href="phrases.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 font-bold text-xs transition">
+            <a href="currency.html"
+                class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
+                <span class="text-lg">💱</span>
+                <div>
+                    <div>匯率算盤</div>
+                    <div class="text-[10px] text-slate-400 font-normal">韓元 ↔ 台幣即時計算機</div>
+                </div>
+            </a>
+            <a href="weather.html"
+                class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
+                <span class="text-lg">🌤️</span>
+                <div>
+                    <div>天氣預報</div>
+                    <div class="text-[10px] text-slate-400 font-normal">逐時氣溫與降雨機率預報</div>
+                </div>
+            </a>
+            <a href="phrases.html"
+                class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 font-bold text-xs transition">
                 <span class="text-lg">🗣️</span>
                 <div>
-                    <div>實用韓語頁</div>
+                    <div>實用韓語</div>
                     <div class="text-[10px] opacity-75 font-normal">5 大情境會話與一鍵複製</div>
+                </div>
+            </a>
+            <a href="prep.html"
+                class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
+                <span class="text-lg">📋</span>
+                <div>
+                    <div>行前清單</div>
+                    <div class="text-[10px] text-slate-400 font-normal">證件、網卡、轉接頭清單</div>
                 </div>
             </a>
         </div>
@@ -119,7 +145,8 @@
 
     <main class="max-w-4xl mx-auto px-4 sm:px-6 py-6 pb-24 md:pb-8">
         <!-- Banner Header -->
-        <div class="bg-gradient-to-r from-amber-500 via-amber-600 to-rose-600 text-white rounded-2xl p-5 sm:p-6 shadow-lg mb-6">
+        <div
+            class="bg-gradient-to-r from-amber-500 via-amber-600 to-rose-600 text-white rounded-2xl p-5 sm:p-6 shadow-lg mb-6">
             <h2 class="text-xl sm:text-2xl font-extrabold flex items-center gap-2">
                 <span>🗣️ 5 大情境實用韓語會話對照手冊</span>
             </h2>
@@ -130,25 +157,31 @@
 
         <!-- Category Tabs -->
         <div class="flex items-center gap-2 overflow-x-auto pb-2 mb-4 no-scrollbar">
-            <button onclick="switchPhraseCategory('basic')" id="phraseTab-basic" class="px-4 py-2 rounded-xl text-xs font-bold shrink-0 bg-amber-500 text-white shadow-sm">
+            <button onclick="switchPhraseCategory('basic')" id="phraseTab-basic"
+                class="px-4 py-2 rounded-xl text-xs font-bold shrink-0 bg-amber-500 text-white shadow-sm">
                 💡 基本問候禮貌
             </button>
-            <button onclick="switchPhraseCategory('dining')" id="phraseTab-dining" class="px-4 py-2 rounded-xl text-xs font-bold shrink-0 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200">
+            <button onclick="switchPhraseCategory('dining')" id="phraseTab-dining"
+                class="px-4 py-2 rounded-xl text-xs font-bold shrink-0 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200">
                 🍽️ 餐廳用餐點餐
             </button>
-            <button onclick="switchPhraseCategory('shopping')" id="phraseTab-shopping" class="px-4 py-2 rounded-xl text-xs font-bold shrink-0 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200">
+            <button onclick="switchPhraseCategory('shopping')" id="phraseTab-shopping"
+                class="px-4 py-2 rounded-xl text-xs font-bold shrink-0 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200">
                 🛍️ 逛街購物退稅
             </button>
-            <button onclick="switchPhraseCategory('transit')" id="phraseTab-transit" class="px-4 py-2 rounded-xl text-xs font-bold shrink-0 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200">
+            <button onclick="switchPhraseCategory('transit')" id="phraseTab-transit"
+                class="px-4 py-2 rounded-xl text-xs font-bold shrink-0 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200">
                 🚕 交通搭車問路
             </button>
-            <button onclick="switchPhraseCategory('hotel')" id="phraseTab-hotel" class="px-4 py-2 rounded-xl text-xs font-bold shrink-0 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200">
+            <button onclick="switchPhraseCategory('hotel')" id="phraseTab-hotel"
+                class="px-4 py-2 rounded-xl text-xs font-bold shrink-0 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200">
                 🏨 飯店住宿寄存
             </button>
         </div>
 
         <!-- Category Banner -->
-        <div id="phraseCategoryBanner" class="p-3 bg-amber-50 dark:bg-amber-950/40 rounded-xl mb-4 border border-amber-200/60 dark:border-amber-800/60 text-xs font-bold text-amber-900 dark:text-amber-200">
+        <div id="phraseCategoryBanner"
+            class="p-3 bg-amber-50 dark:bg-amber-950/40 rounded-xl mb-4 border border-amber-200/60 dark:border-amber-800/60 text-xs font-bold text-amber-900 dark:text-amber-200">
             💡 日常基本問候與禮貌萬用語
         </div>
 
@@ -164,35 +197,44 @@
     <!-- COLLAPSIBLE FLOATING QUICK MENU (Mobile Only) -->
     <div id="collapsibleFloatingNav" class="fixed bottom-5 right-4 z-50 md:hidden flex flex-col items-end gap-2">
         <!-- Expanded Menu Items Container (Hidden by default) -->
-        <div id="floatingNavMenu" class="hidden bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-2.5 shadow-2xl space-y-1.5 min-w-[170px] transform transition-all duration-300">
-            <div class="text-[10px] font-bold text-slate-400 dark:text-slate-500 px-2 py-0.5 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
-                <span>⚡ 快捷頁面導覽</span>
+        <div id="floatingNavMenu"
+            class="hidden bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-2.5 shadow-2xl space-y-1.5 min-w-[170px] transform transition-all duration-300">
+            <div
+                class="text-[10px] font-bold text-slate-400 dark:text-slate-500 px-2 py-0.5 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                <span>⚡ 快捷導覽</span>
                 <button onclick="toggleFloatingNav()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white">
                     <i data-lucide="x" class="w-3.5 h-3.5"></i>
                 </button>
             </div>
-            <a href="index.html" class="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
-                <i data-lucide="calendar" class="w-4 h-4 text-emerald-500"></i> 🗓️ 天數行程頁
+            <a href="index.html"
+                class="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
+                <i data-lucide="calendar" class="w-4 h-4 text-emerald-500"></i> 🗓️ 天數行程
             </a>
-            <a href="currency.html" class="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
-                <i data-lucide="calculator" class="w-4 h-4 text-teal-500"></i> 💱 匯率算盤頁
+            <a href="subway.html"
+                class="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
+                <i data-lucide="map" class="w-4 h-4 text-indigo-500"></i> 🗺️ 高清地鐵圖
             </a>
-            <a href="weather.html" class="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
-                <i data-lucide="cloud-sun" class="w-4 h-4 text-amber-500"></i> 🌤️ 天氣預報頁
+            <a href="currency.html"
+                class="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
+                <i data-lucide="calculator" class="w-4 h-4 text-teal-500"></i> 💱 匯率算盤
             </a>
-            <a href="prep.html" class="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
-                <i data-lucide="check-square" class="w-4 h-4 text-blue-500"></i> 📋 行前清單頁
+            <a href="weather.html"
+                class="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
+                <i data-lucide="cloud-sun" class="w-4 h-4 text-amber-500"></i> 🌤️ 天氣預報
             </a>
-            <a href="subway.html" class="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
-                <i data-lucide="map" class="w-4 h-4 text-indigo-500"></i> 🗺️ 高清地鐵圖頁
+            <a href="phrases.html"
+                class="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
+                <i data-lucide="languages" class="w-4 h-4 text-rose-500"></i> 🗣️ 實用韓語
             </a>
-            <a href="phrases.html" class="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
-                <i data-lucide="languages" class="w-4 h-4 text-rose-500"></i> 🗣️ 實用韓語頁
+            <a href="prep.html"
+                class="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
+                <i data-lucide="check-square" class="w-4 h-4 text-blue-500"></i> 📋 行前清單
             </a>
         </div>
 
         <!-- Floating Toggle Trigger Button -->
-        <button onclick="toggleFloatingNav()" id="floatingNavBtn" class="flex items-center gap-1.5 px-3.5 py-2.5 bg-gradient-to-r from-amber-500 to-rose-600 text-white rounded-full shadow-xl hover:shadow-2xl border-2 border-white dark:border-slate-900 active:scale-95 transition">
+        <button onclick="toggleFloatingNav()" id="floatingNavBtn"
+            class="flex items-center gap-1.5 px-3.5 py-2.5 bg-gradient-to-r from-amber-500 to-rose-600 text-white rounded-full shadow-xl hover:shadow-2xl border-2 border-white dark:border-slate-900 active:scale-95 transition">
             <i data-lucide="compass" class="w-5 h-5"></i>
             <span class="text-xs font-bold">快捷選單</span>
         </button>
@@ -330,4 +372,5 @@
         document.addEventListener('DOMContentLoaded', () => switchPhraseCategory('basic'));
     </script>
 </body>
+
 </html>

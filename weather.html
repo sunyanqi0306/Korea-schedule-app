@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-TW" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🌤️ 首爾天氣與逐時降雨預報獨立網頁 | 韓國 6 天 5 夜自由行</title>
+    <title>🌤️ 首爾天氣與逐時降雨預報 | 韓國 6 天 5 夜自由行</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -23,40 +24,56 @@
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(12px);
         }
+
         .dark .glass-panel {
             background: rgba(15, 23, 42, 0.85);
             backdrop-filter: blur(12px);
         }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen font-sans transition-colors duration-300">
+
+<body
+    class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen font-sans transition-colors duration-300">
 
     <!-- Header Navigation -->
     <header class="sticky top-0 z-40 glass-panel border-b border-slate-200/80 dark:border-slate-800/80 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-400 to-amber-600 flex items-center justify-center text-white shadow-md font-bold text-lg">
+                <div
+                    class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-400 to-amber-600 flex items-center justify-center text-white shadow-md font-bold text-lg">
                     🌤️
                 </div>
                 <div>
-                    <h1 class="font-bold text-base sm:text-lg tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
+                    <h1
+                        class="font-bold text-base sm:text-lg tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
                         首爾天氣預報與降雨機率
-                        <span class="text-xs font-normal px-2 py-0.5 rounded-full bg-amber-100 dark:bg-amber-900/50 text-amber-700 dark:text-amber-300 border border-amber-200">Seoul Weather 9/5 - 9/10</span>
+                        <span
+                            class="text-xs font-normal px-2 py-0.5 rounded-full bg-amber-100 dark:bg-amber-900/50 text-amber-700 dark:text-amber-300 border border-amber-200">Seoul
+                            Weather 9/5 - 9/10</span>
                     </h1>
                 </div>
             </div>
 
             <!-- Quick Header Action Buttons -->
             <div class="flex items-center space-x-1.5 sm:space-x-2 shrink-0">
-                <button onclick="toggleDarkMode()" aria-label="Toggle Dark Mode" class="p-1.5 sm:p-2 rounded-xl text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+                <button onclick="toggleDarkMode()" aria-label="Toggle Dark Mode"
+                    class="p-1.5 sm:p-2 rounded-xl text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition">
                     <i data-lucide="moon" class="w-4 h-4 dark:hidden"></i>
                     <i data-lucide="sun" class="w-4 h-4 hidden dark:block text-amber-400"></i>
                 </button>
 
                 <!-- Hamburger Menu Trigger Button -->
-                <button onclick="toggleHamburgerMenu()" aria-label="Open Navigation Menu" class="px-3 py-1.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-bold text-xs shadow-md transition active:scale-95 flex items-center gap-1.5">
+                <button onclick="toggleHamburgerMenu()" aria-label="Open Navigation Menu"
+                    class="px-3 py-1.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-bold text-xs shadow-md transition active:scale-95 flex items-center gap-1.5">
                     <i data-lucide="menu" class="w-4 h-4"></i>
                     <span>選單</span>
                 </button>
@@ -64,53 +81,62 @@
         </div>
 
         <!-- HAMBURGER MENU DROPDOWN DRAWER -->
-        <div id="hamburgerMenuDrawer" class="hidden absolute top-16 right-4 z-50 w-72 bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl border border-slate-200/80 dark:border-slate-800/80 rounded-2xl shadow-2xl p-3 space-y-1.5 transition-all duration-300">
-            <div class="px-3 py-2 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-slate-400">
-                <span>🧭 導覽分頁漢堡選單</span>
-                <button onclick="toggleHamburgerMenu()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white">
+        <div id="hamburgerMenuDrawer"
+            class="hidden absolute top-16 right-4 z-50 w-72 bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl border border-slate-200/80 dark:border-slate-800/80 rounded-2xl shadow-2xl p-3 space-y-1.5 transition-all duration-300">
+            <div
+                class="px-3 py-2 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-slate-400">
+                <span>🧭 導覽漢堡選單</span>
+                <button onclick="toggleHamburgerMenu()"
+                    class="text-slate-400 hover:text-slate-600 dark:hover:text-white">
                     <i data-lucide="x" class="w-4 h-4"></i>
                 </button>
             </div>
-            <a href="index.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
+            <a href="index.html"
+                class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
                 <span class="text-lg">🗓️</span>
                 <div>
-                    <div>天數行程頁</div>
+                    <div>天數行程</div>
                     <div class="text-[10px] text-slate-400 font-normal">6D5N 詳細每日行程與飯店</div>
                 </div>
             </a>
-            <a href="currency.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
-                <span class="text-lg">💱</span>
-                <div>
-                    <div>匯率算盤頁</div>
-                    <div class="text-[10px] text-slate-400 font-normal">韓元 ↔ 台幣即時計算機</div>
-                </div>
-            </a>
-            <a href="weather.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 font-bold text-xs transition">
-                <span class="text-lg">🌤️</span>
-                <div>
-                    <div>天氣預報頁</div>
-                    <div class="text-[10px] opacity-75 font-normal">逐時氣溫與降雨機率預報</div>
-                </div>
-            </a>
-            <a href="prep.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
-                <span class="text-lg">📋</span>
-                <div>
-                    <div>行前清單頁</div>
-                    <div class="text-[10px] text-slate-400 font-normal">證件、網卡、轉接頭清單</div>
-                </div>
-            </a>
-            <a href="subway.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
+            <a href="subway.html"
+                class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
                 <span class="text-lg">🗺️</span>
                 <div>
-                    <div>高清地鐵圖頁</div>
+                    <div>高清地鐵圖</div>
                     <div class="text-[10px] text-slate-400 font-normal">地鐵地圖與點對點路線規劃</div>
                 </div>
             </a>
-            <a href="phrases.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
+            <a href="currency.html"
+                class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
+                <span class="text-lg">💱</span>
+                <div>
+                    <div>匯率算盤</div>
+                    <div class="text-[10px] text-slate-400 font-normal">韓元 ↔ 台幣即時計算機</div>
+                </div>
+            </a>
+            <a href="weather.html"
+                class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 font-bold text-xs transition">
+                <span class="text-lg">🌤️</span>
+                <div>
+                    <div>天氣預報</div>
+                    <div class="text-[10px] opacity-75 font-normal">逐時氣溫與降雨機率預報</div>
+                </div>
+            </a>
+            <a href="phrases.html"
+                class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
                 <span class="text-lg">🗣️</span>
                 <div>
-                    <div>實用韓語頁</div>
+                    <div>實用韓語</div>
                     <div class="text-[10px] text-slate-400 font-normal">5 大情境會話與一鍵複製</div>
+                </div>
+            </a>
+            <a href="prep.html"
+                class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
+                <span class="text-lg">📋</span>
+                <div>
+                    <div>行前清單</div>
+                    <div class="text-[10px] text-slate-400 font-normal">證件、網卡、轉接頭清單</div>
                 </div>
             </a>
         </div>
@@ -119,7 +145,8 @@
 
     <main class="max-w-5xl mx-auto px-4 sm:px-6 py-6 pb-24 md:pb-8">
         <!-- Banner Header -->
-        <div class="bg-gradient-to-r from-amber-500 via-amber-600 to-rose-600 text-white rounded-2xl p-5 sm:p-6 shadow-lg mb-6">
+        <div
+            class="bg-gradient-to-r from-amber-500 via-amber-600 to-rose-600 text-white rounded-2xl p-5 sm:p-6 shadow-lg mb-6">
             <h2 class="text-xl sm:text-2xl font-extrabold flex items-center gap-2">
                 <span>🌤️ 9/5 - 9/10 首爾氣溫與逐時降雨預報</span>
             </h2>
@@ -129,20 +156,25 @@
         </div>
 
         <!-- Live Weather Realtime Card -->
-        <div class="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200/80 dark:border-slate-800 shadow-lg mb-6">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 mb-4 border-b border-slate-100 dark:border-slate-800 text-xs">
+        <div
+            class="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200/80 dark:border-slate-800 shadow-lg mb-6">
+            <div
+                class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 mb-4 border-b border-slate-100 dark:border-slate-800 text-xs">
                 <div class="flex items-center gap-2">
                     <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
                     <span class="font-bold text-slate-800 dark:text-white">🟢 首爾當地即時連線天氣 (Seoul Live Weather)</span>
                     <span class="text-slate-400 font-mono text-[11px]" id="weatherLastUpdated">最後更新：載入中...</span>
                 </div>
-                <button onclick="fetchLiveSeoulWeather()" class="inline-flex items-center gap-1 text-amber-600 dark:text-amber-400 font-semibold hover:underline cursor-pointer" title="手動更新即時天氣">
+                <button onclick="fetchLiveSeoulWeather()"
+                    class="inline-flex items-center gap-1 text-amber-600 dark:text-amber-400 font-semibold hover:underline cursor-pointer"
+                    title="手動更新即時天氣">
                     <i data-lucide="rotate-cw" class="w-3.5 h-3.5" id="weatherRefreshIcon"></i> 隨時手動更新
                 </button>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div class="p-4 bg-gradient-to-br from-amber-500 to-rose-500 text-white rounded-xl flex items-center justify-between">
+                <div
+                    class="p-4 bg-gradient-to-br from-amber-500 to-rose-500 text-white rounded-xl flex items-center justify-between">
                     <div>
                         <div class="text-[11px] opacity-90">首爾當前氣溫</div>
                         <div class="text-3xl font-black mt-0.5" id="liveTemp">-- °C</div>
@@ -151,22 +183,28 @@
                     <div class="text-4xl" id="liveWeatherEmoji">🌤️</div>
                 </div>
 
-                <div class="p-4 bg-slate-50 dark:bg-slate-800 rounded-xl flex items-center justify-between border border-slate-100 dark:border-slate-700/60">
+                <div
+                    class="p-4 bg-slate-50 dark:bg-slate-800 rounded-xl flex items-center justify-between border border-slate-100 dark:border-slate-700/60">
                     <div>
                         <div class="text-xs text-slate-400 font-medium">當前降雨機率 / 風速</div>
-                        <div class="text-lg font-extrabold text-slate-800 dark:text-white mt-1" id="liveRainProb">降雨 -- %</div>
-                        <div class="text-xs text-teal-600 dark:text-teal-400 font-semibold mt-0.5" id="liveWind">風速 -- km/h</div>
+                        <div class="text-lg font-extrabold text-slate-800 dark:text-white mt-1" id="liveRainProb">降雨 --
+                            %</div>
+                        <div class="text-xs text-teal-600 dark:text-teal-400 font-semibold mt-0.5" id="liveWind">風速 --
+                            km/h</div>
                     </div>
                     <div class="p-2.5 bg-teal-100 dark:bg-teal-950/60 text-teal-600 rounded-xl">
                         <i data-lucide="cloud-rain" class="w-5 h-5"></i>
                     </div>
                 </div>
 
-                <div class="p-4 bg-slate-50 dark:bg-slate-800 rounded-xl flex items-center justify-between border border-slate-100 dark:border-slate-700/60">
+                <div
+                    class="p-4 bg-slate-50 dark:bg-slate-800 rounded-xl flex items-center justify-between border border-slate-100 dark:border-slate-700/60">
                     <div>
                         <div class="text-xs text-slate-400 font-medium">旅遊舒適度建議</div>
-                        <div class="text-xs font-bold text-slate-800 dark:text-white mt-1" id="liveTip">涼爽宜人，適合戶外散步！</div>
-                        <div class="text-[10px] text-amber-600 dark:text-amber-400 font-semibold mt-0.5">建議穿搭：短袖 + 薄外套</div>
+                        <div class="text-xs font-bold text-slate-800 dark:text-white mt-1" id="liveTip">涼爽宜人，適合戶外散步！
+                        </div>
+                        <div class="text-[10px] text-amber-600 dark:text-amber-400 font-semibold mt-0.5">建議穿搭：短袖 + 薄外套
+                        </div>
                     </div>
                     <div class="p-2.5 bg-amber-100 dark:bg-amber-950/60 text-amber-600 rounded-xl">
                         <i data-lucide="sparkles" class="w-5 h-5"></i>
@@ -181,7 +219,8 @@
         </div>
 
         <!-- Hourly Detailed Forecast Section -->
-        <div class="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200/80 dark:border-slate-800 shadow-xl">
+        <div
+            class="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200/80 dark:border-slate-800 shadow-xl">
             <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100 dark:border-slate-800">
                 <div class="flex items-center gap-2">
                     <div class="p-2 bg-amber-100 dark:bg-amber-900/50 text-amber-600 rounded-xl">
@@ -200,7 +239,8 @@
             </div>
 
             <!-- Summary Box -->
-            <div id="hourlyDaySummary" class="p-3 bg-amber-50 dark:bg-amber-950/40 rounded-xl mb-4 border border-amber-200/60 dark:border-amber-800/60 flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs text-amber-900 dark:text-amber-200">
+            <div id="hourlyDaySummary"
+                class="p-3 bg-amber-50 dark:bg-amber-950/40 rounded-xl mb-4 border border-amber-200/60 dark:border-amber-800/60 flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs text-amber-900 dark:text-amber-200">
                 <span class="font-semibold">🌤️ 當日平均氣溫 20°C ~ 25°C</span>
                 <span class="font-bold text-emerald-600 dark:text-emerald-400">最高降雨機率：15% (宜出遊)</span>
             </div>
@@ -406,12 +446,12 @@
                 // Open-Meteo Satellite API for Seoul (Lat: 37.5665, Lon: 126.9780)
                 const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=37.5665&longitude=126.9780&current_weather=true&hourly=precipitation_probability');
                 const data = await res.json();
-                
+
                 if (data && data.current_weather) {
                     const cw = data.current_weather;
                     document.getElementById('liveTemp').innerText = `${Math.round(cw.temperature)} °C`;
                     document.getElementById('liveWind').innerText = `風速 ${cw.windspeed} km/h`;
-                    
+
                     const now = new Date();
                     if (updatedEl) updatedEl.innerText = `最後更新：${now.toTimeString().split(' ')[0]}`;
 
@@ -453,4 +493,5 @@
         });
     </script>
 </body>
+
 </html>
