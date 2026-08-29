@@ -140,7 +140,7 @@
     </header>
 
     <!-- Main Container -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 pb-24 md:pb-8">
 
         <!-- Top Flight & Accommodation Overview Banner -->
         <section class="mb-6 bg-gradient-to-r from-slate-900 via-teal-950 to-slate-900 text-white rounded-2xl p-5 sm:p-6 shadow-xl relative overflow-hidden">
@@ -211,13 +211,18 @@
                     <div class="space-y-1.5 text-xs">
                         <div class="flex items-start gap-1.5">
                             <span class="font-bold text-amber-300 shrink-0">Day 1 (9/5):</span>
-                            <span>永登浦可可酒店 (Hotel Gogo)</span>
+                            <div class="flex-1">
+                                <span>永登浦可可酒店 (Hotel Gogo / Coco)</span>
+                                <a href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EC%96%B1%EB%93%B1%ED%8F%AC%EA%B5%AC%20%EC%96%B1%EC%8B%A0%EB%A1%9C38%EA%B8%B8%2022" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-0.5 text-[11px] text-amber-300 underline ml-1 hover:text-white" title="開啟 Naver Map 導航">
+                                    地圖 <i data-lucide="external-link" class="w-3 h-3"></i>
+                                </a>
+                            </div>
                         </div>
                         <div class="flex items-start gap-1.5">
                             <span class="font-bold text-emerald-300 shrink-0">Day 2-6 (9/6-10):</span>
                             <div class="flex-1">
                                 <span>首爾萬楓酒店 (Fairfield by Marriott)</span>
-                                <a href="https://maps.app.goo.gl/y4hB8hc74NwvgpUj8" target="_blank" class="inline-flex items-center gap-0.5 text-[11px] text-teal-300 underline ml-1 hover:text-white">
+                                <a href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EC%96%B1%EB%93%B1%ED%8F%AC%EA%B5%AC%20%EA%BD%BD%EC%9D%B8%EB%A1%9C%20870" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-0.5 text-[11px] text-teal-300 underline ml-1 hover:text-white" title="開啟 Naver Map 導航">
                                     地圖 <i data-lucide="external-link" class="w-3 h-3"></i>
                                 </a>
                             </div>
@@ -234,7 +239,7 @@
             <aside class="lg:col-span-4 space-y-6">
 
                 <!-- WIDGET 1: Currency Calculator -->
-                <div class="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-800 shadow-md">
+                <div id="currencyWidget" class="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-800 shadow-md scroll-mt-20">
                     <div class="flex items-center justify-between mb-4">
                         <div class="flex items-center space-x-2">
                             <div class="p-2 bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400 rounded-xl">
@@ -300,7 +305,7 @@
                 </div>
 
                 <!-- WIDGET 2: Seoul Weather Forecast Widget -->
-                <div class="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-800 shadow-md">
+                <div id="weatherWidget" class="bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-800 shadow-md scroll-mt-20">
                     <div class="flex items-center justify-between mb-3">
                         <div class="flex items-center space-x-2">
                             <div class="p-2 bg-teal-100 dark:bg-teal-900/50 text-teal-600 dark:text-teal-400 rounded-xl">
@@ -317,7 +322,7 @@
                     </div>
 
                     <!-- Current Weather Card -->
-                    <div id="currentWeatherContainer" class="bg-gradient-to-br from-teal-500 to-emerald-600 text-white rounded-xl p-4 mb-4 shadow-sm relative overflow-hidden">
+                    <div id="currentWeatherContainer" onclick="openHourlyWeatherModal()" class="bg-gradient-to-br from-teal-500 to-emerald-600 text-white rounded-xl p-4 mb-3 shadow-sm relative overflow-hidden cursor-pointer hover:opacity-95 transition group" title="點擊查看每小時詳細預報">
                         <div class="flex items-center justify-between">
                             <div>
                                 <div class="text-3xl font-extrabold" id="currentTemp">-- °C</div>
@@ -332,6 +337,13 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Hourly Weather Button -->
+                    <button onclick="openHourlyWeatherModal()" class="w-full mb-4 py-2 bg-teal-50 hover:bg-teal-100 dark:bg-teal-950/60 dark:hover:bg-teal-900/60 text-teal-700 dark:text-teal-300 rounded-xl text-xs font-semibold border border-teal-200/80 dark:border-teal-800/80 transition flex items-center justify-center gap-1.5 active:scale-95 shadow-sm">
+                        <i data-lucide="clock" class="w-4 h-4 text-teal-600"></i>
+                        <span>查看每小時氣溫與降雨機率 (24h)</span>
+                        <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+                    </button>
 
                     <!-- 5-Day Trend Forecast -->
                     <div>
@@ -701,6 +713,57 @@
     </div>
 
 
+    <!-- MODAL 4: 逐時天氣與降雨機率預報 (Hourly Weather Modal) -->
+    <div id="hourlyWeatherModal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm hidden p-4">
+        <div class="bg-white dark:bg-slate-900 rounded-2xl max-w-2xl w-full p-5 sm:p-6 shadow-2xl border border-slate-200 dark:border-slate-800 max-h-[88vh] overflow-y-auto">
+            <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100 dark:border-slate-800">
+                <div class="flex items-center gap-2">
+                    <div class="p-2 bg-teal-100 dark:bg-teal-900/50 text-teal-600 rounded-xl">
+                        <i data-lucide="clock" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 dark:text-white text-base sm:text-lg">首爾每小時天氣與降雨機率</h3>
+                        <p class="text-[11px] text-slate-400">點擊切換行程天數檢視詳細氣溫與降雨趨勢</p>
+                    </div>
+                </div>
+                <button onclick="toggleModal('hourlyWeatherModal')" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-white">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <!-- Date Selector Tabs for Hourly Forecast -->
+            <div class="flex items-center gap-1.5 overflow-x-auto pb-2 mb-3 no-scrollbar" id="hourlyDateTabs">
+                <!-- Dynamic Date Tabs (Day 1 - Day 6) -->
+            </div>
+
+            <!-- Summary Bar -->
+            <div id="hourlyDaySummary" class="p-3 bg-teal-50 dark:bg-teal-950/40 rounded-xl mb-4 border border-teal-200/60 dark:border-teal-800/60 flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs text-teal-900 dark:text-teal-200">
+                <span class="font-semibold">🌤️ 當日平均氣溫 20°C ~ 25°C</span>
+                <span class="font-bold text-emerald-600 dark:text-emerald-400">最高降雨機率：15% (宜出遊)</span>
+            </div>
+
+            <!-- Hourly Grid / Timeline Scroll Container -->
+            <div class="overflow-x-auto pb-3">
+                <div id="hourlyCardsContainer" class="flex items-center gap-2.5 min-w-max p-1">
+                    <!-- Hourly Item Cards Render Dynamically -->
+                </div>
+            </div>
+
+            <!-- Weather Tip Box -->
+            <div class="mt-4 p-3 bg-amber-50 dark:bg-amber-950/30 rounded-xl border border-amber-200/60 dark:border-amber-800/60 text-xs text-amber-900 dark:text-amber-200 flex items-start gap-2">
+                <i data-lucide="umbrella" class="w-4 h-4 text-amber-500 shrink-0 mt-0.5"></i>
+                <div class="leading-relaxed">
+                    <strong>旅遊溫馨提醒：</strong> 韓國 9 月秋高氣爽、氣候宜人。降雨機率低於 30% 時適合景福宮韓服體驗與聖水洞徒步散策；若降雨機率超過 40%，建議隨身攜帶輕便折疊傘。
+                </div>
+            </div>
+
+            <div class="mt-5 pt-3 border-t border-slate-100 dark:border-slate-800 text-right">
+                <button onclick="toggleModal('hourlyWeatherModal')" class="px-5 py-2 bg-teal-600 text-white rounded-xl text-xs font-semibold hover:bg-teal-700 transition">關閉</button>
+            </div>
+        </div>
+    </div>
+
+
     <!-- TOAST NOTIFICATION CONTAINER -->
     <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
@@ -1058,6 +1121,8 @@
         let favorites = JSON.parse(localStorage.getItem('seoul_favorites') || '[]');
         let customItems = JSON.parse(localStorage.getItem('seoul_custom_items') || '[]');
         let currentExchangeRate = parseFloat(localStorage.getItem('seoul_rate') || '42.0');
+        let weatherRawData = null;
+        let selectedHourlyDayIndex = 0;
 
         function getMergedDayItems(dayNum) {
             const baseItems = tripData[dayNum - 1].items;
@@ -1107,9 +1172,10 @@
                 const isActive = index === currentDayIndex;
                 const btn = document.createElement('button');
                 btn.onclick = () => switchDay(index);
-                btn.className = `flex-1 min-w-[100px] sm:min-w-[120px] px-3 py-2 rounded-xl text-center transition duration-200 shrink-0 ${
+                btn.id = `day-tab-${index}`;
+                btn.className = `flex-1 min-w-[95px] sm:min-w-[120px] px-3 py-2.5 rounded-xl text-center transition duration-200 shrink-0 snap-center active:scale-95 ${
                     isActive 
-                        ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold shadow-md shadow-emerald-600/20' 
+                        ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold shadow-md shadow-emerald-600/20 scale-[1.02]' 
                         : 'bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/80 font-medium'
                 }`;
 
@@ -1119,6 +1185,13 @@
                 `;
                 container.appendChild(btn);
             });
+
+            setTimeout(() => {
+                const activeTab = document.getElementById(`day-tab-${currentDayIndex}`);
+                if (activeTab) {
+                    activeTab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                }
+            }, 50);
         }
 
         function switchDay(index) {
@@ -1238,12 +1311,12 @@
                     </div>
 
                     <!-- Address Block -->
-                    <div class="p-3 bg-slate-50 dark:bg-slate-800/60 rounded-xl mb-2 flex items-center justify-between gap-2 border border-slate-100 dark:border-slate-700/50">
+                    <div class="p-3 bg-slate-50 dark:bg-slate-800/60 rounded-xl mb-2 flex flex-col sm:flex-row sm:items-center justify-between gap-2 border border-slate-100 dark:border-slate-700/50">
                         <div class="flex items-start gap-2 text-xs text-slate-600 dark:text-slate-300 min-w-0">
                             <i data-lucide="map-pin" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>
-                            <span class="truncate" title="${item.address}">${item.address}</span>
+                            <span class="break-all sm:truncate" title="${item.address}">${item.address}</span>
                         </div>
-                        <button onclick="copyToClipboard('${item.address}', '已複製韓文地址至剪貼簿！')" class="shrink-0 flex items-center gap-1 px-2.5 py-1 bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold rounded-lg shadow-sm border border-slate-200 dark:border-slate-600 hover:text-emerald-600 transition">
+                        <button onclick="copyToClipboard('${item.address}', '已複製韓文地址至剪貼簿！')" class="self-end sm:self-auto shrink-0 flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold rounded-lg shadow-sm border border-slate-200 dark:border-slate-600 hover:text-emerald-600 transition active:scale-95">
                             <i data-lucide="copy" class="w-3.5 h-3.5"></i> 複製地址
                         </button>
                     </div>
@@ -1262,13 +1335,13 @@
                     </div>
 
                     <!-- Action Bar: Dual Map Links (Naver Map & Google Maps) -->
-                    <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-2 flex-wrap sm:flex-nowrap">
-                        <span class="text-[11px] text-slate-400">一鍵地圖導航</span>
-                        <div class="flex items-center gap-2">
-                            <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.address || item.krTitle || item.title)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-semibold text-xs transition">
+                    <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                        <span class="text-[11px] text-slate-400 font-medium">一鍵地圖導航：</span>
+                        <div class="grid grid-cols-2 sm:flex items-center gap-2 w-full sm:w-auto">
+                            <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.address || item.krTitle || item.title)}" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-semibold text-xs transition active:scale-95">
                                 <i data-lucide="map-pin" class="w-3.5 h-3.5 text-blue-500"></i> Google 地圖 <i data-lucide="external-link" class="w-3 h-3"></i>
                             </a>
-                            <a href="${item.naverMap}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs shadow-sm transition">
+                            <a href="${item.naverMap}" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs shadow-sm transition active:scale-95">
                                 <i data-lucide="map" class="w-3.5 h-3.5"></i> Naver Map <i data-lucide="external-link" class="w-3 h-3"></i>
                             </a>
                         </div>
@@ -1462,7 +1535,7 @@
         }
 
         /* ==========================================================================
-           8. SEOUL WEATHER API & FORECAST
+           8. SEOUL WEATHER API & HOURLY FORECAST
            ========================================================================== */
         async function fetchSeoulWeather() {
             const refreshIcon = document.getElementById('weatherRefreshIcon');
@@ -1470,49 +1543,55 @@
 
             try {
                 // Seoul Latitude: 37.5665, Longitude: 126.9780
-                const url = 'https://api.open-meteo.com/v1/forecast?latitude=37.5665&longitude=126.9780&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Asia%2FTokyo';
+                const url = 'https://api.open-meteo.com/v1/forecast?latitude=37.5665&longitude=126.9780&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code&hourly=temperature_2m,precipitation_probability,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Asia%2FTokyo';
                 
                 const res = await fetch(url);
                 if (!res.ok) throw new Error('Weather API fetch error');
                 const data = await res.json();
 
-                if (data && data.current) {
-                    const temp = Math.round(data.current.temperature_2m);
-                    const feels = Math.round(data.current.apparent_temperature);
-                    const code = data.current.weather_code;
-                    const rain = data.daily?.precipitation_probability_max?.[0] ?? 10;
+                if (data) {
+                    weatherRawData = data;
 
-                    document.getElementById('currentTemp').innerText = `${temp}°C`;
-                    document.getElementById('feelsLikeTemp').innerText = `體感溫度 ${feels}°C`;
-                    document.getElementById('rainProb').innerText = `${rain}%`;
+                    if (data.current) {
+                        const temp = Math.round(data.current.temperature_2m);
+                        const feels = Math.round(data.current.apparent_temperature);
+                        const code = data.current.weather_code;
+                        const rain = data.daily?.precipitation_probability_max?.[0] ?? 10;
 
-                    const weatherMeta = getWeatherMeta(code);
-                    document.getElementById('weatherDesc').innerText = weatherMeta.desc;
-                    document.getElementById('weatherIconLarge').innerText = weatherMeta.icon;
+                        document.getElementById('currentTemp').innerText = `${temp}°C`;
+                        document.getElementById('feelsLikeTemp').innerText = `體感溫度 ${feels}°C`;
+                        document.getElementById('rainProb').innerText = `${rain}%`;
 
-                    // Render 5-day forecast
-                    if (data.daily && data.daily.time) {
-                        const container = document.getElementById('forecastContainer');
-                        container.innerHTML = '';
+                        const weatherMeta = getWeatherMeta(code);
+                        document.getElementById('weatherDesc').innerText = weatherMeta.desc;
+                        document.getElementById('weatherIconLarge').innerText = weatherMeta.icon;
 
-                        const daysNames = ['9/5 (五)', '9/6 (六)', '9/7 (日)', '9/8 (一)', '9/9 (二)', '9/10 (三)'];
+                        // Render 5-day forecast
+                        if (data.daily && data.daily.time) {
+                            const container = document.getElementById('forecastContainer');
+                            container.innerHTML = '';
 
-                        for (let i = 0; i < Math.min(5, data.daily.time.length); i++) {
-                            const dateStr = daysNames[i] || data.daily.time[i].substring(5);
-                            const maxT = Math.round(data.daily.temperature_2m_max[i]);
-                            const minT = Math.round(data.daily.temperature_2m_min[i]);
-                            const wCode = data.daily.weather_code[i];
-                            const meta = getWeatherMeta(wCode);
+                            const daysNames = ['9/5 (五)', '9/6 (六)', '9/7 (日)', '9/8 (一)', '9/9 (二)', '9/10 (三)'];
 
-                            const fItem = document.createElement('div');
-                            fItem.className = 'p-2 bg-slate-50 dark:bg-slate-800/80 rounded-lg text-center text-xs border border-slate-100 dark:border-slate-700/50';
-                            fItem.innerHTML = `
-                                <div class="text-[10px] text-slate-400 font-semibold truncate">${dateStr}</div>
-                                <div class="my-1 text-base">${meta.icon}</div>
-                                <div class="font-bold text-slate-700 dark:text-slate-200">${maxT}°</div>
-                                <div class="text-[10px] text-slate-400">${minT}°</div>
-                            `;
-                            container.appendChild(fItem);
+                            for (let i = 0; i < Math.min(5, data.daily.time.length); i++) {
+                                const dateStr = daysNames[i] || data.daily.time[i].substring(5);
+                                const maxT = Math.round(data.daily.temperature_2m_max[i]);
+                                const minT = Math.round(data.daily.temperature_2m_min[i]);
+                                const wCode = data.daily.weather_code[i];
+                                const meta = getWeatherMeta(wCode);
+
+                                const fItem = document.createElement('div');
+                                fItem.onclick = () => openHourlyWeatherModal(i);
+                                fItem.className = 'p-2 bg-slate-50 dark:bg-slate-800/80 hover:bg-teal-50 dark:hover:bg-teal-950/50 rounded-lg text-center text-xs border border-slate-100 dark:border-slate-700/50 cursor-pointer transition active:scale-95';
+                                fItem.title = '點擊查看此日每小時氣溫與降雨機率';
+                                fItem.innerHTML = `
+                                    <div class="text-[10px] text-slate-400 font-semibold truncate">${dateStr}</div>
+                                    <div class="my-1 text-base">${meta.icon}</div>
+                                    <div class="font-bold text-slate-700 dark:text-slate-200">${maxT}°</div>
+                                    <div class="text-[10px] text-slate-400">${minT}°</div>
+                                `;
+                                container.appendChild(fItem);
+                            }
                         }
                     }
                 }
@@ -1525,6 +1604,130 @@
             } finally {
                 if (refreshIcon) refreshIcon.classList.remove('animate-spin');
             }
+        }
+
+        function openHourlyWeatherModal(dayIdx = currentDayIndex) {
+            selectedHourlyDayIndex = dayIdx;
+            toggleModal('hourlyWeatherModal');
+            renderHourlyWeatherContent();
+        }
+
+        function renderHourlyWeatherContent() {
+            const tabsContainer = document.getElementById('hourlyDateTabs');
+            tabsContainer.innerHTML = '';
+
+            const daysList = [
+                { day: 1, name: '9/5 (五)' },
+                { day: 2, name: '9/6 (六)' },
+                { day: 3, name: '9/7 (日)' },
+                { day: 4, name: '9/8 (一)' },
+                { day: 5, name: '9/9 (二)' },
+                { day: 6, name: '9/10 (三)' }
+            ];
+
+            daysList.forEach((d, idx) => {
+                const isActive = idx === selectedHourlyDayIndex;
+                const btn = document.createElement('button');
+                btn.onclick = () => {
+                    selectedHourlyDayIndex = idx;
+                    renderHourlyWeatherContent();
+                };
+                btn.className = `px-3 py-1.5 rounded-xl text-xs font-semibold shrink-0 transition active:scale-95 ${
+                    isActive 
+                        ? 'bg-teal-600 text-white shadow-sm' 
+                        : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
+                }`;
+                btn.innerText = `Day ${d.day} • ${d.name}`;
+                tabsContainer.appendChild(btn);
+            });
+
+            const hourlyContainer = document.getElementById('hourlyCardsContainer');
+            hourlyContainer.innerHTML = '';
+
+            const startIndex = selectedHourlyDayIndex * 24;
+            const endIndex = startIndex + 24;
+
+            let maxRain = 0;
+            let minTemp = 99;
+            let maxTemp = -99;
+
+            if (weatherRawData && weatherRawData.hourly && weatherRawData.hourly.time) {
+                const hData = weatherRawData.hourly;
+                const totalLen = hData.time.length;
+
+                for (let i = startIndex; i < Math.min(endIndex, totalLen); i++) {
+                    const timeStr = hData.time[i].substring(11, 16);
+                    const temp = Math.round(hData.temperature_2m[i]);
+                    const rainProb = hData.precipitation_probability ? Math.round(hData.precipitation_probability[i]) : 10;
+                    const wCode = hData.weather_code[i];
+                    const meta = getWeatherMeta(wCode);
+
+                    if (temp > maxTemp) maxTemp = temp;
+                    if (temp < minTemp) minTemp = temp;
+                    if (rainProb > maxRain) maxRain = rainProb;
+
+                    const card = createHourlyCard(timeStr, meta.icon, meta.desc, temp, rainProb);
+                    hourlyContainer.appendChild(card);
+                }
+            } else {
+                // Fallback 24-hour hourly dataset for Seoul in Sept
+                const fallbackHours = ['00:00', '03:00', '06:00', '09:00', '12:00', '15:00', '18:00', '21:00'];
+                const sampleTemps = [19, 18, 17, 21, 25, 26, 23, 20];
+                const sampleRain = [5, 5, 10, 15, 20, 15, 10, 5];
+                const sampleIcons = ['🌙', '🌙', '🌅', '🌤️', '☀️', '☀️', '⛅', '🌙'];
+                const sampleDescs = ['晴朗', '晴朗', '早晨清爽', '多雲時晴', '晴朗溫暖', '陽光普照', '晚霞多雲', '夜間涼爽'];
+
+                maxTemp = 26;
+                minTemp = 17;
+                maxRain = 20;
+
+                for (let i = 0; i < fallbackHours.length; i++) {
+                    const card = createHourlyCard(fallbackHours[i], sampleIcons[i], sampleDescs[i], sampleTemps[i], sampleRain[i]);
+                    hourlyContainer.appendChild(card);
+                }
+            }
+
+            document.getElementById('hourlyDaySummary').innerHTML = `
+                <span class="font-semibold">🌤️ Day ${selectedHourlyDayIndex + 1} 氣溫區間：${minTemp}°C ~ ${maxTemp}°C</span>
+                <span class="font-bold ${maxRain >= 40 ? 'text-rose-500' : 'text-emerald-600 dark:text-emerald-400'}">
+                    最高降雨機率：${maxRain}% ${maxRain >= 40 ? '⚠️ (建議攜帶雨具)' : '✨ (氣候良好宜出遊)'}
+                </span>
+            `;
+
+            lucide.createIcons();
+        }
+
+        function createHourlyCard(timeStr, icon, desc, temp, rainProb) {
+            const div = document.createElement('div');
+            div.className = 'w-24 p-3 bg-slate-50 dark:bg-slate-800/90 rounded-xl text-center border border-slate-100 dark:border-slate-700/60 shrink-0 shadow-sm';
+
+            let rainColor = 'bg-emerald-500';
+            let rainTextColor = 'text-emerald-600 dark:text-emerald-400 font-semibold';
+            if (rainProb >= 40) {
+                rainColor = 'bg-rose-500';
+                rainTextColor = 'text-rose-500 font-bold';
+            } else if (rainProb >= 20) {
+                rainColor = 'bg-amber-500';
+                rainTextColor = 'text-amber-500 font-semibold';
+            }
+
+            div.innerHTML = `
+                <div class="text-xs font-bold text-slate-500 dark:text-slate-400 mb-1">${timeStr}</div>
+                <div class="text-2xl my-1">${icon}</div>
+                <div class="text-[10px] text-slate-400 truncate mb-1" title="${desc}">${desc}</div>
+                <div class="text-base font-extrabold text-slate-800 dark:text-white">${temp}°C</div>
+                
+                <div class="mt-2 pt-2 border-t border-slate-200/60 dark:border-slate-700/60">
+                    <div class="flex items-center justify-between text-[10px] mb-1">
+                        <span class="text-slate-400">降雨</span>
+                        <span class="${rainTextColor}">${rainProb}%</span>
+                    </div>
+                    <div class="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                        <div class="${rainColor} h-full rounded-full transition-all duration-500" style="width: ${Math.max(8, rainProb)}%"></div>
+                    </div>
+                </div>
+            `;
+            return div;
         }
 
         function getWeatherMeta(code) {
@@ -1581,6 +1784,43 @@
             const isDark = html.classList.toggle('dark');
             localStorage.setItem('seoul_dark_mode', isDark);
         }
+
+        function scrollToElement(elementId) {
+            const el = document.getElementById(elementId);
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
     </script>
+
+    <!-- MOBILE BOTTOM FLOATING QUICK BAR (Visible on mobile screens) -->
+    <nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-t border-slate-200/80 dark:border-slate-800/80 py-1.5 px-3 shadow-2xl flex items-center justify-around text-center">
+        <button onclick="scrollToElement('dayTabsContainer')" class="flex flex-col items-center justify-center py-1 px-2 text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition active:scale-95">
+            <i data-lucide="calendar" class="w-5 h-5 text-emerald-600 dark:text-emerald-400"></i>
+            <span class="text-[10px] font-medium mt-0.5">天數切換</span>
+        </button>
+
+        <button onclick="scrollToElement('currencyWidget')" class="flex flex-col items-center justify-center py-1 px-2 text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition active:scale-95">
+            <i data-lucide="calculator" class="w-5 h-5 text-teal-600 dark:text-teal-400"></i>
+            <span class="text-[10px] font-medium mt-0.5">匯率算盤</span>
+        </button>
+
+        <button onclick="openAddSpotModal()" class="flex flex-col items-center justify-center py-1 px-2 text-white transition -mt-5 active:scale-95">
+            <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-500/30 border-2 border-white dark:border-slate-900">
+                <i data-lucide="plus" class="w-6 h-6"></i>
+            </div>
+            <span class="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 mt-0.5">新增地點</span>
+        </button>
+
+        <button onclick="scrollToElement('weatherWidget')" class="flex flex-col items-center justify-center py-1 px-2 text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition active:scale-95">
+            <i data-lucide="cloud-sun" class="w-5 h-5 text-amber-500"></i>
+            <span class="text-[10px] font-medium mt-0.5">即時天氣</span>
+        </button>
+
+        <button onclick="toggleModal('prepModal')" class="flex flex-col items-center justify-center py-1 px-2 text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition active:scale-95">
+            <i data-lucide="check-square" class="w-5 h-5 text-blue-500"></i>
+            <span class="text-[10px] font-medium mt-0.5">行前清單</span>
+        </button>
+    </nav>
 </body>
 </html>
