@@ -146,6 +146,12 @@
 
             <!-- Quick Header Action Buttons -->
             <div class="flex items-center space-x-1.5 sm:space-x-2 shrink-0">
+                <button onclick="showPWAInstallPrompt()" id="pwaInstallBtn" aria-label="安裝 App"
+                    class="px-2.5 py-1.5 rounded-xl bg-teal-50 dark:bg-teal-950/80 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-800 hover:bg-teal-100 font-bold text-xs transition active:scale-95 flex items-center gap-1.5 shadow-sm">
+                    <i data-lucide="download" class="w-3.5 h-3.5 text-teal-600 dark:text-teal-400"></i>
+                    <span>安裝 App</span>
+                </button>
+
                 <button onclick="toggleDarkMode()" id="darkModeToggle" aria-label="Toggle Dark Mode"
                     class="p-1.5 sm:p-2 rounded-xl text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition">
                     <i data-lucide="moon" class="w-4 h-4 dark:hidden"></i>
@@ -2748,7 +2754,99 @@
             lucide.createIcons();
         }
 
+        let deferredPrompt = null;
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+        });
+
+        function showPWAInstallPrompt() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        showToast('🎉 App 已成功安裝至手機主畫面！');
+                    }
+                    deferredPrompt = null;
+                });
+            } else {
+                toggleModal('pwaInstallModal');
+            }
+        }
+
+        function triggerPWAInstall() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        showToast('🎉 App 已成功安裝至手機主畫面！');
+                    }
+                    deferredPrompt = null;
+                });
+            } else {
+                toggleModal('pwaInstallModal');
+            }
+        }
+
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(reg => console.log('Service Worker Registered:', reg.scope))
+                    .catch(err => console.warn('Service Worker Register failed:', err));
+            });
+        }
     </script>
+
+    <!-- PWA Install Guidance Modal -->
+    <div id="pwaInstallModal"
+        class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm hidden p-4">
+        <div
+            class="bg-white dark:bg-slate-900 rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-100 relative">
+            <button onclick="toggleModal('pwaInstallModal')"
+                class="absolute top-4 right-4 p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-white rounded-lg">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <div class="flex items-center gap-3 mb-4">
+                <img src="icon.svg" alt="App Icon" class="w-12 h-12 rounded-2xl shadow-md border border-slate-200 dark:border-slate-700">
+                <div>
+                    <h3 class="font-bold text-base text-slate-900 dark:text-white">韓國首爾 6D5N 自由行 App</h3>
+                    <p class="text-xs text-emerald-600 dark:text-emerald-400 font-semibold">安裝至手機主畫面 📱 支援離線瀏覽</p>
+                </div>
+            </div>
+
+            <div class="space-y-3 text-xs">
+                <div class="p-3 bg-slate-50 dark:bg-slate-800/80 rounded-xl border border-slate-100 dark:border-slate-700">
+                    <div class="font-bold text-slate-900 dark:text-white mb-1.5 flex items-center gap-1.5">
+                        <span>🍎 iPhone / iPad (Safari) 安裝步驟：</span>
+                    </div>
+                    <ol class="list-decimal list-inside space-y-1 text-slate-600 dark:text-slate-300 leading-relaxed">
+                        <li>點擊 Safari 螢幕底部中央的 <strong>「分享按鈕 📤 (Share)」</strong></li>
+                        <li>向下滑動選單，點選 <strong>「加入主畫面 ➕ (Add to Home Screen)」</strong></li>
+                        <li>點擊右上角 <strong>「新增」</strong>，即可完成 App 安裝！</li>
+                    </ol>
+                </div>
+
+                <div class="p-3 bg-slate-50 dark:bg-slate-800/80 rounded-xl border border-slate-100 dark:border-slate-700">
+                    <div class="font-bold text-slate-900 dark:text-white mb-1.5 flex items-center gap-1.5">
+                        <span>🤖 Android / Chrome 安裝步驟：</span>
+                    </div>
+                    <ol class="list-decimal list-inside space-y-1 text-slate-600 dark:text-slate-300 leading-relaxed">
+                        <li>點擊 Chrome 右上角選單 <strong>「⋮」</strong></li>
+                        <li>點選 <strong>「安裝應用程式」</strong> 或 <strong>「加到主畫面」</strong></li>
+                        <li>點擊確認新增，手機桌面即出現專屬 App 圖示！</li>
+                    </ol>
+                </div>
+            </div>
+
+            <button onclick="triggerPWAInstall()" id="modalNativeInstallBtn"
+                class="w-full mt-4 py-2.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold text-xs rounded-xl shadow-md transition active:scale-95 flex items-center justify-center gap-2">
+                <i data-lucide="download" class="w-4 h-4"></i>
+                <span>一鍵安裝 / 依指引安裝</span>
+            </button>
+        </div>
+    </div>
 </body>
 
 </html>
