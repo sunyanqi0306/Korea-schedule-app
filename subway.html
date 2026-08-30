@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🗺️ 首爾高清地鐵圖與路線規劃 | 韓國 6 天 5 夜自由行</title>
+    <title>🗺️ 首爾地鐵圖與路線規劃</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -55,7 +55,7 @@
                 <div>
                     <h1
                         class="font-bold text-base sm:text-lg tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
-                        2026 首爾高清大眾運輸地鐵圖
+                        2026 首爾大眾運輸地鐵圖
                         <span
                             class="text-xs font-normal px-2 py-0.5 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 border border-indigo-200">Seoul
                             Metro Map</span>
@@ -99,6 +99,14 @@
                     <div class="text-[10px] text-slate-400 font-normal">6D5N 詳細每日行程與飯店</div>
                 </div>
             </a>
+            <a href="subway.html"
+                class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 font-bold text-xs transition">
+                <span class="text-lg">🗺️</span>
+                <div>
+                    <div>首爾地鐵</div>
+                    <div class="text-[10px] opacity-75 font-normal">地鐵地圖與點對點路線規劃</div>
+                </div>
+            </a>
             <a href="currency.html"
                 class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
                 <span class="text-lg">💱</span>
@@ -121,14 +129,6 @@
                 <div>
                     <div>行前清單</div>
                     <div class="text-[10px] text-slate-400 font-normal">證件、網卡、轉接頭清單</div>
-                </div>
-            </a>
-            <a href="subway.html"
-                class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 font-bold text-xs transition">
-                <span class="text-lg">🗺️</span>
-                <div>
-                    <div>高清地鐵圖</div>
-                    <div class="text-[10px] opacity-75 font-normal">地鐵地圖與點對點路線規劃</div>
                 </div>
             </a>
             <a href="phrases.html"
@@ -163,7 +163,7 @@
                         <i data-lucide="map" class="w-5 h-5"></i>
                     </div>
                     <div>
-                        <h3 class="font-bold text-slate-900 dark:text-white text-base sm:text-lg">高清地鐵路線圖檢視器</h3>
+                        <h3 class="font-bold text-slate-900 dark:text-white text-base sm:text-lg">地鐵路線圖檢視器</h3>
                         <p class="text-[11px] text-slate-400">點擊切換版本、放大或點擊原圖檔瀏覽</p>
                     </div>
                 </div>
@@ -179,7 +179,7 @@
             <div class="flex items-center gap-1.5 overflow-x-auto py-1 my-2 shrink-0 no-scrollbar">
                 <button onclick="switchSubwayMapVersion('airport')" id="mapTab-airport"
                     class="px-3.5 py-2 rounded-xl text-xs font-bold shrink-0 bg-indigo-600 text-white shadow-sm">
-                    含機場標示版 (預設)
+                    含機場標示版
                 </button>
                 <button onclick="switchSubwayMapVersion('simplified')" id="mapTab-simplified"
                     class="px-3.5 py-2 rounded-xl text-xs font-bold shrink-0 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200">
@@ -219,8 +219,7 @@
                             <span class="text-[10px] text-indigo-500 font-normal">可手動輸入或下拉選擇</span>
                         </label>
                         <div class="space-y-1.5">
-                            <input type="text" id="routeOriginInput"
-                                placeholder="可自由手動輸入 或 選取下方選單..." required
+                            <input type="text" id="routeOriginInput" placeholder="可自由手動輸入 或 選取下方選單..." required
                                 class="w-full px-3 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white font-bold outline-none focus:ring-2 focus:ring-indigo-500 text-xs sm:text-sm">
                             <select
                                 onchange="if(this.value){ document.getElementById('routeOriginInput').value = this.value; this.selectedIndex = 0; }"
@@ -229,7 +228,7 @@
                                 <optgroup label="🏨 住宿與機場基地">
                                     <option value="仁川國際機場">✈️ 仁川國際機場 (AREX)</option>
                                     <option value="首爾萬楓酒店">🏨 首爾萬楓酒店 (1號線/永登浦站)</option>
-                                    <option value="永登浦可可酒店">🏨 永登浦可可酒店 (Hotel Gogo)</option>
+                                    <option value="永登浦可可酒店">🏨 永登浦可可酒店 (Yeongdeungpo Coco)</option>
                                     <option value="首爾站">🚉 首爾站 (1號線/4號線/AREX)</option>
                                 </optgroup>
                                 <optgroup label="📍 6D5N 行程景點">
@@ -272,8 +271,7 @@
                             <span class="text-[10px] text-indigo-500 font-normal">可手動輸入或下拉選擇</span>
                         </label>
                         <div class="space-y-1.5">
-                            <input type="text" id="routeDestInput"
-                                placeholder="可自由手動輸入 或 選取下方選單..." required
+                            <input type="text" id="routeDestInput" placeholder="可自由手動輸入 或 選取下方選單..." required
                                 class="w-full px-3 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white font-bold outline-none focus:ring-2 focus:ring-indigo-500 text-xs sm:text-sm">
                             <select
                                 onchange="if(this.value){ document.getElementById('routeDestInput').value = this.value; this.selectedIndex = 0; }"
@@ -282,7 +280,7 @@
                                 <optgroup label="🏨 住宿與機場基地">
                                     <option value="仁川國際機場">✈️ 仁川國際機場 (AREX)</option>
                                     <option value="首爾萬楓酒店">🏨 首爾萬楓酒店 (1號線/永登浦站)</option>
-                                    <option value="永登浦可可酒店">🏨 永登浦可可酒店 (Hotel Gogo)</option>
+                                    <option value="永登浦可可酒店">🏨 永登浦可可酒店 (Yeongdeungpo Coco)</option>
                                     <option value="首爾站">🚉 首爾站 (1號線/4號線/AREX)</option>
                                 </optgroup>
                                 <optgroup label="📍 6D5N 行程景點">
@@ -447,7 +445,7 @@
             { keys: ['東大門', 'dongdaemun', 'ddp'], station: '東大門歷史文化公園站', krStation: '동대문역사문화공원역', line: '2/4/5號線', exit: '14號出口' },
             { keys: ['蠶室', 'jamsil', '樂天世界', '梨花校服'], station: '蠶室站', krStation: '잠실역', line: '2號線 (綠色)', exit: '4號出口' },
             { keys: ['萬楓', 'fairfield', '永登浦'], station: '首爾萬楓酒店 / 永登浦站', krStation: '영등포역', line: '1號線 (深藍)', exit: '5號出口' },
-            { keys: ['可可', 'coco', 'gogo', '永登浦市場'], station: '永登浦市場站', krStation: '영등포시장역', line: '5號線 (紫色)', exit: '4號出口' },
+            { keys: ['可可', 'coco', 'yeongdeungpo coco', 'gogo', '永登浦市場'], station: '永登浦市場站', krStation: '영등포시장역', line: '5號線 (紫色)', exit: '4號出口' },
             { keys: ['安國', 'anguk', '北村', '三清洞'], station: '安國站', krStation: '안국역', line: '3號線 (橘色)', exit: '2/3號出口' },
             { keys: ['堂山', 'dangsan', 'spa', '汗蒸幕'], station: '堂山站', krStation: '당산역', line: '2號線 (綠色)', exit: '10號出口' },
             { keys: ['首爾站', 'seoul station', 'ktx'], station: '首爾站', krStation: '서울역', line: '1/4號線/AREX', exit: '1/15號出口' },
@@ -655,7 +653,7 @@
                 }
             ];
 
-            return routeDatabase.find(r => 
+            return routeDatabase.find(r =>
                 r.origins.some(o => oStr.includes(o)) && r.dests.some(d => dStr.includes(d))
             );
         }

@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-TW" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>韓國首爾 6 天 5 夜自由行 | Seoul Travel App</title>
+    <title>韓國首爾 6 天 5 夜 | Seoul Travel App</title>
+
+    <link rel="manifest" href="manifest.json">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -50,43 +55,52 @@
 
     <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    
+
     <style>
         /* Custom scrollbar and glassmorphism styling */
         ::-webkit-scrollbar {
             width: 6px;
             height: 6px;
         }
+
         ::-webkit-scrollbar-track {
             background: rgba(0, 0, 0, 0.05);
         }
+
         ::-webkit-scrollbar-thumb {
             background: rgba(16, 185, 129, 0.3);
             border-radius: 4px;
         }
+
         ::-webkit-scrollbar-thumb:hover {
             background: rgba(16, 185, 129, 0.6);
         }
+
         .glass-panel {
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
         }
+
         .dark .glass-panel {
             background: rgba(15, 23, 42, 0.85);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
         }
+
         .card-hover {
             transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
+
         .card-hover:hover {
             transform: translateY(-3px);
             box-shadow: 0 12px 24px -8px rgba(16, 185, 129, 0.15);
         }
+
         .tab-active {
             position: relative;
         }
+
         .tab-active::after {
             content: '';
             position: absolute;
@@ -99,33 +113,41 @@
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen font-sans transition-colors duration-300">
+
+<body
+    class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen font-sans transition-colors duration-300">
 
     <!-- Header Navigation -->
-    <header class="sticky top-0 z-40 glass-panel border-b border-slate-200/80 dark:border-slate-800/80 shadow-sm transition-all duration-300">
+    <header
+        class="sticky top-0 z-40 glass-panel border-b border-slate-200/80 dark:border-slate-800/80 shadow-sm transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-600 flex items-center justify-center text-white shadow-md shadow-emerald-500/20 font-bold text-lg">
+                <div
+                    class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-600 flex items-center justify-center text-white shadow-md shadow-emerald-500/20 font-bold text-lg">
                     🇰🇷
                 </div>
                 <div>
-                    <h1 class="font-bold text-base sm:text-lg tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
-                        首爾自由行 6D5N
-                        <span class="text-xs font-normal px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-700">9/5 - 9/10</span>
+                    <h1
+                        class="font-bold text-base sm:text-lg tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
+                        首爾6D5N
+                        <span
+                            class="text-xs font-normal px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-700">9/5
+                            - 9/10</span>
                     </h1>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 hidden sm:block">永登浦 • 聖水洞 • 樂天世界 • 景福宮 • 弘大</p>
                 </div>
             </div>
 
             <!-- Quick Header Action Buttons -->
             <div class="flex items-center space-x-1.5 sm:space-x-2 shrink-0">
-                <button onclick="toggleDarkMode()" id="darkModeToggle" aria-label="Toggle Dark Mode" class="p-1.5 sm:p-2 rounded-xl text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+                <button onclick="toggleDarkMode()" id="darkModeToggle" aria-label="Toggle Dark Mode"
+                    class="p-1.5 sm:p-2 rounded-xl text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition">
                     <i data-lucide="moon" class="w-4 h-4 dark:hidden"></i>
                     <i data-lucide="sun" class="w-4 h-4 hidden dark:block text-amber-400"></i>
                 </button>
 
                 <!-- Hamburger Menu Trigger Button -->
-                <button onclick="toggleHamburgerMenu()" aria-label="Open Navigation Menu" class="px-3 py-1.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold text-xs shadow-md transition active:scale-95 flex items-center gap-1.5">
+                <button onclick="toggleHamburgerMenu()" aria-label="Open Navigation Menu"
+                    class="px-3 py-1.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold text-xs shadow-md transition active:scale-95 flex items-center gap-1.5">
                     <i data-lucide="menu" class="w-4 h-4"></i>
                     <span>選單</span>
                 </button>
@@ -133,49 +155,58 @@
         </div>
 
         <!-- HAMBURGER MENU DROPDOWN DRAWER -->
-        <div id="hamburgerMenuDrawer" class="hidden absolute top-16 right-4 z-50 w-72 bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl border border-slate-200/80 dark:border-slate-800/80 rounded-2xl shadow-2xl p-3 space-y-1.5 transition-all duration-300">
-            <div class="px-3 py-2 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-slate-400">
-                <span>🧭 導覽漢堡選單</span>
-                <button onclick="toggleHamburgerMenu()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white">
+        <div id="hamburgerMenuDrawer"
+            class="hidden absolute top-16 right-4 z-50 w-72 bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl border border-slate-200/80 dark:border-slate-800/80 rounded-2xl shadow-2xl p-3 space-y-1.5 transition-all duration-300">
+            <div
+                class="px-3 py-2 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-slate-400">
+                <span>🧭 導覽選單</span>
+                <button onclick="toggleHamburgerMenu()"
+                    class="text-slate-400 hover:text-slate-600 dark:hover:text-white">
                     <i data-lucide="x" class="w-4 h-4"></i>
                 </button>
             </div>
-            <a href="index.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 font-bold text-xs transition">
+            <a href="index.html"
+                class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 font-bold text-xs transition">
                 <span class="text-lg">🗓️</span>
                 <div>
                     <div>天數行程</div>
                     <div class="text-[10px] opacity-75 font-normal">6D5N 詳細每日行程與飯店</div>
                 </div>
             </a>
-            <a href="subway.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
+            <a href="subway.html"
+                class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
                 <span class="text-lg">🗺️</span>
                 <div>
-                    <div>高清地鐵圖</div>
+                    <div>首爾地鐵</div>
                     <div class="text-[10px] text-slate-400 font-normal">地鐵地圖與點對點路線規劃</div>
                 </div>
             </a>
-            <a href="currency.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
+            <a href="currency.html"
+                class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
                 <span class="text-lg">💱</span>
                 <div>
                     <div>匯率算盤</div>
                     <div class="text-[10px] text-slate-400 font-normal">韓元 ↔ 台幣即時計算機</div>
                 </div>
             </a>
-            <a href="weather.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
+            <a href="weather.html"
+                class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
                 <span class="text-lg">🌤️</span>
                 <div>
                     <div>天氣預報</div>
                     <div class="text-[10px] text-slate-400 font-normal">逐時氣溫與降雨機率預報</div>
                 </div>
             </a>
-            <a href="phrases.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
+            <a href="phrases.html"
+                class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
                 <span class="text-lg">🗣️</span>
                 <div>
                     <div>實用韓語</div>
                     <div class="text-[10px] text-slate-400 font-normal">5 大情境會話與一鍵複製</div>
                 </div>
             </a>
-            <a href="prep.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
+            <a href="prep.html"
+                class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
                 <span class="text-lg">📋</span>
                 <div>
                     <div>行前清單</div>
@@ -189,16 +220,19 @@
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 pb-24 md:pb-8">
 
         <!-- Top Flight & Accommodation Overview Banner -->
-        <section class="mb-6 bg-gradient-to-r from-slate-900 via-teal-950 to-slate-900 text-white rounded-2xl p-5 sm:p-6 shadow-xl relative overflow-hidden">
+        <section
+            class="mb-6 bg-gradient-to-r from-slate-900 via-teal-950 to-slate-900 text-white rounded-2xl p-5 sm:p-6 shadow-xl relative overflow-hidden">
             <div class="absolute -right-10 -bottom-10 opacity-10 pointer-events-none">
                 <i data-lucide="plane-takeoff" class="w-64 h-64 text-emerald-400"></i>
             </div>
-            
+
             <div class="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-6">
                 <!-- Flight Outbound -->
-                <div class="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/10 flex flex-col justify-between">
+                <div
+                    class="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/10 flex flex-col justify-between">
                     <div class="flex items-center justify-between mb-2">
-                        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">
+                        <span
+                            class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">
                             <i data-lucide="plane-takeoff" class="w-3.5 h-3.5"></i> 去程 9/5 (五)
                         </span>
                         <span class="text-xs text-slate-300">高雄 ✈️ 首爾仁川</span>
@@ -222,9 +256,11 @@
                 </div>
 
                 <!-- Flight Inbound -->
-                <div class="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/10 flex flex-col justify-between">
+                <div
+                    class="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/10 flex flex-col justify-between">
                     <div class="flex items-center justify-between mb-2">
-                        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-teal-500/20 text-teal-300 border border-teal-400/30">
+                        <span
+                            class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-teal-500/20 text-teal-300 border border-teal-400/30">
                             <i data-lucide="plane-landing" class="w-3.5 h-3.5"></i> 回程 9/10 (三)
                         </span>
                         <span class="text-xs text-slate-300">首爾仁川 ✈️ 高雄</span>
@@ -248,9 +284,11 @@
                 </div>
 
                 <!-- Hotel Overview -->
-                <div class="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/10 flex flex-col justify-between">
+                <div
+                    class="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/10 flex flex-col justify-between">
                     <div class="flex items-center justify-between mb-2">
-                        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-500/20 text-amber-300 border border-amber-400/30">
+                        <span
+                            class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-500/20 text-amber-300 border border-amber-400/30">
                             <i data-lucide="building-2" class="w-3.5 h-3.5"></i> 住宿飯店資訊
                         </span>
                     </div>
@@ -258,11 +296,17 @@
                         <div class="flex items-start gap-1.5">
                             <span class="font-bold text-amber-300 shrink-0">Day 1 (9/5):</span>
                             <div class="flex-1">
-                                <span>永登浦可可酒店 (Hotel Gogo / Coco)</span>
+                                <span>永登浦可可酒店 (Yeongdeungpo Coco)</span>
                                 <span class="inline-flex items-center gap-1 ml-1">
-                                    <a href="https://map.naver.com/v5/search/%EC%84%9C%EC%9A%B8%20%EC%96%B1%EB%93%B1%ED%8F%AC%EA%B5%AC%20%EC%96%B1%EC%8B%A0%EB%A1%9C38%EA%B8%B8%2022" target="_blank" rel="noopener noreferrer" class="text-[11px] text-amber-300 underline hover:text-white" title="開啟 Naver Map 導航">Naver 地圖</a>
+                                    <a href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EC%96%B1%EB%93%B1%ED%8F%AC%EA%B5%AC%20%EC%96%B1%EC%8B%A0%EB%A1%9C38%EA%B8%B8%2022"
+                                        target="_blank" rel="noopener noreferrer"
+                                        class="text-[11px] text-amber-300 underline hover:text-white"
+                                        title="開啟 Naver Map 導航">Naver 地圖</a>
                                     <span class="text-white/40">•</span>
-                                    <a href="https://www.google.com/maps/search/?api=1&query=%EC%84%9C%EC%9A%B8%20%EC%96%B1%EB%93%B1%ED%8F%AC%EA%B5%AC%20%EC%96%B1%EC%8B%A0%EB%A1%9C38%EA%B8%B8%2022" target="_blank" rel="noopener noreferrer" class="text-[11px] text-sky-300 underline hover:text-white" title="開啟 Google Maps 導航">Google 地圖</a>
+                                    <a href="https://www.google.com/maps/search/?api=1&query=%EC%84%9C%EC%9A%B8%20%EC%96%B1%EB%93%B1%ED%8F%AC%EA%B5%AC%20%EC%96%B1%EC%8B%A0%EB%A1%9C38%EA%B8%B8%2022"
+                                        target="_blank" rel="noopener noreferrer"
+                                        class="text-[11px] text-sky-300 underline hover:text-white"
+                                        title="開啟 Google Maps 導航">Google 地圖</a>
                                 </span>
                             </div>
                         </div>
@@ -271,9 +315,15 @@
                             <div class="flex-1">
                                 <span>首爾萬楓酒店 (Fairfield by Marriott)</span>
                                 <span class="inline-flex items-center gap-1 ml-1">
-                                    <a href="https://map.naver.com/v5/search/%EC%84%9C%EC%9A%B8%20%EC%96%B1%EB%93%B1%ED%8F%AC%EA%B5%AC%20%EA%BD%BD%EC%9D%B8%EB%A1%9C%20870" target="_blank" rel="noopener noreferrer" class="text-[11px] text-teal-300 underline hover:text-white" title="開啟 Naver Map 導航">Naver 地圖</a>
+                                    <a href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EC%96%B1%EB%93%B1%ED%8F%AC%EA%B5%AC%20%EA%BD%BD%EC%9D%B8%EB%A1%9C%20870"
+                                        target="_blank" rel="noopener noreferrer"
+                                        class="text-[11px] text-teal-300 underline hover:text-white"
+                                        title="開啟 Naver Map 導航">Naver 地圖</a>
                                     <span class="text-white/40">•</span>
-                                    <a href="https://www.google.com/maps/search/?api=1&query=%EC%84%9C%EC%9A%B8%20%EC%96%B1%EB%93%B1%ED%8F%AC%EA%B5%AC%20%EA%BD%BD%EC%9D%B8%EB%A1%9C%20870" target="_blank" rel="noopener noreferrer" class="text-[11px] text-sky-300 underline hover:text-white" title="開啟 Google Maps 導航">Google 地圖</a>
+                                    <a href="https://www.google.com/maps/search/?api=1&query=%EC%84%9C%EC%9A%B8%20%EC%96%B1%EB%93%B1%ED%8F%AC%EA%B5%AC%20%EA%BD%BD%EC%9D%B8%EB%A1%9C%20870"
+                                        target="_blank" rel="noopener noreferrer"
+                                        class="text-[11px] text-sky-300 underline hover:text-white"
+                                        title="開啟 Google Maps 導航">Google 地圖</a>
                                 </span>
                             </div>
                         </div>
@@ -285,89 +335,116 @@
         <!-- Main Content Area: Day Tabs & Spot Cards -->
         <div class="max-w-5xl mx-auto space-y-6">
 
-                <!-- Mobile & Desktop Quick Subway Map Entrance Banner -->
-                <div class="bg-gradient-to-r from-indigo-900 via-slate-900 to-indigo-950 text-white rounded-2xl p-3.5 sm:p-4 shadow-md flex items-center justify-between gap-3 border border-indigo-500/30">
-                    <div class="flex items-center gap-2.5 overflow-hidden">
-                        <div class="p-2 bg-indigo-600/80 rounded-xl shrink-0">
-                            <i data-lucide="map" class="w-5 h-5 text-indigo-200"></i>
+            <!-- Mobile & Desktop Quick Subway Map Entrance Banner -->
+            <div
+                class="bg-gradient-to-r from-indigo-900 via-slate-900 to-indigo-950 text-white rounded-2xl p-3.5 sm:p-4 shadow-md flex items-center justify-between gap-3 border border-indigo-500/30">
+                <div class="flex items-center gap-2.5 overflow-hidden">
+                    <div class="p-2 bg-indigo-600/80 rounded-xl shrink-0">
+                        <i data-lucide="map" class="w-5 h-5 text-indigo-200"></i>
+                    </div>
+                    <div class="truncate">
+                        <div class="text-xs sm:text-sm font-bold text-white flex items-center gap-1.5">
+                            <span>🗺️ 2026 首爾地鐵圖 & 點對點路線規劃器</span>
                         </div>
-                        <div class="truncate">
-                            <div class="text-xs sm:text-sm font-bold text-white flex items-center gap-1.5">
-                                <span>🗺️ 2026 首爾高清地鐵圖 & 點對點路線規劃器</span>
-                            </div>
-                            <div class="text-[10px] sm:text-xs text-indigo-200/80 truncate">隨時查詢地鐵路線、轉乘月台與全區高畫質路線圖</div>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-1.5 shrink-0">
-                        <button onclick="openRoutePlannerModal()" class="px-2.5 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-bold transition shadow-sm flex items-center gap-1">
-                            <i data-lucide="navigation" class="w-3.5 h-3.5"></i> 規劃
-                        </button>
-                        <a href="subway.html" class="px-3 py-1.5 bg-white text-indigo-900 hover:bg-indigo-50 rounded-xl text-xs font-black transition shadow-sm flex items-center gap-1">
-                            看地圖 <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-                        </a>
+                        <div class="text-[10px] sm:text-xs text-indigo-200/80 truncate">隨時查詢地鐵路線、轉乘月台與全區高畫質路線圖</div>
                     </div>
                 </div>
+                <div class="flex items-center gap-1.5 shrink-0">
+                    <button onclick="openRoutePlannerModal()"
+                        class="px-2.5 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-bold transition shadow-sm flex items-center gap-1">
+                        <i data-lucide="navigation" class="w-3.5 h-3.5"></i> 規劃
+                    </button>
+                    <a href="subway.html"
+                        class="px-3 py-1.5 bg-white text-indigo-900 hover:bg-indigo-50 rounded-xl text-xs font-black transition shadow-sm flex items-center gap-1">
+                        看地圖 <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                    </a>
+                </div>
+            </div>
 
-                <!-- DAY NAVIGATION TABS -->
-                <div class="bg-white dark:bg-slate-900 rounded-2xl p-2 border border-slate-200 dark:border-slate-800 shadow-md">
-                    <div class="flex items-center gap-1 overflow-x-auto pb-1 pt-1 no-scrollbar" id="dayTabsContainer">
-                        <!-- Dynamic Day Tabs -->
+            <!-- DAY NAVIGATION TABS -->
+            <div
+                class="bg-white dark:bg-slate-900 rounded-2xl p-2 border border-slate-200 dark:border-slate-800 shadow-md">
+                <div class="flex items-center gap-1 overflow-x-auto pb-1 pt-1 no-scrollbar" id="dayTabsContainer">
+                    <!-- Dynamic Day Tabs -->
+                </div>
+            </div>
+
+            <!-- FILTER BAR & SEARCH & ADD SPOT BUTTON -->
+            <div
+                class="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col md:flex-row items-center justify-between gap-3">
+                <!-- Search Input & Quick Add Button -->
+                <div class="flex items-center gap-2 w-full md:w-auto flex-1">
+                    <div class="relative flex-1">
+                        <input type="text" id="searchInput" placeholder="搜尋景點、地鐵站或地址..." oninput="handleSearchFilter()"
+                            class="w-full pl-9 pr-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs sm:text-sm text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition">
+                        <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-2.5"></i>
                     </div>
+                    <button onclick="openAddSpotModal()"
+                        class="shrink-0 flex items-center gap-1.5 px-3 py-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-semibold text-xs rounded-xl shadow-sm transition"
+                        title="新增景點或美食地點">
+                        <i data-lucide="plus-circle" class="w-4 h-4"></i>
+                        <span>新增地點</span>
+                    </button>
                 </div>
 
-                <!-- FILTER BAR & SEARCH & ADD SPOT BUTTON -->
-                <div class="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col md:flex-row items-center justify-between gap-3">
-                    <!-- Search Input & Quick Add Button -->
-                    <div class="flex items-center gap-2 w-full md:w-auto flex-1">
-                        <div class="relative flex-1">
-                            <input type="text" id="searchInput" placeholder="搜尋景點、地鐵站或地址..." oninput="handleSearchFilter()" class="w-full pl-9 pr-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs sm:text-sm text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition">
-                            <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-2.5"></i>
-                        </div>
-                        <button onclick="openAddSpotModal()" class="shrink-0 flex items-center gap-1.5 px-3 py-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-semibold text-xs rounded-xl shadow-sm transition" title="新增景點或美食地點">
-                            <i data-lucide="plus-circle" class="w-4 h-4"></i>
-                            <span>新增地點</span>
-                        </button>
-                    </div>
-
-                    <!-- Category Pills -->
-                    <div class="flex items-center gap-1.5 overflow-x-auto w-full md:w-auto pb-1 md:pb-0" id="categoryFilterContainer">
-                        <button onclick="setCategoryFilter('all')" class="category-btn active px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-600 text-white shadow-sm transition">全部</button>
-                        <button onclick="setCategoryFilter('food')" class="category-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-emerald-950 transition">🍽️ 美食</button>
-                        <button onclick="setCategoryFilter('spot')" class="category-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-emerald-950 transition">🏛️ 景點</button>
-                        <button onclick="setCategoryFilter('exp')" class="category-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-emerald-950 transition">♨️ 體驗</button>
-                        <button onclick="setCategoryFilter('hotel')" class="category-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-emerald-950 transition">🏨 住宿</button>
-                        <button onclick="setCategoryFilter('fav')" class="category-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-amber-50 dark:hover:bg-amber-950 transition">⭐ 收藏</button>
-                    </div>
+                <!-- Category Pills -->
+                <div class="flex items-center gap-1.5 overflow-x-auto w-full md:w-auto pb-1 md:pb-0"
+                    id="categoryFilterContainer">
+                    <button onclick="setCategoryFilter('all')"
+                        class="category-btn active px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-600 text-white shadow-sm transition">全部</button>
+                    <button onclick="setCategoryFilter('food')"
+                        class="category-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-emerald-950 transition">🍽️
+                        美食</button>
+                    <button onclick="setCategoryFilter('spot')"
+                        class="category-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-emerald-950 transition">🏛️
+                        景點</button>
+                    <button onclick="setCategoryFilter('exp')"
+                        class="category-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-emerald-950 transition">♨️
+                        體驗</button>
+                    <button onclick="setCategoryFilter('hotel')"
+                        class="category-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-emerald-50 dark:hover:bg-emerald-950 transition">🏨
+                        住宿</button>
+                    <button onclick="setCategoryFilter('fav')"
+                        class="category-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-amber-50 dark:hover:bg-amber-950 transition">⭐
+                        收藏</button>
                 </div>
+            </div>
 
-                <!-- DAY HEADER BANNER -->
-                <div id="dayHeaderBanner" class="bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60 rounded-2xl p-4 sm:p-5 flex items-center justify-between">
-                    <div>
-                        <div class="flex items-center gap-2">
-                            <span id="currentDayBadge" class="px-2.5 py-0.5 rounded-full bg-emerald-600 text-white font-bold text-xs">Day 1</span>
-                            <span id="currentDateText" class="text-sm font-semibold text-emerald-900 dark:text-emerald-200">2026/09/05 (五)</span>
-                        </div>
-                        <h2 id="currentDayTitle" class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mt-1">抵達首爾 & 永登浦美饌之旅</h2>
-                        <p id="currentDayDesc" class="text-xs text-slate-600 dark:text-slate-400 mt-0.5">搭機降落仁川國際機場，前往永登浦飯店 Check-in 並享用專人代烤韓式熟成肉！</p>
+            <!-- DAY HEADER BANNER -->
+            <div id="dayHeaderBanner"
+                class="bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60 rounded-2xl p-4 sm:p-5 flex items-center justify-between">
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span id="currentDayBadge"
+                            class="px-2.5 py-0.5 rounded-full bg-emerald-600 text-white font-bold text-xs">Day 1</span>
+                        <span id="currentDateText"
+                            class="text-sm font-semibold text-emerald-900 dark:text-emerald-200">2026/09/05 (五)</span>
                     </div>
+                    <h2 id="currentDayTitle" class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mt-1">
+                        抵達首爾 & 永登浦美饌之旅</h2>
+                    <p id="currentDayDesc" class="text-xs text-slate-600 dark:text-slate-400 mt-0.5">搭機降落仁川國際機場，前往永登浦飯店
+                        Check-in 並享用專人代烤韓式熟成肉！</p>
                 </div>
+            </div>
 
-                <!-- CARDS CONTAINER -->
-                <div id="spotCardsContainer" class="space-y-4">
-                    <!-- Dynamic Spot Cards Render Here -->
-                </div>
+            <!-- CARDS CONTAINER -->
+            <div id="spotCardsContainer" class="space-y-4">
+                <!-- Dynamic Spot Cards Render Here -->
+            </div>
         </div>
     </main>
 
     <!-- FOOTER -->
     <footer class="mt-12 border-t border-slate-200 dark:border-slate-800 py-6 text-center text-xs text-slate-400">
-        <p>🇰🇷 韓國首爾 6 天 5 夜自由行行程手冊 • Powered by Tailwind CSS & Lucide Icons</p>
+        <p>🇰🇷 韓國首爾 6 天 5 夜 • Powered by Tailwind CSS & Lucide Icons</p>
         <p class="mt-1">地圖串接 Naver Map • 天氣資料來源 Open-Meteo • 匯率資料來源 ExchangeRate API</p>
     </footer>
 
     <!-- MODAL 1: 行前準備清單 (Packing Checklist Modal) -->
-    <div id="prepModal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm hidden p-4">
-        <div class="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-200 dark:border-slate-800 max-h-[85vh] overflow-y-auto">
+    <div id="prepModal"
+        class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm hidden p-4">
+        <div
+            class="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-200 dark:border-slate-800 max-h-[85vh] overflow-y-auto">
             <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100 dark:border-slate-800">
                 <div class="flex items-center gap-2">
                     <div class="p-2 bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 rounded-xl">
@@ -375,7 +452,8 @@
                     </div>
                     <h3 class="font-bold text-slate-900 dark:text-white text-lg">首爾行前準備與檢查清單</h3>
                 </div>
-                <button onclick="toggleModal('prepModal')" class="p-1 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-white">
+                <button onclick="toggleModal('prepModal')"
+                    class="p-1 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-white">
                     <i data-lucide="x" class="w-5 h-5"></i>
                 </button>
             </div>
@@ -387,16 +465,20 @@
                     </h4>
                     <div class="space-y-1.5 pl-2">
                         <label class="flex items-center gap-2 cursor-pointer text-slate-700 dark:text-slate-300">
-                            <input type="checkbox" checked class="rounded text-emerald-600 focus:ring-emerald-500"> 護照正本 (效期 6 個月以上)
+                            <input type="checkbox" checked class="rounded text-emerald-600 focus:ring-emerald-500"> 護照正本
+                            (效期 6 個月以上)
                         </label>
                         <label class="flex items-center gap-2 cursor-pointer text-slate-700 dark:text-slate-300">
-                            <input type="checkbox" checked class="rounded text-emerald-600 focus:ring-emerald-500"> 韓國電子入境卡 / K-ETA / 電子申報
+                            <input type="checkbox" checked class="rounded text-emerald-600 focus:ring-emerald-500">
+                            韓國電子入境卡 / K-ETA / 電子申報
                         </label>
                         <label class="flex items-center gap-2 cursor-pointer text-slate-700 dark:text-slate-300">
-                            <input type="checkbox" checked class="rounded text-emerald-600 focus:ring-emerald-500"> 韓國 eSIM / 實體 SIM 卡 (網卡開通)
+                            <input type="checkbox" checked class="rounded text-emerald-600 focus:ring-emerald-500"> 韓國
+                            eSIM / 實體 SIM 卡 (網卡開通)
                         </label>
                         <label class="flex items-center gap-2 cursor-pointer text-slate-700 dark:text-slate-300">
-                            <input type="checkbox" checked class="rounded text-emerald-600 focus:ring-emerald-500"> 來回機票 PDF / 飯店 Check-in 憑證
+                            <input type="checkbox" checked class="rounded text-emerald-600 focus:ring-emerald-500"> 來回機票
+                            PDF / 飯店 Check-in 憑證
                         </label>
                     </div>
                 </div>
@@ -407,13 +489,16 @@
                     </h4>
                     <div class="space-y-1.5 pl-2">
                         <label class="flex items-center gap-2 cursor-pointer text-slate-700 dark:text-slate-300">
-                            <input type="checkbox" checked class="rounded text-teal-600 focus:ring-teal-500"> T-Money 交通卡 / WOWPASS 卡
+                            <input type="checkbox" checked class="rounded text-teal-600 focus:ring-teal-500"> T-Money
+                            交通卡 / WOWPASS 卡
                         </label>
                         <label class="flex items-center gap-2 cursor-pointer text-slate-700 dark:text-slate-300">
-                            <input type="checkbox" checked class="rounded text-teal-600 focus:ring-teal-500"> 準備韓元現金 (約 ₩15萬-20萬 儲值與小吃備用)
+                            <input type="checkbox" checked class="rounded text-teal-600 focus:ring-teal-500"> 準備韓元現金 (約
+                            ₩15萬-20萬 儲值與小吃備用)
                         </label>
                         <label class="flex items-center gap-2 cursor-pointer text-slate-700 dark:text-slate-300">
-                            <input type="checkbox" checked class="rounded text-teal-600 focus:ring-teal-500"> 海外回饋信用卡 (Visa / Mastercard)
+                            <input type="checkbox" checked class="rounded text-teal-600 focus:ring-teal-500"> 海外回饋信用卡
+                            (Visa / Mastercard)
                         </label>
                     </div>
                 </div>
@@ -424,10 +509,12 @@
                     </h4>
                     <div class="space-y-1.5 pl-2">
                         <label class="flex items-center gap-2 cursor-pointer text-slate-700 dark:text-slate-300">
-                            <input type="checkbox" checked class="rounded text-amber-600 focus:ring-amber-500"> Day 3 梨花校服 11:00 預約確認憑證
+                            <input type="checkbox" checked class="rounded text-amber-600 focus:ring-amber-500"> Day 3
+                            梨花校服 11:00 預約確認憑證
                         </label>
                         <label class="flex items-center gap-2 cursor-pointer text-slate-700 dark:text-slate-300">
-                            <input type="checkbox" checked class="rounded text-amber-600 focus:ring-amber-500"> 樂天世界主題樂園門票 QR Code
+                            <input type="checkbox" checked class="rounded text-amber-600 focus:ring-amber-500">
+                            樂天世界主題樂園門票 QR Code
                         </label>
                     </div>
                 </div>
@@ -438,28 +525,34 @@
                     </h4>
                     <div class="space-y-1.5 pl-2">
                         <label class="flex items-center gap-2 cursor-pointer text-slate-700 dark:text-slate-300">
-                            <input type="checkbox" checked class="rounded text-slate-600 focus:ring-slate-500"> 韓國轉接頭 (德規/韓規 圓插頭 4.7mm / Type C/F)
+                            <input type="checkbox" checked class="rounded text-slate-600 focus:ring-slate-500"> 韓國轉接頭
+                            (德規/韓規 圓插頭 4.7mm / Type C/F)
                         </label>
                         <label class="flex items-center gap-2 cursor-pointer text-slate-700 dark:text-slate-300">
-                            <input type="checkbox" checked class="rounded text-slate-600 focus:ring-slate-500"> 下載 KakaoMap / Naver Map App (導航必備)
+                            <input type="checkbox" checked class="rounded text-slate-600 focus:ring-slate-500"> 下載
+                            KakaoMap / Naver Map App (導航必備)
                         </label>
                         <label class="flex items-center gap-2 cursor-pointer text-slate-700 dark:text-slate-300">
-                            <input type="checkbox" checked class="rounded text-slate-600 focus:ring-slate-500"> 下載 Papago 翻譯 App (拍照即時翻譯)
+                            <input type="checkbox" checked class="rounded text-slate-600 focus:ring-slate-500"> 下載
+                            Papago 翻譯 App (拍照即時翻譯)
                         </label>
                     </div>
                 </div>
             </div>
 
             <div class="mt-6 pt-3 border-t border-slate-100 dark:border-slate-800 text-right">
-                <button onclick="toggleModal('prepModal')" class="px-4 py-2 bg-emerald-600 text-white rounded-xl text-xs font-semibold hover:bg-emerald-700 transition">完成關閉</button>
+                <button onclick="toggleModal('prepModal')"
+                    class="px-4 py-2 bg-emerald-600 text-white rounded-xl text-xs font-semibold hover:bg-emerald-700 transition">完成關閉</button>
             </div>
         </div>
     </div>
 
 
     <!-- MODAL 2: 交通說明指南 (Transport Guide Modal) -->
-    <div id="transportModal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm hidden p-4">
-        <div class="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-200 dark:border-slate-800 max-h-[85vh] overflow-y-auto">
+    <div id="transportModal"
+        class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm hidden p-4">
+        <div
+            class="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-200 dark:border-slate-800 max-h-[85vh] overflow-y-auto">
             <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100 dark:border-slate-800">
                 <div class="flex items-center gap-2">
                     <div class="p-2 bg-teal-100 dark:bg-teal-900/50 text-teal-600 rounded-xl">
@@ -467,13 +560,15 @@
                     </div>
                     <h3 class="font-bold text-slate-900 dark:text-white text-lg">首爾交通實用指南</h3>
                 </div>
-                <button onclick="toggleModal('transportModal')" class="p-1 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-white">
+                <button onclick="toggleModal('transportModal')"
+                    class="p-1 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-white">
                     <i data-lucide="x" class="w-5 h-5"></i>
                 </button>
             </div>
 
             <div class="space-y-4 text-xs sm:text-sm">
-                <div class="bg-slate-50 dark:bg-slate-800 p-3.5 rounded-xl border border-slate-200 dark:border-slate-700">
+                <div
+                    class="bg-slate-50 dark:bg-slate-800 p-3.5 rounded-xl border border-slate-200 dark:border-slate-700">
                     <div class="font-bold text-slate-900 dark:text-white flex items-center gap-1.5 mb-1">
                         <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span> AREX 機場快線
                     </div>
@@ -482,7 +577,8 @@
                     </p>
                 </div>
 
-                <div class="bg-slate-50 dark:bg-slate-800 p-3.5 rounded-xl border border-slate-200 dark:border-slate-700">
+                <div
+                    class="bg-slate-50 dark:bg-slate-800 p-3.5 rounded-xl border border-slate-200 dark:border-slate-700">
                     <div class="font-bold text-slate-900 dark:text-white flex items-center gap-1.5 mb-1">
                         <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> 首爾地圖與熱門路線
                     </div>
@@ -495,7 +591,8 @@
                     </ul>
                 </div>
 
-                <div class="bg-slate-50 dark:bg-slate-800 p-3.5 rounded-xl border border-slate-200 dark:border-slate-700">
+                <div
+                    class="bg-slate-50 dark:bg-slate-800 p-3.5 rounded-xl border border-slate-200 dark:border-slate-700">
                     <div class="font-bold text-slate-900 dark:text-white flex items-center gap-1.5 mb-1">
                         <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span> Kakao T 計程車搭乘小撇步
                     </div>
@@ -506,15 +603,18 @@
             </div>
 
             <div class="mt-6 pt-3 border-t border-slate-100 dark:border-slate-800 text-right">
-                <button onclick="toggleModal('transportModal')" class="px-4 py-2 bg-teal-600 text-white rounded-xl text-xs font-semibold hover:bg-teal-700 transition">關閉</button>
+                <button onclick="toggleModal('transportModal')"
+                    class="px-4 py-2 bg-teal-600 text-white rounded-xl text-xs font-semibold hover:bg-teal-700 transition">關閉</button>
             </div>
         </div>
     </div>
 
 
     <!-- MODAL 3: 新增行程地點 (Add Custom Spot Modal) -->
-    <div id="addSpotModal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm hidden p-4">
-        <div class="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-200 dark:border-slate-800 max-h-[88vh] overflow-y-auto">
+    <div id="addSpotModal"
+        class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm hidden p-4">
+        <div
+            class="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-200 dark:border-slate-800 max-h-[88vh] overflow-y-auto">
             <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100 dark:border-slate-800">
                 <div class="flex items-center gap-2">
                     <div class="p-2 bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 rounded-xl">
@@ -522,7 +622,8 @@
                     </div>
                     <h3 class="font-bold text-slate-900 dark:text-white text-lg">新增自訂行程地點</h3>
                 </div>
-                <button onclick="toggleModal('addSpotModal')" class="p-1 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-white">
+                <button onclick="toggleModal('addSpotModal')"
+                    class="p-1 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-white">
                     <i data-lucide="x" class="w-5 h-5"></i>
                 </button>
             </div>
@@ -531,7 +632,8 @@
                 <div class="grid grid-cols-2 gap-3">
                     <div>
                         <label class="block font-semibold text-slate-700 dark:text-slate-300 mb-1">加入哪一天？</label>
-                        <select id="newSpotDay" class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white font-medium focus:ring-2 focus:ring-emerald-500 outline-none">
+                        <select id="newSpotDay"
+                            class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white font-medium focus:ring-2 focus:ring-emerald-500 outline-none">
                             <option value="1">Day 1 (9/5 五)</option>
                             <option value="2">Day 2 (9/6 六)</option>
                             <option value="3">Day 3 (9/7 日)</option>
@@ -543,7 +645,8 @@
 
                     <div>
                         <label class="block font-semibold text-slate-700 dark:text-slate-300 mb-1">地點分類</label>
-                        <select id="newSpotCategory" class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white font-medium focus:ring-2 focus:ring-emerald-500 outline-none">
+                        <select id="newSpotCategory"
+                            class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white font-medium focus:ring-2 focus:ring-emerald-500 outline-none">
                             <option value="spot">🏛️ 景點</option>
                             <option value="food">🍽️ 美食</option>
                             <option value="exp">♨️ 體驗 / 預約</option>
@@ -553,38 +656,49 @@
                 </div>
 
                 <div>
-                    <label class="block font-semibold text-slate-700 dark:text-slate-300 mb-1">中文名稱 <span class="text-rose-500">*</span></label>
-                    <input type="text" id="newSpotTitle" required placeholder="例如：聖水洞 Cafe Onion" class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500 outline-none">
+                    <label class="block font-semibold text-slate-700 dark:text-slate-300 mb-1">中文名稱 <span
+                            class="text-rose-500">*</span></label>
+                    <input type="text" id="newSpotTitle" required placeholder="例如：聖水洞 Cafe Onion"
+                        class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500 outline-none">
                 </div>
 
                 <div>
                     <label class="block font-semibold text-slate-700 dark:text-slate-300 mb-1">韓文名稱</label>
-                    <input type="text" id="newSpotKrTitle" placeholder="例如：어니언 성수" class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500 outline-none">
+                    <input type="text" id="newSpotKrTitle" placeholder="例如：어니언 성수"
+                        class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500 outline-none">
                 </div>
 
                 <div>
-                    <label class="block font-semibold text-slate-700 dark:text-slate-300 mb-1">韓文地址 (自動產生 Naver Map 地圖連結)</label>
-                    <input type="text" id="newSpotAddress" placeholder="例如：서울 성동구 아차산로9길 8" class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500 outline-none">
+                    <label class="block font-semibold text-slate-700 dark:text-slate-300 mb-1">韓文地址 (自動產生 Naver Map
+                        地圖連結)</label>
+                    <input type="text" id="newSpotAddress" placeholder="例如：서울 성동구 아차산로9길 8"
+                        class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500 outline-none">
                 </div>
 
                 <div>
                     <label class="block font-semibold text-slate-700 dark:text-slate-300 mb-1">地鐵交通說明</label>
-                    <input type="text" id="newSpotTransit" placeholder="例如：地鐵 2 號線「聖水站」2 號出口步行 2 分鐘" class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500 outline-none">
+                    <input type="text" id="newSpotTransit" placeholder="例如：地鐵 2 號線「聖水站」2 號出口步行 2 分鐘"
+                        class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500 outline-none">
                 </div>
 
                 <div>
                     <label class="block font-semibold text-slate-700 dark:text-slate-300 mb-1">特色介紹 / 筆記</label>
-                    <textarea id="newSpotDesc" rows="2" placeholder="特色介紹、招牌菜色或備忘筆記..." class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500 outline-none resize-none"></textarea>
+                    <textarea id="newSpotDesc" rows="2" placeholder="特色介紹、招牌菜色或備忘筆記..."
+                        class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500 outline-none resize-none"></textarea>
                 </div>
 
                 <div>
                     <label class="block font-semibold text-slate-700 dark:text-slate-300 mb-1">特色亮點標籤 (用逗號隔開)</label>
-                    <input type="text" id="newSpotHighlights" placeholder="例如：人氣咖啡廳, 草莓雪山麵包, 工業風打卡" class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500 outline-none">
+                    <input type="text" id="newSpotHighlights" placeholder="例如：人氣咖啡廳, 草莓雪山麵包, 工業風打卡"
+                        class="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500 outline-none">
                 </div>
 
-                <div class="mt-6 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-end gap-2">
-                    <button type="button" onclick="toggleModal('addSpotModal')" class="px-4 py-2 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-xl text-xs font-semibold hover:bg-slate-200 transition">取消</button>
-                    <button type="submit" class="px-5 py-2 bg-emerald-600 text-white rounded-xl text-xs font-semibold hover:bg-emerald-700 shadow-md transition">儲存並加入行程</button>
+                <div
+                    class="mt-6 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-end gap-2">
+                    <button type="button" onclick="toggleModal('addSpotModal')"
+                        class="px-4 py-2 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-xl text-xs font-semibold hover:bg-slate-200 transition">取消</button>
+                    <button type="submit"
+                        class="px-5 py-2 bg-emerald-600 text-white rounded-xl text-xs font-semibold hover:bg-emerald-700 shadow-md transition">儲存並加入行程</button>
                 </div>
             </form>
         </div>
@@ -592,8 +706,10 @@
 
 
     <!-- MODAL 4: 逐時天氣與降雨機率預報 (Hourly Weather Modal) -->
-    <div id="hourlyWeatherModal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm hidden p-4">
-        <div class="bg-white dark:bg-slate-900 rounded-2xl max-w-2xl w-full p-5 sm:p-6 shadow-2xl border border-slate-200 dark:border-slate-800 max-h-[88vh] overflow-y-auto">
+    <div id="hourlyWeatherModal"
+        class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm hidden p-4">
+        <div
+            class="bg-white dark:bg-slate-900 rounded-2xl max-w-2xl w-full p-5 sm:p-6 shadow-2xl border border-slate-200 dark:border-slate-800 max-h-[88vh] overflow-y-auto">
             <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100 dark:border-slate-800">
                 <div class="flex items-center gap-2">
                     <div class="p-2 bg-teal-100 dark:bg-teal-900/50 text-teal-600 rounded-xl">
@@ -604,7 +720,8 @@
                         <p class="text-[11px] text-slate-400">點擊切換行程天數檢視詳細氣溫與降雨趨勢</p>
                     </div>
                 </div>
-                <button onclick="toggleModal('hourlyWeatherModal')" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-white">
+                <button onclick="toggleModal('hourlyWeatherModal')"
+                    class="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-white">
                     <i data-lucide="x" class="w-5 h-5"></i>
                 </button>
             </div>
@@ -615,7 +732,8 @@
             </div>
 
             <!-- Summary Bar -->
-            <div id="hourlyDaySummary" class="p-3 bg-teal-50 dark:bg-teal-950/40 rounded-xl mb-4 border border-teal-200/60 dark:border-teal-800/60 flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs text-teal-900 dark:text-teal-200">
+            <div id="hourlyDaySummary"
+                class="p-3 bg-teal-50 dark:bg-teal-950/40 rounded-xl mb-4 border border-teal-200/60 dark:border-teal-800/60 flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs text-teal-900 dark:text-teal-200">
                 <span class="font-semibold">🌤️ 當日平均氣溫 20°C ~ 25°C</span>
                 <span class="font-bold text-emerald-600 dark:text-emerald-400">最高降雨機率：15% (宜出遊)</span>
             </div>
@@ -628,7 +746,8 @@
             </div>
 
             <!-- Weather Tip Box -->
-            <div class="mt-4 p-3 bg-amber-50 dark:bg-amber-950/30 rounded-xl border border-amber-200/60 dark:border-amber-800/60 text-xs text-amber-900 dark:text-amber-200 flex items-start gap-2">
+            <div
+                class="mt-4 p-3 bg-amber-50 dark:bg-amber-950/30 rounded-xl border border-amber-200/60 dark:border-amber-800/60 text-xs text-amber-900 dark:text-amber-200 flex items-start gap-2">
                 <i data-lucide="umbrella" class="w-4 h-4 text-amber-500 shrink-0 mt-0.5"></i>
                 <div class="leading-relaxed">
                     <strong>旅遊溫馨提醒：</strong> 韓國 9 月秋高氣爽、氣候宜人。降雨機率低於 30% 時適合景福宮韓服體驗與聖水洞徒步散策；若降雨機率超過 40%，建議隨身攜帶輕便折疊傘。
@@ -636,18 +755,22 @@
             </div>
 
             <div class="mt-5 pt-3 border-t border-slate-100 dark:border-slate-800 text-right">
-                <button onclick="toggleModal('hourlyWeatherModal')" class="px-5 py-2 bg-teal-600 text-white rounded-xl text-xs font-semibold hover:bg-teal-700 transition">關閉</button>
+                <button onclick="toggleModal('hourlyWeatherModal')"
+                    class="px-5 py-2 bg-teal-600 text-white rounded-xl text-xs font-semibold hover:bg-teal-700 transition">關閉</button>
             </div>
         </div>
     </div>
 
 
     <!-- MODAL 5: 點對點地鐵路線規劃器 (Subway Route Planner Modal) -->
-    <div id="routePlannerModal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm hidden p-4">
-        <div class="bg-white dark:bg-slate-900 rounded-2xl max-w-xl w-full p-5 sm:p-6 shadow-2xl border border-slate-200 dark:border-slate-800 max-h-[90vh] overflow-y-auto">
+    <div id="routePlannerModal"
+        class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm hidden p-4">
+        <div
+            class="bg-white dark:bg-slate-900 rounded-2xl max-w-xl w-full p-5 sm:p-6 shadow-2xl border border-slate-200 dark:border-slate-800 max-h-[90vh] overflow-y-auto">
             <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100 dark:border-slate-800">
                 <div class="flex items-center gap-2">
-                    <div class="p-2 bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 rounded-xl">
+                    <div
+                        class="p-2 bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 rounded-xl">
                         <i data-lucide="navigation" class="w-5 h-5"></i>
                     </div>
                     <div>
@@ -655,28 +778,34 @@
                         <p class="text-[11px] text-slate-400">輸入或點選出發地與目的地，即刻規劃最佳地鐵乘車路線</p>
                     </div>
                 </div>
-                <button onclick="toggleModal('routePlannerModal')" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-white">
+                <button onclick="toggleModal('routePlannerModal')"
+                    class="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-white">
                     <i data-lucide="x" class="w-5 h-5"></i>
                 </button>
             </div>
 
             <!-- Route Inputs Form -->
             <form onsubmit="handlePlanRoute(event)" class="space-y-4 text-xs sm:text-sm">
-                <div class="space-y-4 bg-slate-50 dark:bg-slate-800/60 p-4 rounded-xl border border-slate-200/60 dark:border-slate-700/60">
+                <div
+                    class="space-y-4 bg-slate-50 dark:bg-slate-800/60 p-4 rounded-xl border border-slate-200/60 dark:border-slate-700/60">
                     <!-- Origin Field -->
                     <div>
-                        <label class="block font-semibold text-slate-700 dark:text-slate-300 mb-1 flex items-center justify-between">
+                        <label
+                            class="block font-semibold text-slate-700 dark:text-slate-300 mb-1 flex items-center justify-between">
                             <span>🟢 出發地點 (Origin)</span>
                             <span class="text-[10px] text-indigo-500 font-normal">可手動輸入或下拉選擇</span>
                         </label>
                         <div class="space-y-1.5">
-                            <input type="text" id="routeOriginInput" list="stationPresetList" placeholder="可自由手動輸入 或 選取下方選單..." required class="w-full px-3 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white font-bold outline-none focus:ring-2 focus:ring-indigo-500 text-xs sm:text-sm">
-                            <select onchange="if(this.value){ document.getElementById('routeOriginInput').value = this.value; this.selectedIndex = 0; }" class="w-full px-2.5 py-1.5 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-600 dark:text-slate-300 font-semibold text-xs outline-none cursor-pointer">
+                            <input type="text" id="routeOriginInput" placeholder="可自由手動輸入 或 選取下方選單..." required
+                                class="w-full px-3 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white font-bold outline-none focus:ring-2 focus:ring-indigo-500 text-xs sm:text-sm">
+                            <select
+                                onchange="if(this.value){ document.getElementById('routeOriginInput').value = this.value; this.selectedIndex = 0; }"
+                                class="w-full px-2.5 py-1.5 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-600 dark:text-slate-300 font-semibold text-xs outline-none cursor-pointer">
                                 <option value="" selected>👇 點此展開快捷下拉選單選擇出發地...</option>
                                 <optgroup label="🏨 住宿與機場基地">
                                     <option value="仁川國際機場">✈️ 仁川國際機場 (AREX)</option>
                                     <option value="首爾萬楓酒店">🏨 首爾萬楓酒店 (1號線/永登浦站)</option>
-                                    <option value="永登浦可可酒店">🏨 永登浦可可酒店 (Hotel Gogo)</option>
+                                    <option value="永登浦可可酒店">🏨 永登浦可可酒店 (Yeongdeungpo Coco)</option>
                                     <option value="首爾站">🚉 首爾站 (1號線/4號線/AREX)</option>
                                 </optgroup>
                                 <optgroup label="📍 6D5N 行程景點">
@@ -703,25 +832,31 @@
 
                     <!-- Swap Button -->
                     <div class="flex justify-center -my-1">
-                        <button type="button" onclick="swapRouteOriginDest()" class="p-1.5 rounded-full bg-white dark:bg-slate-700 text-indigo-600 dark:text-indigo-400 border border-slate-200 dark:border-slate-600 hover:rotate-180 transition duration-300 shadow-sm" title="互相調換出發地與目的地">
+                        <button type="button" onclick="swapRouteOriginDest()"
+                            class="p-1.5 rounded-full bg-white dark:bg-slate-700 text-indigo-600 dark:text-indigo-400 border border-slate-200 dark:border-slate-600 hover:rotate-180 transition duration-300 shadow-sm"
+                            title="互相調換出發地與目的地">
                             <i data-lucide="arrow-up-down" class="w-4 h-4"></i>
                         </button>
                     </div>
 
                     <!-- Destination Field -->
                     <div>
-                        <label class="block font-semibold text-slate-700 dark:text-slate-300 mb-1 flex items-center justify-between">
+                        <label
+                            class="block font-semibold text-slate-700 dark:text-slate-300 mb-1 flex items-center justify-between">
                             <span>🔴 目的地點 (Destination)</span>
                             <span class="text-[10px] text-indigo-500 font-normal">可手動輸入或下拉選擇</span>
                         </label>
                         <div class="space-y-1.5">
-                            <input type="text" id="routeDestInput" list="stationPresetList" placeholder="可自由手動輸入 或 選取下方選單..." required class="w-full px-3 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white font-bold outline-none focus:ring-2 focus:ring-indigo-500 text-xs sm:text-sm">
-                            <select onchange="if(this.value){ document.getElementById('routeDestInput').value = this.value; this.selectedIndex = 0; }" class="w-full px-2.5 py-1.5 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-600 dark:text-slate-300 font-semibold text-xs outline-none cursor-pointer">
+                            <input type="text" id="routeDestInput" placeholder="可自由手動輸入 或 選取下方選單..." required
+                                class="w-full px-3 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white font-bold outline-none focus:ring-2 focus:ring-indigo-500 text-xs sm:text-sm">
+                            <select
+                                onchange="if(this.value){ document.getElementById('routeDestInput').value = this.value; this.selectedIndex = 0; }"
+                                class="w-full px-2.5 py-1.5 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-600 dark:text-slate-300 font-semibold text-xs outline-none cursor-pointer">
                                 <option value="" selected>👇 點此展開快捷下拉選單選擇目的地...</option>
                                 <optgroup label="🏨 住宿與機場基地">
                                     <option value="仁川國際機場">✈️ 仁川國際機場 (AREX)</option>
                                     <option value="首爾萬楓酒店">🏨 首爾萬楓酒店 (1號線/永登浦站)</option>
-                                    <option value="永登浦可可酒店">🏨 永登浦可可酒店 (Hotel Gogo)</option>
+                                    <option value="永登浦可可酒店">🏨 永登浦可可酒店 (Yeongdeungpo Coco)</option>
                                     <option value="首爾站">🚉 首爾站 (1號線/4號線/AREX)</option>
                                 </optgroup>
                                 <optgroup label="📍 6D5N 行程景點">
@@ -747,36 +882,16 @@
                     </div>
                 </div>
 
-                <!-- Presets Datalist for typing auto-complete -->
-                <datalist id="stationPresetList">
-                    <option value="仁川國際機場">
-                    <option value="首爾萬楓酒店">
-                    <option value="永登浦可可酒店">
-                    <option value="首爾站">
-                    <option value="堂山站">
-                    <option value="聖水站">
-                    <option value="合井站">
-                    <option value="蠶室站">
-                    <option value="景福宮站">
-                    <option value="安國站">
-                    <option value="弘大入口站">
-                    <option value="明洞站">
-                    <option value="東大門歷史文化公園站">
-                    <option value="新沙站">
-                    <option value="江南站">
-                    <option value="梨大站">
-                    <option value="龍山站">
-                    <option value="金浦國際機場">
-                </datalist>
-
-                <button type="submit" class="w-full py-2.5 bg-gradient-to-r from-indigo-600 to-teal-600 hover:from-indigo-700 hover:to-teal-700 text-white font-bold rounded-xl shadow-md transition flex items-center justify-center gap-2 text-sm active:scale-95">
+                <button type="submit"
+                    class="w-full py-2.5 bg-gradient-to-r from-indigo-600 to-teal-600 hover:from-indigo-700 hover:to-teal-700 text-white font-bold rounded-xl shadow-md transition flex items-center justify-center gap-2 text-sm active:scale-95">
                     <i data-lucide="compass" class="w-4 h-4"></i>
                     <span>開始規劃地鐵路線</span>
                 </button>
             </form>
 
             <!-- Route Result Container -->
-            <div id="routeResultContainer" class="mt-5 pt-4 border-t border-slate-100 dark:border-slate-800 hidden space-y-4">
+            <div id="routeResultContainer"
+                class="mt-5 pt-4 border-t border-slate-100 dark:border-slate-800 hidden space-y-4">
                 <!-- Result renders dynamically -->
             </div>
         </div>
@@ -784,12 +899,16 @@
 
 
     <!-- MODAL 6: 高清地鐵圖 Modal (Subway Map Viewer Modal) -->
-    <div id="subwayMapModal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/80 backdrop-blur-md hidden p-2 sm:p-4">
-        <div class="bg-white dark:bg-slate-900 rounded-2xl max-w-5xl w-full p-4 sm:p-6 shadow-2xl border border-slate-200 dark:border-slate-800 max-h-[95vh] flex flex-col">
+    <div id="subwayMapModal"
+        class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/80 backdrop-blur-md hidden p-2 sm:p-4">
+        <div
+            class="bg-white dark:bg-slate-900 rounded-2xl max-w-5xl w-full p-4 sm:p-6 shadow-2xl border border-slate-200 dark:border-slate-800 max-h-[95vh] flex flex-col">
             <!-- Modal Header -->
-            <div class="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800 shrink-0">
+            <div
+                class="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800 shrink-0">
                 <div class="flex items-center gap-2">
-                    <div class="p-2 bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 rounded-xl">
+                    <div
+                        class="p-2 bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 rounded-xl">
                         <i data-lucide="map" class="w-5 h-5"></i>
                     </div>
                     <div>
@@ -798,10 +917,14 @@
                     </div>
                 </div>
                 <div class="flex items-center gap-2">
-                    <a id="subwayMapOriginalLink" href="./2026 map/2026 South Korea Subway Map (Chinese Version with Airport Signage).png" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-200 rounded-xl text-xs font-semibold transition hidden sm:flex items-center gap-1">
+                    <a id="subwayMapOriginalLink"
+                        href="./2026 map/2026 South Korea Subway Map (Chinese Version with Airport Signage).png"
+                        target="_blank" rel="noopener noreferrer"
+                        class="px-3 py-1.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-200 rounded-xl text-xs font-semibold transition hidden sm:flex items-center gap-1">
                         開啟原圖檔 <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
                     </a>
-                    <button onclick="toggleModal('subwayMapModal')" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-white">
+                    <button onclick="toggleModal('subwayMapModal')"
+                        class="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-white">
                         <i data-lucide="x" class="w-5 h-5"></i>
                     </button>
                 </div>
@@ -809,49 +932,65 @@
 
             <!-- Map Version Tabs Selector -->
             <div class="flex items-center gap-1.5 overflow-x-auto py-2 my-1 shrink-0 no-scrollbar" id="mapVersionTabs">
-                <button onclick="switchSubwayMapVersion('airport')" id="mapTab-airport" class="px-3 py-1.5 rounded-xl text-xs font-semibold shrink-0 bg-indigo-600 text-white shadow-sm">
+                <button onclick="switchSubwayMapVersion('airport')" id="mapTab-airport"
+                    class="px-3 py-1.5 rounded-xl text-xs font-semibold shrink-0 bg-indigo-600 text-white shadow-sm">
                     ✈️ 含機場標示版
                 </button>
-                <button onclick="switchSubwayMapVersion('simplified')" id="mapTab-simplified" class="px-3 py-1.5 rounded-xl text-xs font-semibold shrink-0 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200">
+                <button onclick="switchSubwayMapVersion('simplified')" id="mapTab-simplified"
+                    class="px-3 py-1.5 rounded-xl text-xs font-semibold shrink-0 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200">
                     🇨🇳 中文高清版
                 </button>
-                <button onclick="switchSubwayMapVersion('bilingual')" id="mapTab-bilingual" class="px-3 py-1.5 rounded-xl text-xs font-semibold shrink-0 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200">
+                <button onclick="switchSubwayMapVersion('bilingual')" id="mapTab-bilingual"
+                    class="px-3 py-1.5 rounded-xl text-xs font-semibold shrink-0 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200">
                     🇰🇷 韓英雙語對照版
                 </button>
             </div>
 
             <!-- Image Zoom Controls Bar -->
-            <div class="flex items-center justify-between bg-slate-50 dark:bg-slate-800/80 px-3 py-1.5 rounded-xl border border-slate-100 dark:border-slate-700/50 mb-2 shrink-0 text-xs">
+            <div
+                class="flex items-center justify-between bg-slate-50 dark:bg-slate-800/80 px-3 py-1.5 rounded-xl border border-slate-100 dark:border-slate-700/50 mb-2 shrink-0 text-xs">
                 <div class="flex items-center gap-1 text-slate-500 dark:text-slate-400">
                     <i data-lucide="move" class="w-3.5 h-3.5"></i>
                     <span>可雙指或按鈕自由縮放</span>
                 </div>
                 <div class="flex items-center gap-1.5">
-                    <button onclick="zoomSubwayMap(-0.2)" class="px-2.5 py-1 bg-white dark:bg-slate-700 rounded-lg border border-slate-200 dark:border-slate-600 font-bold hover:bg-slate-100 text-slate-700 dark:text-slate-200" title="縮小">
+                    <button onclick="zoomSubwayMap(-0.2)"
+                        class="px-2.5 py-1 bg-white dark:bg-slate-700 rounded-lg border border-slate-200 dark:border-slate-600 font-bold hover:bg-slate-100 text-slate-700 dark:text-slate-200"
+                        title="縮小">
                         <i data-lucide="zoom-out" class="w-3.5 h-3.5 inline"></i> -
                     </button>
-                    <span id="subwayZoomPercentage" class="w-12 text-center font-bold text-indigo-600 dark:text-indigo-400">100%</span>
-                    <button onclick="zoomSubwayMap(0.2)" class="px-2.5 py-1 bg-white dark:bg-slate-700 rounded-lg border border-slate-200 dark:border-slate-600 font-bold hover:bg-slate-100 text-slate-700 dark:text-slate-200" title="放大">
+                    <span id="subwayZoomPercentage"
+                        class="w-12 text-center font-bold text-indigo-600 dark:text-indigo-400">100%</span>
+                    <button onclick="zoomSubwayMap(0.2)"
+                        class="px-2.5 py-1 bg-white dark:bg-slate-700 rounded-lg border border-slate-200 dark:border-slate-600 font-bold hover:bg-slate-100 text-slate-700 dark:text-slate-200"
+                        title="放大">
                         <i data-lucide="zoom-in" class="w-3.5 h-3.5 inline"></i> +
                     </button>
-                    <button onclick="resetSubwayMapZoom()" class="px-2.5 py-1 bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 rounded-lg font-semibold border border-indigo-200 dark:border-indigo-800 hover:bg-indigo-100">
+                    <button onclick="resetSubwayMapZoom()"
+                        class="px-2.5 py-1 bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 rounded-lg font-semibold border border-indigo-200 dark:border-indigo-800 hover:bg-indigo-100">
                         重置
                     </button>
                 </div>
             </div>
 
             <!-- Interactive Zoomable Map Container -->
-            <div class="flex-1 overflow-auto bg-slate-950 rounded-xl relative flex items-center justify-center p-2 min-h-[350px] max-h-[65vh] select-none" id="subwayMapViewport">
-                <img id="subwayMapImage" src="./2026 map/2026 South Korea Subway Map (Chinese Version with Airport Signage).png" alt="2026首爾地鐵圖" class="max-w-none transition-transform duration-200 ease-out origin-center rounded shadow-2xl">
+            <div class="flex-1 overflow-auto bg-slate-950 rounded-xl relative flex items-center justify-center p-2 min-h-[350px] max-h-[65vh] select-none"
+                id="subwayMapViewport">
+                <img id="subwayMapImage"
+                    src="./2026 map/2026 South Korea Subway Map (Chinese Version with Airport Signage).png"
+                    alt="2026首爾地鐵圖"
+                    class="max-w-none transition-transform duration-200 ease-out origin-center rounded shadow-2xl">
             </div>
 
             <!-- Modal Footer -->
-            <div class="pt-3 mt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between shrink-0 text-xs">
+            <div
+                class="pt-3 mt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between shrink-0 text-xs">
                 <div class="text-slate-400 flex items-center gap-1 truncate">
                     <i data-lucide="info" class="w-3.5 h-3.5 text-indigo-500 shrink-0"></i>
                     <span class="truncate">重點路線：1號線(深藍) | 2號線(綠) | 3號線(橘) | 5號線(紫) | AREX(機場快線)</span>
                 </div>
-                <button onclick="toggleModal('subwayMapModal')" class="px-4 py-2 bg-indigo-600 text-white rounded-xl font-semibold hover:bg-indigo-700 transition shrink-0">
+                <button onclick="toggleModal('subwayMapModal')"
+                    class="px-4 py-2 bg-indigo-600 text-white rounded-xl font-semibold hover:bg-indigo-700 transition shrink-0">
                     關閉
                 </button>
             </div>
@@ -860,10 +999,13 @@
 
 
     <!-- MODAL 7: 實用韓語會話對照 Modal (Korean Phrases Handbook Modal) -->
-    <div id="koreanPhrasesModal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm hidden p-4">
-        <div class="bg-white dark:bg-slate-900 rounded-2xl max-w-2xl w-full p-5 sm:p-6 shadow-2xl border border-slate-200 dark:border-slate-800 max-h-[90vh] flex flex-col">
+    <div id="koreanPhrasesModal"
+        class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm hidden p-4">
+        <div
+            class="bg-white dark:bg-slate-900 rounded-2xl max-w-2xl w-full p-5 sm:p-6 shadow-2xl border border-slate-200 dark:border-slate-800 max-h-[90vh] flex flex-col">
             <!-- Modal Header -->
-            <div class="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800 shrink-0">
+            <div
+                class="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800 shrink-0">
                 <div class="flex items-center gap-2">
                     <div class="p-2 bg-amber-100 dark:bg-amber-900/50 text-amber-600 dark:text-amber-400 rounded-xl">
                         <i data-lucide="book-open" class="w-5 h-5"></i>
@@ -873,32 +1015,40 @@
                         <p class="text-[11px] text-slate-400">收錄 5 大情境常用對照，點擊按鈕即可一鍵複製韓文</p>
                     </div>
                 </div>
-                <button onclick="toggleModal('koreanPhrasesModal')" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-white">
+                <button onclick="toggleModal('koreanPhrasesModal')"
+                    class="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-white">
                     <i data-lucide="x" class="w-5 h-5"></i>
                 </button>
             </div>
 
             <!-- Category Switcher Tabs -->
-            <div class="flex items-center gap-1.5 overflow-x-auto py-2 my-1 shrink-0 no-scrollbar" id="phraseCategoryTabs">
-                <button onclick="switchPhraseCategory('basic')" id="phraseTab-basic" class="px-3 py-1.5 rounded-xl text-xs font-semibold shrink-0 bg-amber-500 text-white shadow-sm">
+            <div class="flex items-center gap-1.5 overflow-x-auto py-2 my-1 shrink-0 no-scrollbar"
+                id="phraseCategoryTabs">
+                <button onclick="switchPhraseCategory('basic')" id="phraseTab-basic"
+                    class="px-3 py-1.5 rounded-xl text-xs font-semibold shrink-0 bg-amber-500 text-white shadow-sm">
                     💡 基本問候
                 </button>
-                <button onclick="switchPhraseCategory('dining')" id="phraseTab-dining" class="px-3 py-1.5 rounded-xl text-xs font-semibold shrink-0 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200">
+                <button onclick="switchPhraseCategory('dining')" id="phraseTab-dining"
+                    class="px-3 py-1.5 rounded-xl text-xs font-semibold shrink-0 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200">
                     🍽️ 餐廳點餐
                 </button>
-                <button onclick="switchPhraseCategory('shopping')" id="phraseTab-shopping" class="px-3 py-1.5 rounded-xl text-xs font-semibold shrink-0 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200">
+                <button onclick="switchPhraseCategory('shopping')" id="phraseTab-shopping"
+                    class="px-3 py-1.5 rounded-xl text-xs font-semibold shrink-0 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200">
                     🛍️ 購物退稅
                 </button>
-                <button onclick="switchPhraseCategory('transit')" id="phraseTab-transit" class="px-3 py-1.5 rounded-xl text-xs font-semibold shrink-0 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200">
+                <button onclick="switchPhraseCategory('transit')" id="phraseTab-transit"
+                    class="px-3 py-1.5 rounded-xl text-xs font-semibold shrink-0 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200">
                     🚕 交通問路
                 </button>
-                <button onclick="switchPhraseCategory('hotel')" id="phraseTab-hotel" class="px-3 py-1.5 rounded-xl text-xs font-semibold shrink-0 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200">
+                <button onclick="switchPhraseCategory('hotel')" id="phraseTab-hotel"
+                    class="px-3 py-1.5 rounded-xl text-xs font-semibold shrink-0 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200">
                     🏨 飯店住宿
                 </button>
             </div>
 
             <!-- Category Description Banner -->
-            <div id="phraseCategoryBanner" class="p-3 bg-amber-50 dark:bg-amber-950/40 rounded-xl mb-3 border border-amber-200/60 dark:border-amber-800/60 text-xs text-amber-900 dark:text-amber-200 shrink-0 font-medium">
+            <div id="phraseCategoryBanner"
+                class="p-3 bg-amber-50 dark:bg-amber-950/40 rounded-xl mb-3 border border-amber-200/60 dark:border-amber-800/60 text-xs text-amber-900 dark:text-amber-200 shrink-0 font-medium">
                 💡 韓國禮貌問候語與日常必備萬用語
             </div>
 
@@ -908,9 +1058,11 @@
             </div>
 
             <!-- Modal Footer -->
-            <div class="pt-3 mt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between shrink-0 text-xs">
+            <div
+                class="pt-3 mt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between shrink-0 text-xs">
                 <span class="text-slate-400">💡 提示：點擊右側複製鈕即可直接貼上或出示給店員查看</span>
-                <button onclick="toggleModal('koreanPhrasesModal')" class="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white rounded-xl font-semibold transition shrink-0">
+                <button onclick="toggleModal('koreanPhrasesModal')"
+                    class="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white rounded-xl font-semibold transition shrink-0">
                     關閉
                 </button>
             </div>
@@ -943,19 +1095,19 @@
                         address: "인천 중구 공항로 272 (仁川國際機場)",
                         transit: "仁川機場 T1/T2 ➔ 搭乘 AREX 機場快線（直達車約 43 分鐘至首爾站，或普通列車至孔德站轉乘 5 號線 / 首爾站轉乘 1 號線至永登浦站）。",
                         desc: "16:10 高雄小港機場 (KHH) 起飛 ➔ 20:00 抵達首爾仁川國際機場 (ICN)。出關後搭乘 AREX 或機場巴士前往永登浦區。",
-                        naverMap: "https://map.naver.com/v5/search/%EC%9D%B8%EC%B2%9C%EA%B5%AD%EC%A0%9C%EA%B3%B5%ED%95%AD",
+                        naverMap: "https://map.naver.com/p/search/%EC%9D%B8%EC%B2%9C%EA%B5%AD%EC%A0%9C%EA%B3%B5%ED%95%AD",
                         highlights: ["16:10 KHH ✈️ 20:00 ICN", "記得預先開通 eSIM/SIM卡", "領取 T-Money / WOWPASS"]
                     },
                     {
                         id: "d1-hotel",
                         category: "hotel",
                         tag: "🏨 Day1 住宿",
-                        title: "永登浦可可酒店 (Hotel Gogo / Koko)",
+                        title: "永登浦可可酒店 (Yeongdeungpo Coco)",
                         krTitle: "영등포 코코호텔",
                         address: "서울 영등포구 영신로38길 22 (22, Yeongsin-ro 38-gil, 永登浦區, 首爾 07251)",
                         transit: "地鐵 1 號線「永登浦站 (Yeongdeungpo)」5 號出口，步行約 6 分鐘；或 5 號線「永登浦市場站 (Yeongdeungpo Market)」4 號出口，步行約 7 分鐘。",
                         desc: "Day 1 晚間入住飯店。交通便利，鄰近永登浦商圈與美食街。",
-                        naverMap: "https://map.naver.com/v5/search/%EC%84%9C%EC%9A%B8%20%EC%96%B1%EB%93%B1%ED%8F%AC%EA%B5%AC%20%EC%96%B1%EC%8B%A0%EB%A1%9C38%EA%B8%B8%2022",
+                        naverMap: "https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EC%96%B1%EB%93%B1%ED%8F%AC%EA%B5%AC%20%EC%96%B1%EC%8B%A0%EB%A1%9C38%EA%B8%B8%2022",
                         highlights: ["永登浦區優質住宿", "郵遞區號 07251", "距離地鐵站步行可達", "周邊深夜美食多"]
                     },
                     {
@@ -967,7 +1119,7 @@
                         address: "서울 영등포구 영등포로 218-1",
                         transit: "地鐵 1 號線「永登浦站」5 號出口，步行約 7 分鐘；或 5 號線「永登浦市場站」3 號出口，步行約 5 分鐘。",
                         desc: "特色肉品：主打高 CP 值的熟成厚切豬五花、豬頸肉（꼬들살）與優質韓牛等，肉質鮮嫩多汁。用餐體驗：提供專人炭火代烤服務，店內環境乾淨舒適，附贈的豐富韓式小菜與大醬湯搭配烤肉風味極佳。",
-                        naverMap: "https://map.naver.com/v5/search/%EC%84%9C%EC%9A%B8%20%EC%96%B1%EB%93%B1%ED%8F%AC%EA%B5%AC%20%EC%96%B1%EB%93%B1%ED%8F%AC%EB%A1%9C%20218-1",
+                        naverMap: "https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EC%96%B1%EB%93%B1%ED%8F%AC%EA%B5%AC%20%EC%96%B1%EB%93%B1%ED%8F%AC%EB%A1%9C%20218-1",
                         highlights: ["專人炭火代烤服務", "熟成厚切豬五花 & 豬頸肉 (꼬들살)", "附贈豐富韓式小菜和大醬湯"]
                     },
                     {
@@ -979,7 +1131,7 @@
                         address: "서울 영등포구 영등포동4가 97-4",
                         transit: "地鐵 1 號線「永登浦站」3 號/5 號出口，步行約 5 分鐘（位於永登浦地下街 3 號出口周邊）。",
                         desc: "招牌菜色：主打厚切鮮豬肉、松坂豬（抗生肉）與調味豬排，肉香濃郁且油花均勻。肉質優質鮮美。",
-                        naverMap: "https://map.naver.com/v5/search/%EC%84%9C%EC%9A%B8%20%EC%96%B1%EB%93%B1%ED%8F%AC%EA%B5%AC%20%EC%96%B1%EC%8B%A0%EB%A1%9C38%EA%B8%B8%2022",
+                        naverMap: "https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EC%96%B1%EB%93%B1%ED%8F%AC%EA%B5%AC%20%EC%96%B1%EC%8B%A0%EB%A1%9C38%EA%B8%B8%2022",
                         highlights: ["厚切鮮豬肉", "松坂豬（抗生肉）", "獨門調味豬排"]
                     },
                     {
@@ -991,7 +1143,7 @@
                         address: "서울 영등포구 영중로10길 32-4",
                         transit: "地鐵 1 號線「永登浦站」5 號出口，步行約 6 分鐘（永登浦傳統市場美食巷內）。",
                         desc: "招牌菜色：必點「水原王牛排骨（Suwon King Galbi）」與生牛肉沙拉，牛肉醃漬入味、軟嫩多汁。",
-                        naverMap: "https://map.naver.com/v5/search/%EC%84%9C%EC%9A%B8%20%EC%96%B1%EB%93%B1%ED%8F%AC%EA%B5%AC%20%EC%96%B1%EC%A4%91%EB%A1%9C10%EA%B8%B8%2032-4",
+                        naverMap: "https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EC%96%B1%EB%93%B1%ED%8F%AC%EA%B5%AC%20%EC%96%B1%EC%A4%91%EB%A1%9C10%EA%B8%B8%2032-4",
                         highlights: ["必點「水原王牛排骨」", "極品生牛肉沙拉", "韓式復古美式奢華裝潢"]
                     }
                 ]
@@ -1011,7 +1163,7 @@
                         address: "서울 영등포구 경인로 870",
                         transit: "地鐵 1 號線「永登浦站 (Yeongdeungpo)」3 號/5 號出口直達（地鐵地下通道直連，步行約 2 分鐘）。",
                         desc: "Day 2 至 Day 6 連住四晚飯店。萬豪旗下國際連鎖商務飯店，交通便利，設施新穎舒心。",
-                        naverMap: "https://map.naver.com/v5/search/%EC%84%9C%EC%9A%B8%20%EC%96%B1%EB%93%B1%ED%8F%AC%EA%B5%AC%20%EA%BD%BD%EC%9D%B8%EB%A1%9C%20870",
+                        naverMap: "https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EC%96%B1%EB%93%B1%ED%8F%AC%EA%B5%AC%20%EA%BD%BD%EC%9D%B8%EB%A1%9C%20870",
                         highlights: ["萬豪品質認證", "連住四晚無需搬行李", "永登浦站 exit 直達"]
                     },
                     {
@@ -1023,7 +1175,7 @@
                         address: "서울 영등포구 선유동1로 50 더파크365",
                         transit: "地鐵 5 號線 / 9 號線「堂山站 (Dangsan)」10 號出口，步行約 8 分鐘；或 5 號線「楊坪站 (Yangpyeong)」2 號出口步行 9 分鐘。",
                         desc: "傳統韓式汗蒸幕體驗！享受熱療房、搓澡與休息室，體驗韓劇中的羊角頭毛巾與甜米釀 (식혜)！",
-                        naverMap: "https://map.naver.com/v5/search/%EC%84%9C%EC%9A%B8%20%EC%96%B1%EB%93%B1%ED%8F%AC%EA%B5%AC%20%EC%84%A0%EC%9C%A0%EB%8F%991%EB%A1%9C%2050",
+                        naverMap: "https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EC%96%B1%EB%93%B1%ED%8F%AC%EA%B5%AC%20%EC%84%A0%EC%9C%A0%EB%8F%991%EB%A1%9C%2050",
                         highlights: ["解疲勞汗蒸烤箱", "體驗羊角頭與甜米釀", "放鬆全身紓壓"]
                     },
                     {
@@ -1035,7 +1187,7 @@
                         address: "서울 성동구 연무장길 45",
                         transit: "地鐵 2 號線「聖水站 (Seongsu)」4 號出口，直行進入演武場街步行約 3 分鐘。",
                         desc: "聖水洞超狂排隊名店！豬脊骨熬煮至極致軟嫩，湯頭濃郁香辣，帶有芝麻葉與馬鈴薯香氣，肉質一撥即離骨！",
-                        naverMap: "https://map.naver.com/v5/search/%EC%84%9C%EC%9A%B8%20%EC%84%B1%EB%8F%99%EA%B5%AC%20%EC%97%B0%EB%AC%B4%EC%9E%A5%EA%B8%B8%2045",
+                        naverMap: "https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EC%84%B1%EB%8F%99%EA%B5%AC%20%EC%97%B0%EB%AC%B4%EC%9E%A5%EA%B8%B8%2045",
                         highlights: ["聖水洞三大美食之首", "極致軟嫩大塊馬鈴薯排骨", "推薦加點炒飯與麵片"]
                     },
                     {
@@ -1047,7 +1199,7 @@
                         address: "서울 성동구 연무장길 56-1",
                         transit: "地鐵 2 號線「聖水站 (Seongsu)」4 號出口，直行演武場街步行約 4 分鐘 (位於馬鈴薯排骨湯斜對面)。",
                         desc: "聖水洞最火爆的鹽可頌專賣店！使用加拿大優質小麥與法國頂級奶油，出爐時濃郁奶油香撲鼻，底部酥脆內層極具彈性！",
-                        naverMap: "https://map.naver.com/v5/search/%EC%84%9C%EC%9A%B8%20%EC%84%B1%EB%8F%99%EA%B5%AC%20%EC%97%B0%EB%AC%B4%EC%9E%A5%EA%B8%B8%2056-1",
+                        naverMap: "https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EC%84%B1%EB%8F%99%EA%B5%AC%20%EC%97%B0%EB%AC%B4%EC%9E%A5%EA%B8%B8%2056-1",
                         highlights: ["每日定時現烤出爐", "外酥內軟濃厚奶油香", "打卡包裝精緻可愛"]
                     },
                     {
@@ -1059,7 +1211,7 @@
                         address: "서울 성동구 성수이로18길 37",
                         transit: "地鐵 2 號線「聖水站 (Seongsu)」3 號出口，步行約 5 分鐘 (聖水二路 18 街)。",
                         desc: "韓系質感麵包咖啡廳，主打現烤生吐司與手工果醬塗醬，店內氛圍優雅，極具文青美學設計。",
-                        naverMap: "https://map.naver.com/v5/search/%EC%84%9C%EC%9A%B8%20%EC%84%B1%EB%8F%99%EA%B5%AC%20%EC%84%B1%EC%88%98%EC%9D%B4%EB%A1%9C18%EA%B8%B8%2037",
+                        naverMap: "https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EC%84%B1%EB%8F%99%EA%B5%AC%20%EC%84%B1%EC%88%98%EC%9D%B4%EB%A1%9C18%EA%B8%B8%2037",
                         highlights: ["現烤蓬鬆生吐司", "多款手工果醬搭配", "極簡文青網美風裝潢"]
                     },
                     {
@@ -1071,7 +1223,7 @@
                         address: "서울 성동구 광나루로2길 23-1 1층",
                         transit: "地鐵 2 號線「聖水站 (Seongsu)」1 號出口步行 7 分鐘；或地鐵 2 號線「뚝섬 뚝島站」1 號出口步行 6 分鐘。",
                         desc: "聖水洞頂級窯烤披薩店！主廚曾獲世界披薩大賽獎項，餅皮外脆內Q，搭配新鮮莫札瑞拉起司與番茄醬料。",
-                        naverMap: "https://map.naver.com/v5/search/%EC%84%9C%EC%9A%B8%20%EC%84%B1%EB%8F%99%EA%B5%AC%20%EA%B4%91%EB%82%98%EB%A3%A8%EB%A1%9C2%EA%B8%B8%2023-1",
+                        naverMap: "https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EC%84%B1%EB%8F%99%EA%B5%AC%20%EA%B4%91%EB%82%98%EB%A3%A8%EB%A1%9C2%EA%B8%B8%2023-1",
                         highlights: ["正宗拿坡里木柴窯烤", "世界冠軍級披薩職人", "起司香濃餅皮彈牙"]
                     },
                     {
@@ -1083,7 +1235,7 @@
                         address: "서울 마포구 성지길 25",
                         transit: "地鐵 2 號線 / 6 號線「合井站 (Hapjeong)」7 號出口，直行聖地街步行約 3 分鐘。",
                         desc: "經典韓式白切肉 (보쌈)！鮮嫩無腥味的蒸五花肉，搭配特製甜辣高麗菜泡菜與無數豐富韓式小菜，在地人最愛美味。",
-                        naverMap: "https://map.naver.com/v5/search/%EC%84%9C%EC%9A%B8%20%EB%A7%88%ED%8F%AC%EA%B5%AC%20%EC%84%B1%EC%A7%80%EA%B8%B8%2025",
+                        naverMap: "https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EB%A7%88%ED%8F%AC%EA%B5%AC%20%EC%84%B1%EC%A7%80%EA%B8%B8%2025",
                         highlights: ["鮮嫩多汁蒸白切肉", "招牌甜辣特製泡菜", "合井在地老字號高CP值"]
                     }
                 ]
@@ -1103,7 +1255,7 @@
                         address: "서울 송파구 올림픽로 212 갤러리아팰리스 B1 36-27",
                         transit: "地鐵 2 號線 / 8 號線「蠶室站 (Jamsil)」4 號出口，直行約 5 分鐘至 Galleria Palace 大樓 B1 (36-27號)。",
                         desc: "⏰ 已預約 11:00！提供超多款式與顏色的韓劇風格高中校服，包含拍照棚區，換裝後即可前往旁邊的樂天世界拍網美大片！21:00前歸還",
-                        naverMap: "https://map.naver.com/v5/search/%EC%84%9C%EC%9A%B8%20%EC%86%A1%ED%8C%8C%EA%B5%AC%20%EC%98%AC%EB%A6%B9%ED%94%BC%EB%A1%9C%20212",
+                        naverMap: "https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EC%86%A1%ED%8C%8C%EA%B5%AC%20%EC%98%AC%EB%A6%B9%ED%94%BC%EB%A1%9C%20212",
                         highlights: ["⏰ 11:00 準時報到", "絕美韓劇K-pop風格校服", "店內附設室內精緻造景拍照區"]
                     },
                     {
@@ -1115,7 +1267,7 @@
                         address: "서울 송파구 올림픽로 240",
                         transit: "地鐵 2 號線 / 8 號線「蠶室站 (Jamsil)」4 號出口，地下連通道直達樂天世界探險世界入口 (無需走出室外)。",
                         desc: "包含室內「探險世界 (Adventure)」與室外湖中「魔幻島 (Magic Island)」！擁有巨型旋轉木馬、慧星特快車、高空降落等刺激設施與歡樂大遊行。",
-                        naverMap: "https://map.naver.com/v5/search/%EC%84%9C%EC%9A%B8%20%EC%86%A1%ED%8C%8C%EA%B5%AC%20%EC%98%AC%EB%A6%B9%ED%94%BC%EB%A1%9C%20240",
+                        naverMap: "https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EC%86%A1%ED%8C%8C%EA%B5%AC%20%EC%98%AC%EB%A6%B9%ED%94%BC%EB%A1%9C%20240",
                         highlights: ["室內外超大樂園雙園區", "室外迪士尼風夢幻城堡打卡", "精彩夜間燈光花車遊行"]
                     }
                 ]
@@ -1135,7 +1287,7 @@
                         address: "서울 종로구 자하문로5길 5",
                         transit: "地鐵 3 號線「景福宮站 (Gyeongbokgung)」2 號出口，直行 120 公尺左轉進入紫霞門路 5 巷，步行約 3 分鐘。",
                         desc: "招牌菜色：以濃郁綿密的堅果牛骨高湯熬煮童子雞，雞腹內填滿糯米、人蔘、紅棗與栗子，滋補暖胃。韓國前總統亦熱愛的經典老店！",
-                        naverMap: "https://map.naver.com/v5/search/%EC%84%9C%EC%9A%B8%20%EC%A2%85%EB%A1%9C%EA%B5%AC%20%EC%9E%90%ED%95%98%EB%AC%B8%EB%A1%9C5%EA%B8%B8%205",
+                        naverMap: "https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EC%A2%85%EB%A1%9C%EA%B5%AC%20%EC%9E%90%ED%95%98%EB%AC%B8%EB%A1%9C5%EA%B8%B8%205",
                         highlights: ["濃郁堅果牛骨高湯", "獨門童子雞包糯米人蔘栗子", "傳統韓屋用餐氣氛"]
                     },
                     {
@@ -1147,7 +1299,7 @@
                         address: "서울 종로구 사직로 161",
                         transit: "地鐵 3 號線「景福宮站 (Gyeongbokgung)」5 號出口直達光化門；或 5 號線「光化門站 (Gwanghwamun)」2 號出口步行約 8 分鐘。",
                         desc: "朝鮮王朝規模最大、最美麗的始建宮殿！穿著韓服可免門票入場。推薦觀看光化門守門將換崗儀式與勤政殿、慶會樓。",
-                        naverMap: "https://map.naver.com/v5/search/%EC%84%9C%EC%9A%B8%20%EC%A2%85%EB%A1%9C%EA%B5%AC%20%EC%82%AC%EC%A7%81%EB%A1%9C%20161",
+                        naverMap: "https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EC%A2%85%EB%A1%9C%EA%B5%AC%20%EC%82%AC%EC%A7%81%EB%A1%9C%20161",
                         highlights: ["穿韓服免費入場", "整點光化門守門將換衛儀式", "勤政殿與慶會樓湖畔造景"]
                     },
                     {
@@ -1159,7 +1311,7 @@
                         address: "서울 종로구 계동길",
                         transit: "地鐵 3 號線「安國站 (Anguk)」2 號或 3 號出口，沿桂洞街向上步行約 6-8 分鐘即可抵達韓屋聚落。",
                         desc: "擁有 600 年歷史的傳統韓屋村落，保留了數百棟朝鮮時代兩班貴族的瓦房建築，俯瞰首爾新舊交融的美景。",
-                        naverMap: "https://map.naver.com/v5/search/%EC%84%9C%EC%9A%B8%20%EC%A2%85%EB%A1%9C%EA%B5%AC%20%EA%B3%84%EB%8F%99%EA%B8%B8",
+                        naverMap: "https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EC%A2%85%EB%A1%9C%EA%B5%AC%20%EA%B3%84%EB%8F%99%EA%B8%B8",
                         highlights: ["保存極佳的傳統韓屋群", "北村八景經典角度", "請保持安靜維護居民生活"]
                     },
                     {
@@ -1171,7 +1323,7 @@
                         address: "서울 종로구 삼청동",
                         transit: "地鐵 3 號線「安國站 (Anguk)」1 號出口，步行約 8-10 分鐘；或從景福宮東門/石牆路步行 5 分鐘抵達。",
                         desc: "充滿文藝氣息與質感小店的街道，石牆路兩旁林立特色藝廊、獨立咖啡廳與韓風飾品手作店。",
-                        naverMap: "https://map.naver.com/v5/search/%EC%84%9C%EC%9A%B8%20%EC%A2%85%EB%A1%9C%EA%B5%AC%20%EC%82%89%EC%B2%AD%EB%8F%99",
+                        naverMap: "https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EC%A2%85%EB%A1%9C%EA%B5%AC%20%EC%82%89%EC%B2%AD%EB%8F%99",
                         highlights: ["浪漫石牆路與樹蔭大道", "風格藝廊與設計咖啡館", "獨特手工藝品採買"]
                     }
                 ]
@@ -1191,7 +1343,7 @@
                         address: "서울 마포구 서교동 347-20",
                         transit: "地鐵 2 號線 / 京義中央線 / AREX「弘大入口站 (Hongik Univ.)」8 號或 9 號出口，出站即達商圈步行街。",
                         desc: "首爾最潮街區！匯集大牌美妝 (Olive Young)、時尚服飾、潮牌店、拍立得相貼機與青春歡樂的街頭歌舞表演。",
-                        naverMap: "https://map.naver.com/v5/search/%EC%84%9C%EC%9A%B8%20%EB%A7%88%ED%8F%AC%EA%B5%AC%20%EC%84%B1%EA%B5%90%EB%8F%99%20347-20",
+                        naverMap: "https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EB%A7%88%ED%8F%AC%EA%B5%AC%20%EC%84%B1%EA%B5%90%EB%8F%99%20347-20",
                         highlights: ["Olive Young 旗艦大採買", "K-pop 街頭表演現場", "韓系潮流服飾與飾品"]
                     },
                     {
@@ -1203,7 +1355,7 @@
                         address: "서울 마포구 양화로18길 15 3F",
                         transit: "地鐵 2 號線 / 京義中央線 / AREX「弘大入口站 (Hongik Univ.)」8 號出口，步行約 2 分鐘 (位於楊花路 18 巷內 3 樓)。",
                         desc: "⏰ 已預約 17:00！首爾超人氣韓系證件照與履歷寫真工作室。免費提供精緻正裝外套襯衫借用，現場由專業攝影師指導姿態，並提供 1 對 1 高質感即時精修調色拍照服務！",
-                        naverMap: "https://map.naver.com/v5/search/%EC%84%9C%EC%9A%B8%20%EB%A7%88%ED%8F%AC%EA%B5%AC%20%EC%96%91%ED%99%94%EB%A1%9C18%EA%B8%B8%2015",
+                        naverMap: "https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EB%A7%88%ED%8F%AC%EA%B5%AC%20%EC%96%91%ED%99%94%EB%A1%9C18%EA%B8%B8%2015",
                         highlights: ["⏰ 17:00 準時報到", "韓系神級精修證件照/履歷照", "免費提供西裝襯衫借用", "專業妝髮造型諮詢"]
                     },
                     {
@@ -1215,7 +1367,7 @@
                         address: "서울 마포구 어울마당로 123-1",
                         transit: "地鐵 2 號線「弘大入口站 (Hongik Univ.)」9 號出口，直行進入漁雲庭路步行街，步行約 2 分鐘。",
                         desc: "招牌菜色：必點「蒜味豬腳」，軟嫩多汁、富含膠質的豬腳切片淋上微甜微辛的特製蒜醬，風味濃郁不膩！隨餐附贈爽口沙拉與香辣大醬刀削麵。",
-                        naverMap: "https://map.naver.com/v5/search/%EC%84%9C%EC%9A%B8%20%EB%A7%88%ED%8F%AC%EA%B5%AC%20%EC%96%B4%EC%9A%B8%EB%A7%88%EB%8B%B9%EB%A1%9C%20123-1",
+                        naverMap: "https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EB%A7%88%ED%8F%AC%EA%B5%AC%20%EC%96%B4%EC%9A%B8%EB%A7%88%EB%8B%B9%EB%A1%9C%20123-1",
                         highlights: ["招牌鎮店「蒜味豬腳」", "富含膠質入口即化", "免費附贈刀削麵湯與新鮮大沙拉"]
                     },
                     {
@@ -1227,7 +1379,7 @@
                         address: "서울 마포구 양화로16길 6",
                         transit: "地鐵 2 號線「弘大入口站 (Hongik Univ.)」9 號出口，沿楊花路 16 巷步行約 5 分鐘。",
                         desc: "推薦口味：經典蜂蜜醬油（Honey Series）外皮酥脆、甜鹹適中，或是蒜味醬油與香辣雙拼。搭配冰涼韓國啤酒超過癮！",
-                        naverMap: "https://map.naver.com/v5/search/%EC%84%9C%EC%9A%B8%20%EB%A7%88%ED%8F%AC%EA%B5%AC%20%EC%96%91%ED%99%94%EB%A1%9C16%EA%B8%B8%206",
+                        naverMap: "https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EB%A7%88%ED%8F%AC%EA%B5%AC%20%EC%96%91%ED%99%94%EB%A1%9C16%EA%B8%B8%206",
                         highlights: ["經典蜂蜜醬油 (Honey Series)", "香辣雙拼組合", "外皮超薄香酥肉質多汁"]
                     }
                 ]
@@ -1247,7 +1399,7 @@
                         address: "서울 영등포구 / 마포구",
                         transit: "萬楓酒店出發：地鐵 1 號線「永登浦站」乘車至「首爾站」轉乘 AREX 直達車，或從「弘大入口站」搭乘 AREX 普通列車直達仁川機場 (約 50-60 分鐘)。",
                         desc: "早晨自由活動，可至附近咖啡廳享用早午餐、購買伴手禮。預計 10:00 前完成退房並搭車出發前往仁川國際機場。",
-                        naverMap: "https://map.naver.com/v5/search/%EC%9D%B8%EC%B2%9C%EA%B5%AD%EC%A0%9C%EA%B3%B5%ED%95%AD",
+                        naverMap: "https://map.naver.com/p/search/%EC%9D%B8%EC%B2%9C%EA%B5%AD%EC%A0%9C%EA%B3%B5%ED%95%AD",
                         highlights: ["最後採買與早午餐", "10:00 前出發前往仁川機場", "記得準備退稅單據"]
                     },
                     {
@@ -1259,7 +1411,7 @@
                         address: "인천 중구 공항로 272 (仁川國際機場)",
                         transit: "仁川國際機場 T1/T2 (建議搭乘 AREX 機場快線直達車，首爾站出發約 43 分鐘；弘大入口站出發普通列車約 54 分鐘)。",
                         desc: "13:05 仁川國際機場 (ICN) 起飛 ➔ 15:10 返抵高雄小港國際機場 (KHH)。預計 10:30 前抵達機場辦理報到、托運行李與 Tax Refund 海關退稅。",
-                        naverMap: "https://map.naver.com/v5/search/%EC%9D%B8%EC%B2%9C%EA%B5%AD%EC%A0%9C%EA%B3%B5%ED%95%AD",
+                        naverMap: "https://map.naver.com/p/search/%EC%9D%B8%EC%B2%9C%EA%B5%AD%EC%A0%9C%EA%B3%B5%ED%95%AD",
                         highlights: ["13:05 ICN ✈️ 15:10 KHH", "10:00 抵達機場辦理退稅", "平安返抵高雄！"]
                     }
                 ]
@@ -1292,7 +1444,7 @@
             lucide.createIcons();
 
             // Load saved theme preference
-            if (localStorage.getItem('seoul_dark_mode') === 'true' || 
+            if (localStorage.getItem('seoul_dark_mode') === 'true' ||
                 (!('seoul_dark_mode' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
                 document.documentElement.classList.add('dark');
             } else {
@@ -1310,6 +1462,9 @@
             if (customRateEl) {
                 customRateEl.value = currentExchangeRate.toFixed(1);
             }
+
+            // Auto fetch live exchange rate
+            fetchExchangeRate();
         });
 
         /* ==========================================================================
@@ -1324,11 +1479,10 @@
                 const btn = document.createElement('button');
                 btn.onclick = () => switchDay(index);
                 btn.id = `day-tab-${index}`;
-                btn.className = `flex-1 min-w-[95px] sm:min-w-[120px] px-3 py-2.5 rounded-xl text-center transition duration-200 shrink-0 snap-center active:scale-95 ${
-                    isActive 
-                        ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold shadow-md shadow-emerald-600/20 scale-[1.02]' 
-                        : 'bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/80 font-medium'
-                }`;
+                btn.className = `flex-1 min-w-[95px] sm:min-w-[120px] px-3 py-2.5 rounded-xl text-center transition duration-200 shrink-0 snap-center active:scale-95 ${isActive
+                    ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold shadow-md shadow-emerald-600/20 scale-[1.02]'
+                    : 'bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/80 font-medium'
+                    }`;
 
                 btn.innerHTML = `
                     <div class="text-[10px] opacity-80 uppercase tracking-wider">Day ${dayData.day}</div>
@@ -1384,10 +1538,10 @@
                 if (currentSearchQuery.trim() !== '') {
                     const q = currentSearchQuery.toLowerCase();
                     matchSearch = item.title.toLowerCase().includes(q) ||
-                                  item.krTitle.toLowerCase().includes(q) ||
-                                  item.address.toLowerCase().includes(q) ||
-                                  (item.transit && item.transit.toLowerCase().includes(q)) ||
-                                  item.desc.toLowerCase().includes(q);
+                        item.krTitle.toLowerCase().includes(q) ||
+                        item.address.toLowerCase().includes(q) ||
+                        (item.transit && item.transit.toLowerCase().includes(q)) ||
+                        item.desc.toLowerCase().includes(q);
                 }
 
                 return matchCat && matchSearch;
@@ -1489,7 +1643,7 @@
                     <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                         <span class="text-[11px] text-slate-400 font-medium">一鍵開啟地圖導航：</span>
                         <div class="grid grid-cols-3 sm:flex items-center gap-1.5 w-full sm:w-auto">
-                            <a href="https://map.naver.com/v5/search/${encodeURIComponent(item.krTitle || item.address || item.title)}" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1 px-2 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-[11px] sm:text-xs shadow-sm transition active:scale-95" title="開啟 Naver Map 導航">
+                            <a href="https://map.naver.com/p/search/${encodeURIComponent(item.krTitle || item.address || item.title)}" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1 px-2 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-[11px] sm:text-xs shadow-sm transition active:scale-95" title="開啟 Naver Map 導航">
                                 <i data-lucide="map" class="w-3.5 h-3.5 shrink-0"></i> Naver 地圖
                             </a>
                             <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.address || item.krTitle || item.title)}" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1 px-2 py-2 rounded-xl bg-blue-50 dark:bg-blue-950/60 hover:bg-blue-100 dark:hover:bg-blue-900/60 text-blue-700 dark:text-blue-300 font-bold text-[11px] sm:text-xs border border-blue-200/80 dark:border-blue-800/80 transition active:scale-95" title="開啟 Google Maps 導航">
@@ -1510,7 +1664,7 @@
 
         function setCategoryFilter(category) {
             currentCategoryFilter = category;
-            
+
             // Update UI buttons
             document.querySelectorAll('.category-btn').forEach(btn => {
                 btn.classList.remove('bg-emerald-600', 'text-white', 'shadow-sm');
@@ -1560,12 +1714,12 @@
             const desc = document.getElementById('newSpotDesc').value.trim();
             const highlightsStr = document.getElementById('newSpotHighlights').value.trim();
 
-            const highlights = highlightsStr 
-                ? highlightsStr.split(',').map(s => s.trim()).filter(Boolean) 
+            const highlights = highlightsStr
+                ? highlightsStr.split(',').map(s => s.trim()).filter(Boolean)
                 : ['自訂行程地點'];
 
             const queryForMap = address || krTitle || title;
-            const naverMap = `https://map.naver.com/v5/search/${encodeURIComponent(queryForMap)}`;
+            const naverMap = `https://map.naver.com/p/search/${encodeURIComponent(queryForMap)}`;
 
             const newItem = {
                 id: 'custom-' + Date.now(),
@@ -1600,7 +1754,7 @@
         }
 
         function getCategoryTag(cat) {
-            switch(cat) {
+            switch (cat) {
                 case 'food': return '🍽️ 自訂美食';
                 case 'spot': return '🏛️ 自訂景點';
                 case 'exp': return '♨️ 自訂體驗';
@@ -1616,31 +1770,53 @@
             const refreshIcon = document.getElementById('rateRefreshIcon');
             if (refreshIcon) refreshIcon.classList.add('animate-spin');
 
-            try {
-                // Fetch KRW latest rates
-                const res = await fetch('https://open.er-api.com/v6/latest/KRW');
-                if (!res.ok) throw new Error('API fetch failed');
-                const data = await res.json();
-                
-                // data.rates.TWD gives TWD per 1 KRW. So 1 TWD = 1 / data.rates.TWD KRW
-                if (data && data.rates && data.rates.TWD) {
-                    const twdPerKrw = data.rates.TWD;
-                    const krwPerTwd = 1 / twdPerKrw;
-                    currentExchangeRate = krwPerTwd;
+            let rateFound = null;
 
-                    document.getElementById('customRateInput').value = currentExchangeRate.toFixed(1);
-                    document.getElementById('rateStatusBadge').innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> 即時連線 API (1 TWD ≈ ${currentExchangeRate.toFixed(1)} KRW)`;
-                    localStorage.setItem('seoul_rate', currentExchangeRate.toString());
-                    showToast(`⚡ 匯率已更新：1 TWD ≈ ${currentExchangeRate.toFixed(1)} KRW`);
+            try {
+                const res = await fetch('https://open.er-api.com/v6/latest/TWD');
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data && data.rates && data.rates.KRW) {
+                        rateFound = data.rates.KRW;
+                    }
                 }
-            } catch (err) {
-                console.warn('Exchange Rate API failed, using fallback:', err);
-                document.getElementById('rateStatusBadge').innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> 參考匯率 (1 TWD ≈ ${currentExchangeRate.toFixed(1)} KRW)`;
-            } finally {
-                if (refreshIcon) refreshIcon.classList.remove('animate-spin');
+            } catch (e) {
+                console.warn('Index primary rate API failed', e);
             }
 
-            updateCalculations('rateChange');
+            if (!rateFound) {
+                try {
+                    const res = await fetch('https://api.exchangerate-api.com/v4/latest/TWD');
+                    if (res.ok) {
+                        const data = await res.json();
+                        if (data && data.rates && data.rates.KRW) {
+                            rateFound = data.rates.KRW;
+                        }
+                    }
+                } catch (e) {
+                    console.warn('Index backup rate API failed', e);
+                }
+            }
+
+            if (rateFound) {
+                currentExchangeRate = rateFound;
+                localStorage.setItem('seoul_live_rate', currentExchangeRate.toString());
+                const customRateEl = document.getElementById('customRateInput');
+                if (customRateEl) customRateEl.value = currentExchangeRate.toFixed(2);
+                const badgeEl = document.getElementById('rateStatusBadge');
+                if (badgeEl) {
+                    badgeEl.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> 即時連線 API (1 TWD ≈ ${currentExchangeRate.toFixed(1)} KRW)`;
+                }
+            } else {
+                currentExchangeRate = parseFloat(localStorage.getItem('seoul_live_rate')) || 43.5;
+                const badgeEl = document.getElementById('rateStatusBadge');
+                if (badgeEl) {
+                    badgeEl.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> 參考匯率 (1 TWD ≈ ${currentExchangeRate.toFixed(1)} KRW)`;
+                }
+            }
+
+            if (refreshIcon) refreshIcon.classList.remove('animate-spin');
+            if (typeof updateCalculations === 'function') updateCalculations('rateChange');
         }
 
         function updateCalculations(source) {
@@ -1698,7 +1874,7 @@
             try {
                 // Seoul Latitude: 37.5665, Longitude: 126.9780
                 const url = 'https://api.open-meteo.com/v1/forecast?latitude=37.5665&longitude=126.9780&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code&hourly=temperature_2m,precipitation_probability,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Asia%2FTokyo';
-                
+
                 const res = await fetch(url);
                 if (!res.ok) throw new Error('Weather API fetch error');
                 const data = await res.json();
@@ -1786,11 +1962,10 @@
                     selectedHourlyDayIndex = idx;
                     renderHourlyWeatherContent();
                 };
-                btn.className = `px-3 py-1.5 rounded-xl text-xs font-semibold shrink-0 transition active:scale-95 ${
-                    isActive 
-                        ? 'bg-teal-600 text-white shadow-sm' 
-                        : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
-                }`;
+                btn.className = `px-3 py-1.5 rounded-xl text-xs font-semibold shrink-0 transition active:scale-95 ${isActive
+                    ? 'bg-teal-600 text-white shadow-sm'
+                    : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
+                    }`;
                 btn.innerText = `Day ${d.day} • ${d.name}`;
                 tabsContainer.appendChild(btn);
             });
@@ -1910,7 +2085,7 @@
             const toast = document.createElement('div');
             toast.className = 'px-4 py-2.5 rounded-xl bg-slate-900 text-white dark:bg-emerald-600 shadow-xl text-xs font-semibold flex items-center gap-2 transition duration-300 transform translate-y-2 opacity-0 pointer-events-auto';
             toast.innerHTML = `<i data-lucide="check-circle" class="w-4 h-4 text-emerald-400 dark:text-white"></i> <span>${message}</span>`;
-            
+
             container.appendChild(toast);
             lucide.createIcons();
 
@@ -2016,7 +2191,7 @@
             }
 
             const highlights = highlightsRaw ? highlightsRaw.split(/[,，]/).map(h => h.trim()).filter(Boolean) : ['自訂新增行程'];
-            const naverMap = address ? `https://map.naver.com/v5/search/${encodeURIComponent(address)}` : `https://map.naver.com/v5/search/${encodeURIComponent(title)}`;
+            const naverMap = address ? `https://map.naver.com/p/search/${encodeURIComponent(address)}` : `https://map.naver.com/p/search/${encodeURIComponent(title)}`;
 
             const tagMap = {
                 spot: '🏛️ 自訂景點',
@@ -2097,6 +2272,34 @@
             }
         }
 
+        const landmarkMap = [
+            { keys: ['新沙', 'sinsa', '林蔭道'], station: '新沙站', krStation: '신사역', line: '3號線 (橘色)', exit: '8號出口' },
+            { keys: ['景福宮', 'gyeongbokgung', '土俗村', '蔘雞湯'], station: '景福宮站', krStation: '경복궁역', line: '3號線 (橘色)', exit: '2號出口' },
+            { keys: ['廣藏市場', 'kwangjang', '鐘路5街'], station: '鐘路5街站', krStation: '종로5가역', line: '1號線 (深藍)', exit: '8號出口' },
+            { keys: ['聖水', 'seongsu', '馬鈴薯排骨湯', '鹽可頌', '生吐司', 'pizzeria'], station: '聖水站', krStation: '성수역', line: '2號線 (綠色)', exit: '3/4號出口' },
+            { keys: ['弘大', 'hongdae', 'modelro', '證件照', '豬腳'], station: '弘大入口站', krStation: '홍대입구역', line: '2號線 / AREX', exit: '8/9號出口' },
+            { keys: ['明洞', 'myeongdong', '南山塔', '首爾塔'], station: '明洞站', krStation: '명동역', line: '4號線 (天藍)', exit: '6號出口' },
+            { keys: ['東大門', 'dongdaemun', 'ddp'], station: '東大門歷史文化公園站', krStation: '동대문역사문화공원역', line: '2/4/5號線', exit: '14號出口' },
+            { keys: ['蠶室', 'jamsil', '樂天世界', '梨花校服'], station: '蠶室站', krStation: '잠실역', line: '2號線 (綠色)', exit: '4號出口' },
+            { keys: ['萬楓', 'fairfield', '永登浦'], station: '首爾萬楓酒店 / 永登浦站', krStation: '영등포역', line: '1號線 (深藍)', exit: '5號出口' },
+            { keys: ['可可', 'coco', 'gogo', '永登浦市場'], station: '永登浦市場站', krStation: '영등포시장역', line: '5號線 (紫色)', exit: '4號出口' },
+            { keys: ['安國', 'anguk', '北村', '三清洞'], station: '安國站', krStation: '안국역', line: '3號線 (橘色)', exit: '2/3號出口' },
+            { keys: ['堂山', 'dangsan', 'spa', '汗蒸幕'], station: '堂山站', krStation: '당산역', line: '2號線 (綠色)', exit: '10號出口' },
+            { keys: ['首爾站', 'seoul station', 'ktx'], station: '首爾站', krStation: '서울역', line: '1/4號線/AREX', exit: '1/15號出口' },
+            { keys: ['仁川', 'icn', 'incheon', '機場'], station: '仁川國際機場 T1/T2', krStation: '인천국제공항', line: 'AREX 機場快線', exit: '航廈大廳' },
+            { keys: ['汝矣島', 'yeouido', '現代百貨', 'hyundai'], station: '汝矣島站', krStation: '여의도역', line: '5/9號線', exit: '3號出口連通道' },
+            { keys: ['江南', 'gangnam'], station: '江南站', krStation: '강남역', line: '2號線 (綠色)', exit: '10/11號出口' },
+            { keys: ['coex', '三成', 'samseong'], station: '三成站 (COEX)', krStation: '삼성역', line: '2號線 (綠色)', exit: '5/6號出口' },
+            { keys: ['梨大', 'ewha'], station: '梨大站', krStation: '이대역', line: '2號線 (綠色)', exit: '2/3號出口' },
+            { keys: ['龍山', 'yongsan'], station: '龍山站', krStation: '용산역', line: '1號線 / KTX', exit: '1號出口' }
+        ];
+
+        function getLandmarkInfo(inputStr) {
+            if (!inputStr) return null;
+            const str = inputStr.toLowerCase();
+            return landmarkMap.find(item => item.keys.some(k => str.includes(k)));
+        }
+
         function handlePlanRoute(event) {
             if (event) event.preventDefault();
 
@@ -2110,19 +2313,28 @@
             container.innerHTML = `
                 <div class="text-center py-4 text-xs text-slate-400">
                     <i data-lucide="loader-2" class="w-5 h-5 animate-spin mx-auto mb-2 text-indigo-500"></i>
-                    計算最佳地鐵路線中...
+                    計算最佳地鐵點對點路線中...
                 </div>
             `;
             lucide.createIcons();
 
             setTimeout(() => {
+                const originInfo = getLandmarkInfo(origin);
+                const destInfo = getLandmarkInfo(dest);
+
+                const originTermKr = originInfo ? originInfo.krStation : origin;
+                const destTermKr = destInfo ? destInfo.krStation : dest;
+
+                const naverDirectionsUrl = `https://map.naver.com/p/search/${encodeURIComponent(originTermKr + '에서 ' + destTermKr + ' 대중교통 길찾기')}`;
+                const googleDirectionsUrl = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(originTermKr)}&destination=${encodeURIComponent(destTermKr)}&travelmode=transit`;
+                const kakaoDirectionsUrl = `https://map.kakao.com/?sName=${encodeURIComponent(originTermKr)}&eName=${encodeURIComponent(destTermKr)}`;
+
                 const match = findPredefinedRoute(origin, dest);
-                const naverDirectionsUrl = `https://map.naver.com/v5/search/${encodeURIComponent(origin + ' ' + dest)}`;
 
                 if (match) {
-                    renderMatchedRoute(container, match, origin, dest, naverDirectionsUrl);
+                    renderMatchedRoute(container, match, origin, dest, naverDirectionsUrl, googleDirectionsUrl, kakaoDirectionsUrl);
                 } else {
-                    renderDynamicRoute(container, origin, dest, naverDirectionsUrl);
+                    renderDynamicRoute(container, origin, dest, naverDirectionsUrl, googleDirectionsUrl, kakaoDirectionsUrl);
                 }
                 lucide.createIcons();
             }, 300);
@@ -2134,6 +2346,30 @@
 
             const routeDatabase = [
                 {
+                    origins: ['新沙', 'sinsa', '林蔭道'],
+                    dests: ['景福宮', 'gyeongbokgung', '土俗村'],
+                    title: "新沙站 (林蔭道商圈) ➔ 景福宮站 (景福宮 / 土俗村)",
+                    time: "約 12 分鐘 (5 站)",
+                    fare: "₩1,400",
+                    transfers: "直達 (免轉乘)",
+                    steps: [
+                        { line: "3號線 (橘色線)", from: "新沙站 (Sinsa Exit 8)", to: "景福宮站 (Gyeongbokgung Exit 2)", note: "從新沙站搭乘地鐵 3 號線（往大化/景福宮方向），途經 5 站直達「景福宮站」" },
+                        { line: "到站步行 3 分鐘", from: "景福宮站 2號出口", to: "土俗村蔘雞湯 / 景福宮正門", note: "出 2 號出口直行 120 公尺即可抵達土俗村蔘雞湯與景福宮" }
+                    ]
+                },
+                {
+                    origins: ['景福宮', 'gyeongbokgung', '土俗村'],
+                    dests: ['新沙', 'sinsa', '林蔭道'],
+                    title: "景福宮站 ➔ 新沙站 (林蔭道商圈)",
+                    time: "約 12 分鐘 (5 站)",
+                    fare: "₩1,400",
+                    transfers: "直達 (免轉乘)",
+                    steps: [
+                        { line: "3號線 (橘色線)", from: "景福宮站 (Exit 2)", to: "新沙站 (Sinsa Exit 8)", note: "從景福宮站搭乘地鐵 3 號線（往水西/梧琴方向），途經 5 站直達「新沙站」" },
+                        { line: "出站即達商圈", from: "新沙站 8號出口", to: "新沙洞林蔭大道 (Garosu-gil)", note: "出 8 號出口即抵達林蔭大道咖啡館街與潮流品牌專賣店" }
+                    ]
+                },
+                {
                     origins: ['仁川', 'icn', 'incheon'],
                     dests: ['永登浦', '可可', 'gogo', 'koko'],
                     title: "仁川國際機場 ➔ 永登浦可可酒店",
@@ -2144,6 +2380,30 @@
                         { line: "AREX 機場快線", from: "仁川國際機場 T1/T2", to: "孔德站 (Gongdeok)", note: "搭乘 AREX 普通列車至「孔德站」" },
                         { line: "5號線 (紫色)", from: "孔德站", to: "永登浦市場站 (Exit 4)", note: "轉乘 5 號線往傍花方向，至「永登浦市場站」4 號出口" },
                         { line: "步行 7 分鐘", from: "永登浦市場站 4號出口", to: "永登浦可可酒店", note: "出站後沿永新路 38 巷步行 7 分鐘抵達" }
+                    ]
+                },
+                {
+                    origins: ['仁川', 'icn', 'incheon'],
+                    dests: ['萬楓', 'fairfield'],
+                    title: "仁川國際機場 ➔ 首爾萬楓酒店",
+                    time: "約 55 分鐘",
+                    fare: "₩4,750",
+                    transfers: "1 次轉乘",
+                    steps: [
+                        { line: "AREX 機場快線", from: "仁川國際機場 T1/T2", to: "孔德站 (Gongdeok)", note: "搭乘 AREX 普通列車至「孔德站」" },
+                        { line: "5號線 (紫色)", from: "孔德站", to: "永登浦市場站 (Exit 4)", note: "轉乘 5 號線往傍花方向，至「永登浦市場站」4 號出口步行 5 分鐘抵達" }
+                    ]
+                },
+                {
+                    origins: ['廣藏', 'kwangjang', '鐘路5街'],
+                    dests: ['聖水', 'seongsu', '馬鈴薯排骨湯', '鹽可頌'],
+                    title: "廣藏市場 (鐘路5街站) ➔ 聖水洞",
+                    time: "約 18 分鐘 (6 站)",
+                    fare: "₩1,400",
+                    transfers: "1 次轉乘",
+                    steps: [
+                        { line: "1號線 (深藍)", from: "鐘路5街站 (Exit 8)", to: "東大門站 (Dongdaemun)", note: "搭乘 1 號線 1 站至「東大門站」" },
+                        { line: "2號線 (綠色)", from: "東大門歷史文化公園站 / 新堂站", to: "聖水站 (Seongsu Exit 3/4)", note: "轉乘 2 號線往聖水方向，直達「聖水站」" }
                     ]
                 },
                 {
@@ -2230,12 +2490,12 @@
                 }
             ];
 
-            return routeDatabase.find(r => 
+            return routeDatabase.find(r =>
                 r.origins.some(o => oStr.includes(o)) && r.dests.some(d => dStr.includes(d))
             );
         }
 
-        function renderMatchedRoute(container, route, origin, dest, naverUrl) {
+        function renderMatchedRoute(container, route, origin, dest, naverUrl, googleUrl, kakaoUrl) {
             const stepsHTML = route.steps.map((s, idx) => `
                 <div class="flex items-start gap-3 relative pb-4 last:pb-0">
                     ${idx < route.steps.length - 1 ? '<div class="absolute left-3.5 top-6 bottom-0 w-0.5 bg-indigo-200 dark:bg-indigo-800"></div>' : ''}
@@ -2255,10 +2515,10 @@
             `).join('');
 
             container.innerHTML = `
-                <div class="bg-gradient-to-r from-indigo-900 to-slate-900 text-white p-4 rounded-xl shadow-md">
+                <div class="bg-gradient-to-r from-indigo-900 via-slate-900 to-indigo-950 text-white p-4 rounded-xl shadow-md">
                     <div class="text-xs text-indigo-300 font-semibold mb-1">✨ 推薦最佳地鐵路線</div>
                     <h4 class="text-base font-extrabold mb-2">${route.title}</h4>
-                    <div class="flex items-center gap-4 text-xs opacity-90">
+                    <div class="flex flex-wrap items-center gap-3 text-xs opacity-90">
                         <span>⏱️ 預估時間：<strong>${route.time}</strong></span>
                         <span>💳 車資：<strong>${route.fare}</strong></span>
                         <span>🔄 轉乘：<strong>${route.transfers}</strong></span>
@@ -2269,39 +2529,66 @@
                     ${stepsHTML}
                 </div>
 
-                <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-2">
+                <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2">
                     <button onclick="copyToClipboard('${origin} ➔ ${dest} 地鐵路線：${route.title} (${route.time})', '已複製路線筆記至剪貼簿！')" class="px-3 py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-semibold rounded-xl hover:bg-slate-200 transition">
                         <i data-lucide="copy" class="w-3.5 h-3.5 inline"></i> 複製路線
                     </button>
-                    <div class="flex items-center gap-1.5 w-full sm:w-auto">
-                        <a href="https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(origin)}&destination=${encodeURIComponent(dest)}&travelmode=transit" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-initial px-3 py-2 bg-blue-50 dark:bg-blue-950/60 hover:bg-blue-100 text-blue-700 dark:text-blue-300 text-xs font-semibold rounded-xl border border-blue-200/80 transition flex items-center justify-center gap-1">
-                            <i data-lucide="map-pin" class="w-3.5 h-3.5 text-blue-500"></i> Google 導航
+                    <div class="grid grid-cols-3 sm:flex items-center gap-1.5 w-full sm:w-auto">
+                        <a href="${googleUrl}" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-initial px-2 py-2 bg-blue-50 dark:bg-blue-950/60 hover:bg-blue-100 text-blue-700 dark:text-blue-300 text-[11px] sm:text-xs font-semibold rounded-xl border border-blue-200/80 transition flex items-center justify-center gap-1">
+                            <i data-lucide="map-pin" class="w-3.5 h-3.5 text-blue-500 shrink-0"></i> Google
                         </a>
-                        <a href="${naverUrl}" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-initial px-3.5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-xl shadow-md transition flex items-center justify-center gap-1">
-                            <i data-lucide="map" class="w-3.5 h-3.5"></i> Naver 導航
+                        <a href="${naverUrl}" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-initial px-2 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] sm:text-xs font-semibold rounded-xl shadow-md transition flex items-center justify-center gap-1">
+                            <i data-lucide="map" class="w-3.5 h-3.5 shrink-0"></i> Naver
+                        </a>
+                        <a href="${kakaoUrl}" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-initial px-2 py-2 bg-amber-400 hover:bg-amber-500 text-slate-900 text-[11px] sm:text-xs font-bold rounded-xl transition flex items-center justify-center gap-1">
+                            <i data-lucide="navigation" class="w-3.5 h-3.5 text-amber-950 shrink-0"></i> Kakao
                         </a>
                     </div>
                 </div>
             `;
         }
 
-        function renderDynamicRoute(container, origin, dest, naverUrl) {
-            container.innerHTML = `
-                <div class="bg-indigo-50 dark:bg-indigo-950/40 p-4 rounded-xl border border-indigo-200/60 dark:border-indigo-800/60 text-xs space-y-2">
-                    <div class="font-bold text-indigo-900 dark:text-indigo-200 text-sm flex items-center gap-1.5">
-                        <i data-lucide="compass" class="w-4 h-4 text-indigo-600"></i> 自訂地點路線規劃：${origin} ➔ ${dest}
+        function renderDynamicRoute(container, origin, dest, naverUrl, googleUrl, kakaoUrl) {
+            const originLandmark = getLandmarkInfo(origin);
+            const destLandmark = getLandmarkInfo(dest);
+
+            const originStationText = originLandmark ? `${origin} (近 ${originLandmark.station} ${originLandmark.exit})` : `${origin} 站`;
+            const destStationText = destLandmark ? `${dest} (近 ${destLandmark.station} ${destLandmark.exit})` : `${dest} 站`;
+
+            let landmarkNoticeHtml = '';
+            if (originLandmark || destLandmark) {
+                landmarkNoticeHtml = `
+                    <div class="p-3 bg-amber-50 dark:bg-amber-950/40 rounded-xl border border-amber-200/60 dark:border-amber-800/60 text-xs text-amber-900 dark:text-amber-200 mb-3 space-y-1">
+                        <div class="font-bold flex items-center gap-1.5">
+                            <i data-lucide="map-pin" class="w-4 h-4 text-amber-600"></i> 地點最近地鐵站識別結果：
+                        </div>
+                        ${originLandmark ? `<div>🟢 出發點「${origin}」➔ 最近車站：<strong>${originLandmark.station}</strong> (${originLandmark.line} ${originLandmark.exit})</div>` : ''}
+                        ${destLandmark ? `<div>🔴 目的地「${dest}」➔ 最近車站：<strong>${destLandmark.station}</strong> (${destLandmark.line} ${destLandmark.exit})</div>` : ''}
                     </div>
-                    <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
-                        系統已為您準備首爾地鐵與大眾運輸實時路網算路！建議點擊下方按鈕，直接開啟地圖「點對點導航」，自動為您計算最佳車次與轉乘月台資訊。
+                `;
+            }
+
+            container.innerHTML = `
+                ${landmarkNoticeHtml}
+                <div class="bg-gradient-to-r from-indigo-900 via-slate-900 to-indigo-950 text-white p-4 rounded-xl shadow-md space-y-2">
+                    <div class="text-xs text-indigo-300 font-semibold mb-1 flex items-center gap-1.5">
+                        <i data-lucide="compass" class="w-4 h-4 text-emerald-400"></i> 自訂地點路線規劃與路網算路
+                    </div>
+                    <h4 class="text-base font-extrabold">${originStationText} ➔ ${destStationText}</h4>
+                    <p class="text-xs text-slate-300 leading-relaxed pt-1">
+                        系統已為您調用首爾地鐵與大眾運輸實時路網 API！點擊下方按鈕可直接帶入「起點 ➔ 終點」，開啟三大地圖實時點對點導航與最佳候車月台指引。
                     </p>
                 </div>
 
-                <div class="pt-2 flex items-center justify-end gap-2">
-                    <a href="https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(origin)}&destination=${encodeURIComponent(dest)}&travelmode=transit" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-initial px-4 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-200 text-xs font-bold rounded-xl transition flex items-center justify-center gap-1.5">
-                        <i data-lucide="map-pin" class="w-4 h-4 text-blue-500"></i> Google 導航
+                <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-end gap-1.5 mt-3">
+                    <a href="${googleUrl}" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-initial px-3 py-2.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-200 text-xs font-bold rounded-xl transition flex items-center justify-center gap-1">
+                        <i data-lucide="map-pin" class="w-3.5 h-3.5 text-blue-500 shrink-0"></i> Google 導航
                     </a>
-                    <a href="${naverUrl}" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-initial px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-xl shadow-md transition flex items-center justify-center gap-1.5">
-                        <i data-lucide="navigation" class="w-4 h-4"></i> Naver 導航
+                    <a href="${naverUrl}" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-initial px-3 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-xl shadow-md transition flex items-center justify-center gap-1">
+                        <i data-lucide="map" class="w-3.5 h-3.5 shrink-0"></i> Naver 導航
+                    </a>
+                    <a href="${kakaoUrl}" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-initial px-3 py-2.5 bg-amber-400 hover:bg-amber-500 text-slate-900 text-xs font-bold rounded-xl transition flex items-center justify-center gap-1">
+                        <i data-lucide="navigation" class="w-3.5 h-3.5 text-amber-950 shrink-0"></i> Kakao 導航
                     </a>
                 </div>
             `;
@@ -2456,4 +2743,5 @@
 
     </script>
 </body>
+
 </html>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📋 韓國行前準備與行李檢查清單 | 韓國 6 天 5 夜自由行</title>
+    <title>📋 行前準備與行李檢查清單</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -55,7 +55,7 @@
                 <div>
                     <h1
                         class="font-bold text-base sm:text-lg tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
-                        韓國行前準備與行李備忘
+                        行前準備與行李備忘
                         <span
                             class="text-xs font-normal px-2 py-0.5 rounded-full bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 border border-blue-200">Travel
                             Checklist</span>
@@ -85,7 +85,7 @@
             class="hidden absolute top-16 right-4 z-50 w-72 bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl border border-slate-200/80 dark:border-slate-800/80 rounded-2xl shadow-2xl p-3 space-y-1.5 transition-all duration-300">
             <div
                 class="px-3 py-2 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-slate-400">
-                <span>🧭 導覽漢堡選單</span>
+                <span>🧭 導覽選單</span>
                 <button onclick="toggleHamburgerMenu()"
                     class="text-slate-400 hover:text-slate-600 dark:hover:text-white">
                     <i data-lucide="x" class="w-4 h-4"></i>
@@ -103,7 +103,7 @@
                 class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/60 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
                 <span class="text-lg">🗺️</span>
                 <div>
-                    <div>高清地鐵圖</div>
+                    <div>首爾地鐵</div>
                     <div class="text-[10px] text-slate-400 font-normal">地鐵地圖與點對點路線規劃</div>
                 </div>
             </a>
@@ -147,12 +147,21 @@
         <!-- Banner Header -->
         <div
             class="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-800 text-white rounded-2xl p-5 sm:p-6 shadow-lg mb-6">
-            <h2 class="text-xl sm:text-2xl font-extrabold flex items-center gap-2">
-                <span>📋 韓國首爾自由行行李與準備清單</span>
-            </h2>
-            <p class="text-xs sm:text-sm text-blue-100 mt-1 leading-relaxed">
-                出發前逐一勾選確認！系統將自動儲存勾選進度，確保護照、eSIM 網卡、轉接頭與備用韓元萬無一失。
-            </p>
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div>
+                    <h2 class="text-xl sm:text-2xl font-extrabold flex items-center gap-2">
+                        <span>📋 韓國首爾行李與準備清單</span>
+                    </h2>
+                    <p class="text-xs sm:text-sm text-blue-100 mt-1 leading-relaxed">
+                        出發前逐一勾選確認！可自行新增/刪除檢查項目，系統自動記憶勾選狀態與自訂項目。
+                    </p>
+                </div>
+                <button onclick="resetPrepChecklist()"
+                    class="self-start sm:self-auto shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/15 hover:bg-white/25 text-white rounded-xl text-xs font-semibold backdrop-blur-md transition active:scale-95 cursor-pointer">
+                    <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+                    <span>還原預設清單</span>
+                </button>
+            </div>
 
             <!-- Progress Bar -->
             <div class="mt-4 bg-black/20 rounded-full h-3 p-0.5 overflow-hidden">
@@ -166,6 +175,32 @@
             </div>
         </div>
 
+        <!-- Add Custom Item Input Card -->
+        <div
+            class="bg-white dark:bg-slate-900 rounded-2xl p-4 sm:p-5 border border-slate-200/80 dark:border-slate-800 shadow-md mb-6">
+            <h3 class="text-sm font-bold text-slate-800 dark:text-white mb-3 flex items-center gap-2">
+                <i data-lucide="plus-circle" class="w-4 h-4 text-blue-500"></i> 新增自訂檢查項目
+            </h3>
+            <form onsubmit="handleGlobalAdd(event)" class="flex flex-col sm:flex-row gap-2.5">
+                <select id="globalCategorySelect"
+                    class="px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="📄 必備證件與機票憑證">📄 必備證件與機票憑證</option>
+                    <option value="💳 支付、網卡與交通卡">💳 支付、網卡與交通卡</option>
+                    <option value="🔌 電器產品與轉接頭">🔌 電器產品與轉接頭</option>
+                    <option value="👕 衣物穿搭與舒適鞋款">👕 衣物穿搭與舒適鞋款</option>
+                    <option value="💊 個人藥品與盥洗個人用品">💊 個人藥品與盥洗個人用品</option>
+                    <option value="📌 個人自訂新增清單">📌 個人自訂新增清單</option>
+                </select>
+                <input type="text" id="globalItemInput" placeholder="請輸入欲新增的項目名稱 (例：備用眼鏡、雨傘、太陽眼鏡...)"
+                    class="flex-1 px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs text-slate-800 dark:text-slate-100 outline-none focus:ring-2 focus:ring-blue-500">
+                <button type="submit"
+                    class="px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold text-xs rounded-xl shadow-md transition active:scale-95 flex items-center justify-center gap-1.5 shrink-0">
+                    <i data-lucide="plus" class="w-4 h-4"></i>
+                    <span>新增項目</span>
+                </button>
+            </form>
+        </div>
+
         <!-- Checklist Categories -->
         <div id="checklistCategoriesContainer" class="space-y-6">
             <!-- Rendered Dynamically -->
@@ -173,7 +208,7 @@
     </main>
 
     <script>
-        const prepSections = [
+        const defaultPrepSections = [
             {
                 title: "📄 必備證件與機票憑證",
                 icon: "file-text",
@@ -231,15 +266,50 @@
         ];
 
         let checkedItems = JSON.parse(localStorage.getItem('seoul_prep_checked') || '[]');
+        let deletedItems = JSON.parse(localStorage.getItem('seoul_prep_deleted') || '[]');
+        let customItems = JSON.parse(localStorage.getItem('seoul_prep_custom') || '[]');
+
+        function getMergedSections() {
+            // Clone default sections and filter out deleted items
+            let sections = defaultPrepSections.map(sec => ({
+                ...sec,
+                items: sec.items.filter(item => !deletedItems.includes(item.id))
+            }));
+
+            // Group custom items into sections
+            customItems.forEach(item => {
+                if (deletedItems.includes(item.id)) return;
+
+                let targetSec = sections.find(s => s.title === item.categoryTitle);
+                if (!targetSec) {
+                    targetSec = sections.find(s => s.title === '📌 個人自訂新增清單');
+                    if (!targetSec) {
+                        targetSec = {
+                            title: '📌 個人自訂新增清單',
+                            icon: 'bookmark',
+                            color: 'blue',
+                            items: []
+                        };
+                        sections.push(targetSec);
+                    }
+                }
+                targetSec.items.push(item);
+            });
+
+            return sections;
+        }
 
         function renderPrepChecklist() {
             const container = document.getElementById('checklistCategoriesContainer');
             container.innerHTML = '';
 
+            const sections = getMergedSections();
             let totalCount = 0;
             let completedCount = 0;
 
-            prepSections.forEach(section => {
+            sections.forEach((section, sIdx) => {
+                if (section.items.length === 0 && section.title === '📌 個人自訂新增清單') return;
+
                 totalCount += section.items.length;
 
                 const catCard = document.createElement('div');
@@ -251,19 +321,27 @@
                     if (isChecked) completedCount++;
 
                     itemsHtml += `
-                        <label class="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-800/60 hover:bg-blue-50 dark:hover:bg-slate-800 rounded-xl cursor-pointer transition border border-slate-100 dark:border-slate-700/50 group">
-                            <input type="checkbox" onchange="togglePrepItem('${item.id}')" ${isChecked ? 'checked' : ''} class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
-                            <span class="text-xs sm:text-sm font-semibold ${isChecked ? 'line-through text-slate-400 dark:text-slate-500' : 'text-slate-800 dark:text-slate-200'}">${item.name}</span>
-                        </label>
+                        <div class="flex items-center justify-between p-2.5 sm:p-3 bg-slate-50 dark:bg-slate-800/60 hover:bg-blue-50/70 dark:hover:bg-slate-800 rounded-xl transition border border-slate-100 dark:border-slate-700/50 group">
+                            <label class="flex items-center gap-3 flex-1 cursor-pointer select-none overflow-hidden pr-2">
+                                <input type="checkbox" onchange="togglePrepItem('${item.id}')" ${isChecked ? 'checked' : ''} class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500 shrink-0">
+                                <span class="text-xs sm:text-sm font-semibold truncate ${isChecked ? 'line-through text-slate-400 dark:text-slate-500' : 'text-slate-800 dark:text-slate-200'}">${item.name}</span>
+                            </label>
+                            <button onclick="deletePrepItem('${item.id}', event)" title="刪除此項目" class="p-1 text-slate-300 hover:text-rose-500 dark:text-slate-600 dark:hover:text-rose-400 opacity-60 hover:opacity-100 transition rounded-lg hover:bg-rose-50 dark:hover:bg-rose-950/50 shrink-0">
+                                <i data-lucide="trash-2" class="w-4 h-4"></i>
+                            </button>
+                        </div>
                     `;
                 });
 
                 catCard.innerHTML = `
-                    <h3 class="text-base font-bold text-slate-900 dark:text-white mb-3 flex items-center gap-2">
-                        <i data-lucide="${section.icon}" class="w-5 h-5 text-blue-500"></i> ${section.title}
-                    </h3>
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                            <i data-lucide="${section.icon || 'check-square'}" class="w-5 h-5 text-blue-500"></i> ${section.title}
+                        </h3>
+                        <span class="text-xs text-slate-400 font-normal">${section.items.length} 項</span>
+                    </div>
                     <div class="space-y-2">
-                        ${itemsHtml}
+                        ${itemsHtml || '<p class="text-xs text-slate-400 italic p-2">（此分類尚無項目，點擊上方可新增）</p>'}
                     </div>
                 `;
 
@@ -287,6 +365,54 @@
             }
             localStorage.setItem('seoul_prep_checked', JSON.stringify(checkedItems));
             renderPrepChecklist();
+        }
+
+        function handleGlobalAdd(e) {
+            e.preventDefault();
+            const inputEl = document.getElementById('globalItemInput');
+            const selectEl = document.getElementById('globalCategorySelect');
+            const name = inputEl.value.trim();
+            if (!name) return;
+
+            const newItem = {
+                id: 'custom_' + Date.now(),
+                name: name,
+                categoryTitle: selectEl.value
+            };
+
+            customItems.push(newItem);
+            localStorage.setItem('seoul_prep_custom', JSON.stringify(customItems));
+            inputEl.value = '';
+            renderPrepChecklist();
+        }
+
+        function deletePrepItem(id, event) {
+            if (event) event.stopPropagation();
+
+            if (!deletedItems.includes(id)) {
+                deletedItems.push(id);
+                localStorage.setItem('seoul_prep_deleted', JSON.stringify(deletedItems));
+            }
+
+            // Remove from customItems if it's a custom item
+            customItems = customItems.filter(i => i.id !== id);
+            localStorage.setItem('seoul_prep_custom', JSON.stringify(customItems));
+
+            // Remove from checkedItems if checked
+            checkedItems = checkedItems.filter(i => i !== id);
+            localStorage.setItem('seoul_prep_checked', JSON.stringify(checkedItems));
+
+            renderPrepChecklist();
+        }
+
+        function resetPrepChecklist() {
+            if (confirm('確定要還原清單為預設初始狀態嗎？這將會清除自訂刪除記錄與自訂新增項目。')) {
+                deletedItems = [];
+                customItems = [];
+                localStorage.setItem('seoul_prep_deleted', JSON.stringify(deletedItems));
+                localStorage.setItem('seoul_prep_custom', JSON.stringify(customItems));
+                renderPrepChecklist();
+            }
         }
 
         function toggleDarkMode() {
